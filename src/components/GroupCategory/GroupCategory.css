@@ -1,0 +1,51 @@
+.tabs-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2px 0;
+  margin: 4px 15px;
+  text-align: center;
+}
+
+.tabs-nav-left {
+  text-align: left;
+  font-size: 17px;
+  color: var(--text-color);
+}
+
+.tabs-nav-right {
+  width: 256px;
+  border-radius: 17px;
+  background: var(--enrollment-tabs-content-bg);
+}
+
+.enrollment-tabs {
+  cursor: pointer;
+  width: 120px;
+  display: inline-block;
+  text-align: center;
+  padding: 6px 0;
+  margin: 4px;
+  user-select: none;
+  border-radius: 17px;
+  border: none;
+  color: var(--text-color);
+  background: transparent;
+}
+
+.enrollment-tabs.active {
+  color: #000;
+  font-weight: 600;
+  box-shadow: 0 2px 3px rgb(0 16 46 / 15%);
+  color: var(--text-color);
+  background-color: var(--enrollment-tabs-bg);
+}
+
+#category-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 15px 15px 10px 15px;
+  padding-bottom: 5px;
+  color: var(--text-color);
+  border-bottom: 1px solid var(--border-color)
+}

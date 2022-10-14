@@ -1,38 +1,73 @@
-.App {
-  text-align: center;
+body {
+  font-family: "Noto Sans", sans-serif;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html,
+body {
+  height: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+ul,
+li {
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
+  text-decoration: none;
+  list-style: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
 }
 
-.App-link {
-  color: #61dafb;
+::-webkit-scrollbar-thumb {
+  border: 2px solid var(--bg);
+  border-radius: 10px;
+  background: rgba(73, 73, 73, 0.7);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+#main-content {
+  overflow-y: auto;
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 60px);
+  scrollbar-color: rgb(126, 126, 126) rgba(255, 255, 255, 0);
+  scrollbar-width: thin !important;
+}
+
+:root {
+  --bg: #f0f2f5;
+  --text-color: black;
+  --text-color-nav: #445b78;
+  --btn-bg: white;
+  --border-color: rgb(210, 210, 210);
+  --select-table-bg: rgb(231, 231, 231);
+  --select-table-hover: rgb(207, 206, 206);
+  --enrollment-tabs-content-bg: #dce1e5;
+  --enrollment-tabs-bg: #fff;
+  --selected-event: rgb(223, 223, 223);
+}
+
+[class="dark-theme"] {
+  --bg: #18191a;
+  --text-color: rgb(241, 241, 241);
+  --text-color-nav: rgb(195, 195, 195);
+  --btn-bg: #242526;
+  --border-color: rgb(60, 60, 60);
+  --select-table-bg: rgb(62, 62, 62);
+  --select-table-hover: rgb(77, 77, 77);
+  --enrollment-tabs-content-bg: rgb(69, 69, 69);
+  --enrollment-tabs-bg: rgb(45, 43, 43);
+  --selected-event: var(--btn-bg);
 }
