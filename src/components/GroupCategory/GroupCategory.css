@@ -29,6 +29,7 @@
   user-select: none;
   border-radius: 17px;
   border: none;
+  font-size: 13px;
   color: var(--text-color);
   background: transparent;
 }
@@ -47,5 +48,20 @@
   margin: 15px 15px 10px 15px;
   padding-bottom: 5px;
   color: var(--text-color);
-  border-bottom: 1px solid var(--border-color)
+  border-bottom: 1px solid var(--border-color);
+}
+
+@media screen and (max-width: 550px) {
+  .tabs-nav-left {
+    text-align: left;
+    font-size: 12px;
+    word-wrap: break-all;
+  }
+  .tabs-nav-right {
+    width: 100px;
+  }
+  .enrollment-tabs {
+    font-size: 10px;
+    width: 90px;
+  }
 }

@@ -244,6 +244,18 @@
   background: rgb(1, 102, 102);
 }
 
+@media screen and (max-width: 550px) {
+  .table-main {
+    font-size: 10px;
+  }
+  .select-table-btn {
+    font-size: 14px;
+  }
+  .select-table-btn.is-active {
+    font-weight: normal;
+  }
+}
+
 .groups {
   margin: 20px 10px 10px 10px;
   padding: 10px;
@@ -390,6 +402,20 @@
   font-weight: 600;
 }
 
+@media screen and (max-width: 550px) {
+  .profile-info {
+    padding: 10px 5px;
+    font-size: 12px;
+  }
+  .profile-avatar {
+    width: 100px;
+    height: 100px;
+  }
+  .fa-user {
+    font-size: 100px;
+  }
+}
+
 #tiles-content {
   display: flex;
 }
@@ -422,7 +448,7 @@
 }
 
 .tiles:hover {
-  color: var(--text-color);
+  color: white;
   background: rgb(1, 102, 102);
 }
 
@@ -438,6 +464,22 @@
 
 .fa-external-link-alt {
   padding-left: 10px;
+}
+
+@media screen and (max-width: 550px) {
+  .tiles-title {
+    padding: 5px 5px;
+    font-size: 10px;
+    font-weight: bold;
+  }
+  .tiles-text {
+    font-size: 8px;
+  }
+
+  .fa-external-link-alt {
+    padding-left: 10px;
+    font-size: 10px;
+  }
 }
 
 #mobile-app-content {
@@ -651,6 +693,7 @@
 .info-block {
   cursor: pointer;
   display: flex;
+  overflow: hidden;
   justify-content: space-between;
   width: calc(100% - 30px);
   padding: 15px;
@@ -673,6 +716,23 @@
 
 .info-block-text {
   width: 100%;
+}
+
+@media screen and (max-width: 550px) {
+  .info-block {
+    width: calc(100% - 20px);
+    padding: 10px;
+    font-size: 11px;
+  }
+  .info-block-text {
+    word-break: break-all;
+  }
+  .info-block-title {
+    width: 45%;
+  }
+  .info-block-text-content {
+    width: 50%;
+  }
 }
 
 /* ADMIN PANEL */

@@ -30,6 +30,7 @@ const Enrollment = () => {
   // Filters
   const [filterEnable, setFilterEnable] = React.useState("Все");
   const [filterEducation, setFilterEducation] = React.useState("Очная");
+  const [filterPlan, setFilterPlan] = React.useState("Очная");
 
   const unique = (array) => {
     return array.filter((item, index) => {

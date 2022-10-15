@@ -18,7 +18,7 @@ function About() {
             textData={["09.08.1959 г."]}
           />
           <InfoBlockDefault
-            title="Адрес местонахождения образовательной организации"
+            title="Адрес"
             textData={[
               "84646, Донецкая Народная Республика, г. Горловка, улица Кирова, 51",
             ]}
@@ -37,7 +37,7 @@ function About() {
             ]}
           />
           <InfoBlockDefault
-            title="Электронная почта для подачи документов:"
+            title="Эл. почта для подачи документов"
             textData={["priyomADI2022@yandex.ru"]}
           />
         </div>
