@@ -1,22 +1,22 @@
 import React from "react";
 import ListButton from "../Buttons/ListButton";
-import { NavLink } from "react-router-dom";
 import "./Groups.css";
 
-function GroupsDefault({ value, groups, index, headers }) {
+function GroupsDefault({ value, groups, index }) {
   return (
     <details className="details" key={index}>
       <summary className="details-title">{value}</summary>
       {groups
-        .filter((group) => group.category === value)
-        .map((group, value) => {
-          return (
-            <ListButton
-              path={`/profile/${group.id}`}
-              title={`${value + 1}. ` + group.name}
-            />
-          );
-        })}
+      .filter(group => group.category === value)
+      .map((group, index) => {
+        return (
+          <ListButton
+            key={index}
+            path={`/profile/${group.id}`}
+            title={`${index + 1}. ` + group.name}
+          />
+        );
+      })}
       {/* <div className="table-scroll">
         <table className="groups-table">
           <thead>

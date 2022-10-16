@@ -1,5 +1,5 @@
 import React from "react";
-import "./GroupCategory.css";
+import "./Categories.css";
 
 function GroupCategory({ title, buttonOne, buttonTwo, setFilter }) {
   const [buttons, setButtons] = React.useState([

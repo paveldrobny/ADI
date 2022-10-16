@@ -1,5 +1,7 @@
 import React from "react";
-import GroupCategory from "../components/GroupCategory";
+import GroupCategory from "../components/Categories";
+import ListCategory from "../components/Categories/ListCategory";
+import GroupsCategory from "../components/Groups/GroupsCategory";
 import GroupsDefault from "../components/Groups/GroupsDefault";
 import GroupsSearch from "../components/Groups/GroupsSearch";
 import data from "../studentsData";
@@ -29,8 +31,11 @@ const Enrollment = () => {
 
   // Filters
   const [filterEnable, setFilterEnable] = React.useState("Все");
+  const [filterFaculty, setFilterFaculty] = React.useState("ДТ");
+  const [filterProgram, setFilterProgram] = React.useState("Бакалавриат");
+  const [filterPlan, setFilterPlan] = React.useState("Бюджет");
   const [filterEducation, setFilterEducation] = React.useState("Очная");
-  const [filterPlan, setFilterPlan] = React.useState("Очная");
+  const [filterGroup, setFilterGroup] = React.useState("");
 
   const unique = (array) => {
     return array.filter((item, index) => {
@@ -40,38 +45,49 @@ const Enrollment = () => {
   const onChange = (event) => setQuery(event.target.value);
 
   const categories = unique(groups.map((group) => group.category));
+
+  const [groupsList, setGroupsList] = React.useState(categories);
+
   const filterStudents = groups.filter((group) => {
     return group.name.toLowerCase().includes(query.toLowerCase());
   });
 
-  let component;
-  if (!query.trim()) {
-    component = categories.map((value, index) => {
+  const checkCategories = (group) => {
+    if (filterGroup !== "") {
       return (
-        <GroupsDefault
-          key={index}
-          value={value}
-          groups={groups}
-          headers={headers}
-        />
+        group.faculty === filterFaculty &&
+        group.program === filterProgram &&
+        group.plan === filterPlan &&
+        group.formEducation === filterEducation &&
+        group.category === filterGroup
       );
+    }
+    return (
+      group.faculty === filterFaculty &&
+      group.program === filterProgram &&
+      group.plan === filterPlan &&
+      group.formEducation === filterEducation
+    );
+  };
+
+  const categoryStudents = groups.filter((group) => {
+    return checkCategories(group);
+  });
+
+  let component;
+  if (!query.trim() && filterEnable === "Все") {
+    component = categories.map((value, index) => {
+      return <GroupsDefault key={index} value={value} groups={groups} />;
     });
+  } else if (!query.trim() && filterEnable === "Категории") {
+    component = (
+      <GroupsCategory filter={categoryStudents} myGroup={filterGroup} />
+    );
   } else if (query.trim()) {
     component = (
-      <GroupsSearch
-        filter={filterStudents}
-        groups={groups}
-        query={query}
-        headersSearch={headersSearch}
-      />
+      <GroupsSearch filter={filterStudents} groups={groups} query={query} />
     );
   }
-  // } else if (query.trim() && filterProducts.length) {
-  //   component = filterProducts.map((card) => {
-  //     return <Card key={card.id} card={card} />;
-  //   });
-  // } else if (query.trim() && !filterProducts.length) {
-  //   component = <NotFound text={query} />;
 
   return (
     <div className="page">
@@ -88,18 +104,34 @@ const Enrollment = () => {
         }}
       >
         <div id="category-title">Категории</div>
-        <GroupCategory title="Факультет" buttonOne="ДТ" buttonTwo="ТиИТ" />
+        <GroupCategory
+          title="Факультет"
+          buttonOne="ДТ"
+          buttonTwo="ТиИТ"
+          setFilter={setFilterFaculty}
+        />
         <GroupCategory
           title="Образовательная программа"
           buttonOne="Бакалавриат"
           buttonTwo="Магистратура"
+          setFilter={setFilterProgram}
         />
-        <GroupCategory title="План" buttonOne="Бюджет" buttonTwo="Контракт" />
+        <GroupCategory
+          title="План"
+          buttonOne="Бюджет"
+          buttonTwo="Контракт"
+          setFilter={setFilterPlan}
+        />
         <GroupCategory
           title="Форма обучения"
           buttonOne="Очная"
           buttonTwo="Заочная"
           setFilter={setFilterEducation}
+        />
+        <ListCategory
+          title="Группа"
+          groupList={groupsList}
+          setFilter={setFilterGroup}
         />
       </div>
 

@@ -41,21 +41,21 @@ function Profile() {
                   </div>
                   <div className="profile-info">
                     <div className="profile-info-title">Факультет</div>
-                    <div>ТиИТ</div>
+                    <div>{data.faculty}</div>
                   </div>
                   <div className="profile-info">
                     <div className="profile-info-title">
                       Образовательная программа
                     </div>
-                    <div>Бакалавриат</div>
+                    <div>{data.program}</div>
                   </div>
                   <div className="profile-info">
                     <div className="profile-info-title">План</div>
-                    <div>Бюджет</div>
+                    <div>{data.plan}</div>
                   </div>
                   <div className="profile-info">
                     <div className="profile-info-title">Форма обучения</div>
-                    <div>Очная</div>
+                    <div>{data.formEducation}</div>
                   </div>
                   <div className="profile-info">
                     <div className="profile-info-title">№ личного дела</div>
