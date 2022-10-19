@@ -57,7 +57,7 @@ export const Header = ({ changeTheme, changeFavorites }) => {
               className={`settings-item-toggle ${isDarkTheme ? "" : "active"}`}
             ></div>
           </div>
-          <div className="settings-item-desc">Сменить светлую тему</div>
+          <div className="settings-item-desc">Сменить оформление</div>
         </div>
 
         <div className="header-settings-item" onClick={changeFavorites}>

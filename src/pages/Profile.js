@@ -82,7 +82,7 @@ function Profile() {
                             В избранное
                           </button>
                         ) : (
-                          <div id="profile-in-favorites">Уже добавлен в избранное</div>
+                          <div id="profile-in-favorites">Уже в избранном</div>
                         )}
                       </div>
                     ) : (
