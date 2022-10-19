@@ -1,5 +1,6 @@
 #header {
   z-index: 999;
+  user-select: none;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -95,21 +96,29 @@
 
 .fa-home,
 .fa-list-alt,
-.fa-info-circle {
+.fa-info-circle,
+.fa-cog {
   position: relative;
   top: 0px;
   font-size: 16px;
 }
 
+.fa-cog {
+  top: 1px;
+  font-size: 17px;
+}
+
 #theme-btn,
-#admin-btn {
+#admin-btn,
+#settings-btn {
   position: relative;
   width: 35px;
   margin: 0 !important;
   text-align: center;
 }
 
-#admin-btn,
+#admin-btn::after,
+#settings-btn:after,
 #theme-btn::after {
   content: "";
   position: absolute;
@@ -127,6 +136,87 @@
   top: 1px;
 }
 
+#settings-menu {
+  display: none;
+  overflow: hidden;
+  position: absolute;
+  top: 70px;
+  right: 15px;
+  width: 300px;
+  height: 184px;
+  border-radius: 5px;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 3px 10px 1px rgba(0, 0, 0, 0.3);
+  background: var(--btn-bg);
+}
+
+#settings-menu.show {
+  display: block;
+  padding: 8px;
+}
+
+.header-settings-item {
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  margin-bottom: 8px;
+  border: none;
+  padding: 8px 10px;
+  width: calc(100% - 20px);
+  font-size: 15px;
+  border-radius: 8px;
+  color: var(--text-color);
+  background: var(--settings-item-bg);
+}
+
+.header-settings-item:hover {
+  background: var(--bg);
+}
+
+.settings-item-content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.settings-item-title,
+.settings-item-desc {
+  width: calc(100% - 21px);
+}
+
+.settings-item-toggle {
+  position: relative;
+  top: 1px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50px;
+  border: 2px solid #1b6dff;
+}
+
+.settings-item-toggle.active::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50px;
+  background: #1b6dff;
+}
+
+.settings-item-desc {
+  font-size: 11px;
+  color: var(--description);
+}
+
+#settings-btn.active::before {
+  content: "";
+  position: absolute;
+  top: 28px;
+  right: 16px;
+  border: 6px solid transparent;
+  border-top: 6px solid var(--text-color-nav);
+}
+
 @media screen and (max-width: 850px) {
   .nav-text {
     display: none;
@@ -136,5 +226,16 @@
 @media screen and (max-width: 550px) {
   #logo-name {
     display: none;
+  }
+
+  #settings-menu {
+    display: none;
+    overflow: hidden;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: calc(100% - 31px);
+    height: 184px;
+    margin: 8px;
   }
 }

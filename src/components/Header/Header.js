@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import logo from "../../image/zeropoint_logo.jpg";
 import { NavLink } from "react-router-dom";
 import "./Header.css";
+import { Context } from "../../context";
 
-export const Header = () => {
+export const Header = ({ changeTheme, changeFavorites }) => {
   const [links, setLinks] = React.useState([
     { name: "Главная", route: "/", icon: "fa-home" },
     { name: "Зачисление", route: "/enrollment", icon: "fa-list-alt" },
@@ -11,40 +12,8 @@ export const Header = () => {
     { name: "", route: "/admin", icon: "fa-user-shield" },
   ]);
 
-  const [isDarkTheme, setDarkTheme] = React.useState(
-    localStorage.getItem("isDarkTheme") ? true : false
-  );
-
-  React.useEffect(() => {
-    getValue();
-  });
-
-  const changeTheme = () => {
-    store();
-    getValue();
-  };
-
-  const store = () => {
-    localStorage.setItem("isDarkTheme", isDarkTheme);
-  };
-
-  const getValue = () => {
-    let bodyClass = document.body.classList,
-      htmlClass = document.documentElement.classList;
-
-    if (!localStorage.isDarkTheme) {
-      store();
-    }
-    if (localStorage.getItem("isDarkTheme") === "true") {
-      bodyClass.add("dark-theme");
-      htmlClass.add("dark-theme");
-      setDarkTheme(false);
-    } else if (localStorage.getItem("isDarkTheme") === "false") {
-      bodyClass.remove("dark-theme");
-      htmlClass.remove("dark-theme");
-      setDarkTheme(true);
-    }
-  };
+  const [isSettingShow, setSettingsShow] = React.useState(false);
+  const { isDarkTheme, isSaveProfiles } = useContext(Context);
 
   return (
     <header id="header">
@@ -71,10 +40,46 @@ export const Header = () => {
             );
           })}
 
-          <li onClick={changeTheme} id="theme-btn" className="app-link">
-            <i className={`fas ${isDarkTheme ? "fa-moon" : "fa-sun"}`}></i>
+          <li
+            onClick={() => setSettingsShow(!isSettingShow)}
+            id="settings-btn"
+            className={`app-link ${isSettingShow ? "active" : ""}`}
+          >
+            <i className="fas fa-cog"></i>
           </li>
         </ul>
+      </div>
+      <div className={`${isSettingShow ? "show" : ""}`} id="settings-menu">
+        <div className="header-settings-item" onClick={changeTheme}>
+          <div className="settings-item-content">
+            <div className="settings-item-title">Темная тема</div>
+            <div
+              className={`settings-item-toggle ${isDarkTheme ? "" : "active"}`}
+            ></div>
+          </div>
+          <div className="settings-item-desc">Сменить светлую тему</div>
+        </div>
+
+        <div className="header-settings-item" onClick={changeFavorites}>
+          <div className="settings-item-content">
+            <div className="settings-item-title">Избранные профили</div>
+            <div
+              className={`settings-item-toggle ${
+                isSaveProfiles ? "" : "active"
+              }`}
+            ></div>
+          </div>
+          <div className="settings-item-desc">
+            Профили будут сохранятся локально в браузере
+          </div>
+        </div>
+        <NavLink to={"/favorites"} className="header-settings-item">
+          <div className="settings-item-content">
+            <div className="settings-item-title">Показать избранное</div>
+            <i className="fas fa-external-link-alt"></i>
+          </div>
+          <div className="settings-item-desc">Ваши избранные профили</div>
+        </NavLink>
       </div>
     </header>
   );

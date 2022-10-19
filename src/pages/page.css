@@ -223,6 +223,7 @@
 }
 
 .select-table-btn {
+  position: relative;
   cursor: pointer;
   width: 50%;
   border: 0;
@@ -374,9 +375,35 @@
 }
 
 .profile-id {
+  position: relative;
   font-size: 18px;
   font-weight: bold;
+  text-align: right;
   color: var(--text-color);
+}
+
+.profile-btn-content {
+  display: block;
+}
+
+.profile-btn-content.hide {
+  display: none;
+}
+
+.profile-button {
+  color: white;
+  cursor: pointer;
+  border: none;
+  padding: 6px 10px;
+  margin: 5px 0;
+  font-size: 15px;
+  border-radius: 5px;
+  background: green;
+}
+
+#profile-in-favorites {
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .profile-main {
@@ -409,10 +436,17 @@
   }
   .profile-avatar {
     width: 100px;
+    min-width: 100px;
     height: 100px;
   }
   .fa-user {
     font-size: 100px;
+  }
+  .profile-bg {
+    height: 200px;
+  }
+  .profile-parallax {
+    top: -27px;
   }
 }
 
@@ -813,4 +847,33 @@
 
 #not-found-btn {
   color: var(--text-color);
+}
+
+/* FAVORITES */
+
+.favorites-title {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.favorites-btn-delete {
+  cursor: pointer;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  padding: 8px 15px;
+  font-weight: bold;
+  background: red;
+}
+
+.favorites-btn-delete:hover {
+  background: rgb(169, 23, 23);
+}
+
+.favorites-list-empty {
+  text-align: center;
+  font-size: 17px;
+  letter-spacing: 1px;
 }

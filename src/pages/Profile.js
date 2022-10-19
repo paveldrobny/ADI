@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useLocation } from "react-router-dom";
 import studentsData from "../studentsData";
+import { Context } from "../context";
 import "./page.css";
 
 function Profile() {
   const location = useLocation();
+  const [favoritesData, setFavoritesData] = React.useState([]);
+  const { isSaveProfiles } = useContext(Context);
 
   const getStudentID = () => {
     let str = location.pathname;
@@ -12,7 +15,46 @@ function Profile() {
     return Number(newPath);
   };
 
-  console.log(getStudentID());
+  React.useEffect(() => {
+    getValue();
+  }, []);
+
+  const isFavoritesList = () => {
+    if (
+      localStorage.getItem("favoritesData") !== null &&
+      localStorage.getItem("favoritesData") !== ""
+    ) {
+      return (
+        JSON.parse(
+          localStorage.getItem("favoritesData").indexOf(getStudentID())
+        ) > -1
+      );
+    }
+  };
+
+  const addTest = (id) => {
+    if (localStorage.getItem("favoritesData") === null) {
+      const newArray = [];
+      newArray.push(id);
+      setFavoritesData(newArray);
+      localStorage.setItem("favoritesData", JSON.stringify(newArray));
+    }
+    if (localStorage.getItem("favoritesData") !== null) {
+      const newArray = [...favoritesData, id];
+      setFavoritesData(newArray);
+      localStorage.setItem("favoritesData", JSON.stringify(newArray));
+    }
+  };
+
+  const getValue = () => {
+    if (
+      localStorage.getItem("favoritesData") !== null &&
+      localStorage.getItem("favoritesData") !== ""
+    ) {
+      const value = JSON.parse(localStorage.getItem("favoritesData"));
+      setFavoritesData(value);
+    }
+  };
 
   return (
     <div className="profile">
@@ -28,10 +70,28 @@ function Profile() {
                   <div className="profile-avatar">
                     <i className="fas fa-user" />
                   </div>
-                  <div className="profile-id">{data.id}</div>
+                  <div className="profile-id">
+                    {data.id}
+                    {!isSaveProfiles ? (
+                      <div className="profile-btn-content">
+                        {!isFavoritesList() ? (
+                          <button
+                            onClick={() => addTest(data.id)}
+                            className="profile-button"
+                          >
+                            В избранное
+                          </button>
+                        ) : (
+                          <div id="profile-in-favorites">Уже добавлен в избранное</div>
+                        )}
+                      </div>
+                    ) : (
+                      ""
+                    )}
+                  </div>
                 </div>
                 <div className="profile-main">
-                <div className="profile-info">
+                  <div className="profile-info">
                     <div className="profile-info-title">ФИО</div>
                     <div>{data.name}</div>
                   </div>

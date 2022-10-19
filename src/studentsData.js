@@ -26,7 +26,7 @@ const data = [
     faculty: "ТиИТ",
   },
   {
-    id: 7514270021,
+    id: 1514270022,
     category: "БИ-23",
     name: "Малышев Максим Владиславович",
     documentsSeries: 939,
