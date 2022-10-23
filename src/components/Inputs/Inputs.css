@@ -1,0 +1,34 @@
+.input-container {
+    position: relative;
+    display: inline-block;
+    margin: 8px;
+}
+
+.input-title {
+    pointer-events: none;
+    position: absolute;
+    top: 9px;
+    left: 9px;
+    font-size: 14px;
+    transition: .15s;
+    background: white;
+}
+
+.input {
+    width: 350px;
+    height: 35px;
+    padding: 0 8px;
+    font-size: 14px;
+    border: 1px solid #E0E0E0;
+    border-radius: var(--global-border-radius);
+}
+
+.input:focus+.input-title {
+    top: -7px;
+    left: 10px;
+    font-size: 9px;
+}
+
+.input:focus {
+    outline: 2px solid rgb(14, 138, 215);
+}

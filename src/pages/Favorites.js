@@ -1,12 +1,14 @@
-import React, { useContext } from "react";
-import { useLocation } from "react-router-dom";
+import React from "react";
 import ListButton from "../components/Buttons/ListButton";
-import { Context } from "../context";
 import "./page.css";
 
 function Favorites() {
-  const location = useLocation();
   const [favoritesData, setFavoritesData] = React.useState([]);
+  const [title, setTitle] = React.useState("Ваши избранные профили");
+  const [btnText, setBtnText] = React.useState("Удалить все профили");
+  const [emptyDataText, setEmptyDataText] = React.useState(
+    "Ваши избранные профили"
+  );
 
   React.useEffect(() => {
     getValue();
@@ -30,16 +32,16 @@ function Favorites() {
   return (
     <div className="page min">
       <div className="favorites">
-        <div className="favorites-title">Ваши избранные профили</div>
+        <div className="favorites-title">{title}</div>
         <button className="favorites-btn-delete" onClick={deleteFavorites}>
-          Удалить все профили
+          {btnText}
         </button>
         {favoritesData.length > 0 ? (
           favoritesData.map((data) => {
             return <ListButton path={`/profile/${data}`} title={data} />;
           })
         ) : (
-          <div className="favorites-list-empty">Список избранных пуст</div>
+          <div className="favorites-list-empty">{emptyDataText}</div>
         )}
       </div>
     </div>

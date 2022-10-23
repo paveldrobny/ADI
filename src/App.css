@@ -22,6 +22,10 @@ li {
   padding: 0;
 }
 
+input:focus {
+  outline: none;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -47,11 +51,12 @@ li {
 }
 
 :root {
+  --global-border-radius: 3px;
   --bg: #f0f2f5;
   --text-color: black;
   --text-color-nav: #445b78;
   --btn-bg: white;
-  --border-color: rgb(210, 210, 210);
+  --border-color: rgb(215, 215, 215);
   --select-table-bg: rgb(231, 231, 231);
   --select-table-hover: rgb(207, 206, 206);
   --enrollment-tabs-content-bg: #dce1e5;

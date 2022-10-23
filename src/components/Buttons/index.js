@@ -1,2 +1,9 @@
+import ListButton from "./ListButton";
 import SelectedButton from "./SelectedButton";
-export default SelectedButton;
+
+const obj = {
+  ListButton,
+  SelectedButton,
+};
+
+export default obj;

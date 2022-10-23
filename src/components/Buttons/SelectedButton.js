@@ -1,4 +1,5 @@
 import React from "react";
+import "./Buttons.css"
 
 function SelectedButton({ setID, isActive, title }) {
   return (

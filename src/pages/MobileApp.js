@@ -2,18 +2,32 @@ import React from "react";
 import "./page.css";
 
 function MobileApp() {
+  const [title, setTitle] = React.useState(
+    "Мобильное приложение 'Абитуриент АДИ'"
+  );
+  const [downloadText, setDownloadText] = React.useState("Загрузить");
+  const [description, setDescription] = React.useState(
+    "Доступно на Android и IOS"
+  );
+  const [privilegeList, setPrivilegeList] = React.useState([
+    "узнайте, что нужно для поступления",
+    "следите за последними новостями",
+    "проматривайте списки поступивших",
+    "профиль поступающего",
+  ]);
+
   return (
     <div className="page min">
       <div id="mobile-app-content">
         <div id="mobile-content-left">
-          <div id="mobile-title">Мобильное приложение "Абитуриент АДИ"</div>
+          <div id="mobile-title">{title}</div>
           <div id="mobile-download">
             <a href="">
-              Загрузить
+              {downloadText}
               <i style={{ margin: "0 5px" }} className="fas fa-download"></i>
             </a>
           </div>
-          <div id="mobile-desc">Доступно на Android и IOS</div>
+          <div id="mobile-desc">{downloadText}</div>
           <div id="test-content">
             <div id="test">узнайте, что нужно для поступления</div>
             <div id="test">следите за последними новостями</div>

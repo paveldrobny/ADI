@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
 import logo from "../../image/zeropoint_logo.jpg";
 import { NavLink } from "react-router-dom";
-import "./Header.css";
 import { Context } from "../../context";
+import SettingsMenu from "./SettingsMenu";
+import "./Header.css";
 
-export const Header = ({ changeTheme, changeFavorites }) => {
+const Header = ({ changeTheme, changeFavorites }) => {
+  const [title, setTitle] = React.useState("Абитуриент АДИ");
   const [links, setLinks] = React.useState([
     { name: "Главная", route: "/", icon: "fa-home" },
     { name: "Зачисление", route: "/enrollment", icon: "fa-list-alt" },
@@ -19,7 +21,7 @@ export const Header = ({ changeTheme, changeFavorites }) => {
     <header id="header">
       <div className="header-banner">
         <img src={logo} alt="logo" />
-        <div id="logo-name">Абитуриент АДИ</div>
+        <div id="logo-name">{title}</div>
       </div>
       <div className="header-nav-btn">
         <ul>
@@ -49,38 +51,15 @@ export const Header = ({ changeTheme, changeFavorites }) => {
           </li>
         </ul>
       </div>
-      <div className={`${isSettingShow ? "show" : ""}`} id="settings-menu">
-        <div className="header-settings-item" onClick={changeTheme}>
-          <div className="settings-item-content">
-            <div className="settings-item-title">Темная тема</div>
-            <div
-              className={`settings-item-toggle ${isDarkTheme ? "" : "active"}`}
-            ></div>
-          </div>
-          <div className="settings-item-desc">Сменить оформление</div>
-        </div>
-
-        <div className="header-settings-item" onClick={changeFavorites}>
-          <div className="settings-item-content">
-            <div className="settings-item-title">Избранные профили</div>
-            <div
-              className={`settings-item-toggle ${
-                isSaveProfiles ? "" : "active"
-              }`}
-            ></div>
-          </div>
-          <div className="settings-item-desc">
-            Профили будут сохранятся локально в браузере
-          </div>
-        </div>
-        <NavLink to={"/favorites"} className="header-settings-item">
-          <div className="settings-item-content">
-            <div className="settings-item-title">Показать избранное</div>
-            <i className="fas fa-external-link-alt"></i>
-          </div>
-          <div className="settings-item-desc">Ваши избранные профили</div>
-        </NavLink>
-      </div>
+      <SettingsMenu
+        isSettingShow={isSettingShow}
+        isDarkTheme={isDarkTheme}
+        isSaveProfiles={isSaveProfiles}
+        changeTheme={changeTheme}
+        changeFavorites={changeFavorites}
+      />
     </header>
   );
 };
+
+export default Header;

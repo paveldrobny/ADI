@@ -16,7 +16,7 @@
 .tabs-nav-right {
   position: relative;
   width: 256px;
-  border-radius: 8px;
+  border-radius: var(--global-border-radius);;
   background: var(--enrollment-tabs-content-bg);
 }
 
@@ -33,7 +33,7 @@
   padding: 6px 0;
   margin: 4px;
   user-select: none;
-  border-radius: 8px;
+  border-radius: var(--global-border-radius);;
   border: none;
   font-size: 13px;
   color: var(--text-color);

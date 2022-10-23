@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useLocation } from "react-router-dom";
-import studentsData from "../studentsData";
+import studentsData from "../data/studentsData";
 import { Context } from "../context";
 import "./page.css";
 

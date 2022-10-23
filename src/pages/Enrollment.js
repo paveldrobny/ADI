@@ -1,10 +1,10 @@
 import React from "react";
-import GroupCategory from "../components/Categories";
-import ListCategory from "../components/Categories/ListCategory";
-import GroupsCategory from "../components/Groups/GroupsCategory";
-import GroupsDefault from "../components/Groups/GroupsDefault";
-import GroupsSearch from "../components/Groups/GroupsSearch";
-import data from "../studentsData";
+import ToggleCategory from "../components/Categories/ToggleCategory";
+import ComboBoxCategory from "../components/Categories/DropdownCategory";
+import FilterGroups from "../components/Groups/FilterGroups";
+import DefaultGroups from "../components/Groups/DefaultGroups";
+import SearchGroups from "../components/Groups/SearchGroups";
+import data from "../data/studentsData";
 import "./page.css";
 
 const Enrollment = () => {
@@ -77,21 +77,21 @@ const Enrollment = () => {
   let component;
   if (!query.trim() && filterEnable === "Все") {
     component = categories.map((value, index) => {
-      return <GroupsDefault key={index} value={value} groups={groups} />;
+      return <DefaultGroups key={index} value={value} groups={groups} />;
     });
   } else if (!query.trim() && filterEnable === "Категории") {
     component = (
-      <GroupsCategory filter={categoryStudents} myGroup={filterGroup} />
+      <FilterGroups filter={categoryStudents} myGroup={filterGroup} />
     );
   } else if (query.trim()) {
     component = (
-      <GroupsSearch filter={filterStudents} groups={groups} query={query} />
+      <SearchGroups filter={filterStudents} groups={groups} query={query} />
     );
   }
 
   return (
     <div className="page">
-      <GroupCategory
+      <ToggleCategory
         title="Список"
         buttonOne="Все"
         buttonTwo="Категории"
@@ -104,31 +104,31 @@ const Enrollment = () => {
         }}
       >
         <div id="category-title">Категории</div>
-        <GroupCategory
+        <ToggleCategory
           title="Факультет"
           buttonOne="ДТ"
           buttonTwo="ТиИТ"
           setFilter={setFilterFaculty}
         />
-        <GroupCategory
+        <ToggleCategory
           title="Образовательная программа"
           buttonOne="Бакалавриат"
           buttonTwo="Магистратура"
           setFilter={setFilterProgram}
         />
-        <GroupCategory
+        <ToggleCategory
           title="План"
           buttonOne="Бюджет"
           buttonTwo="Контракт"
           setFilter={setFilterPlan}
         />
-        <GroupCategory
+        <ToggleCategory
           title="Форма обучения"
           buttonOne="Очная"
           buttonTwo="Заочная"
           setFilter={setFilterEducation}
         />
-        <ListCategory
+        <ComboBoxCategory
           title="Группа"
           groupList={groupsList}
           setFilter={setFilterGroup}
