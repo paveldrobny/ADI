@@ -7,7 +7,6 @@
     margin: 10px 0;
     border: none;
     border-radius: var(--global-border-radius);
-    ;
     text-decoration: none;
     color: var(--text-color);
     font-size: 15px;
@@ -53,6 +52,49 @@
     font-weight: bold;
     color: white;
     background: rgb(1, 102, 102);
+}
+
+.admin-list-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: calc(100% - 30px);
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid var(--border-color);
+    border-radius: var(--global-border-radius);
+    text-decoration: none;
+    color: var(--text-color);
+    font-size: 15px;
+    background: var(--bg);
+}
+
+.admin-list-button:hover {
+    color: white;
+    background: rgba(1, 102, 102, 0.9);
+}
+
+.admin-list-button-edit, .admin-list-button-delete {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    border: 1px solid var(--text-color);
+    margin: 0 10px;
+    border-radius: var(--global-border-radius);
+}
+
+.admin-list-button-edit {
+    background: rgb(19, 187, 109);
+}
+
+.admin-list-button-delete {
+    background: red;
+}
+
+.fa-edit, .fa-trash {
+    color: white;
+    font-size: 15px;
+    pointer-events: none;
 }
 
 @media screen and (max-width: 550px) {

@@ -37,19 +37,24 @@ const Enrollment = () => {
   const [filterEducation, setFilterEducation] = React.useState("Очная");
   const [filterGroup, setFilterGroup] = React.useState("");
 
-  const unique = (array) => {
-    return array.filter((item, index) => {
-      return array.indexOf(item) === index;
-    });
-  };
-
   const onChange = (event) => setQuery(event.target.value);
-  const categories = unique(groups.map((group) => group.category));
+
   const [groupsList, setGroupsList] = React.useState([
-    "ИСиТ-23",
-    "БИ-23",
+    "ЭТТМиК-23",
+    "ЭТТМиК (маг.)",
+    "ЭТТМиК (заоч.)",
+    "Менеджмент-23",
+    "Менеджмент (маг.)",
+    "Менеджмент (заоч.)",
     "ТСБ-23",
-    "ОПУТ-23",
+    "ТСБ-23 (маг.)",
+    "ТСБ-23 (заоч.)",
+    "ИСиТ-23",
+    "ИСиТ-23 (маг.)",
+    "ИСиТ-23 (заоч.)",
+    "БИ-23",
+    "БИ-23 (маг.)",
+    "БИ-23 (заоч.)",
   ]);
 
   const filterStudents = groups.filter((group) => {
@@ -58,20 +63,20 @@ const Enrollment = () => {
 
   const checkCategories = (group) => {
     if (filterGroup !== "" && group.category.indexOf(filterGroup)) {
-      return (
-        group.faculty === filterFaculty &&
-        group.program === filterProgram &&
-        group.plan === filterPlan &&
-        group.formEducation === filterEducation &&
-        group.category === filterGroup
-      );
+      return group.faculty.indexOf(filterFaculty) === 1
+        ? true
+        : false &&
+            group.program === filterProgram &&
+            group.plan === filterPlan &&
+            group.formEducation === filterEducation &&
+            group.category === filterGroup;
     }
-    return (
-      group.faculty === filterFaculty &&
-      group.program === filterProgram &&
-      group.plan === filterPlan &&
-      group.formEducation === filterEducation
-    );
+    return group.faculty.indexOf(filterFaculty) === 1
+      ? true
+      : false &&
+          group.program === filterProgram &&
+          group.plan === filterPlan &&
+          group.formEducation === filterEducation;
   };
 
   const categoryStudents = groups.filter((group) => {
@@ -80,17 +85,19 @@ const Enrollment = () => {
 
   let component;
   if (!query.trim() && filterEnable === "Все") {
-    component = groups.map((value, index) => {
-      return (
-        <div id="group-search">
-          <ListButton
-            key={index}
-            path={`/profile/${value.id}`}
-            title={`${index + 1}. ${value.name}`}
-          />
-        </div>
-      );
-    });
+    component = groups
+      .filter((group) => group.isReceived !== "Поступил")
+      .map((value, index) => {
+        return (
+          <div key={index} id="group-search">
+            <ListButton
+              key={index}
+              path={`/profile/${value.id}`}
+              title={`${index + 1}. ${value.name}`}
+            />
+          </div>
+        );
+      });
   } else if (!query.trim() && filterEnable === "Категории") {
     component = (
       <FilterGroups filter={categoryStudents} myGroup={filterGroup} />

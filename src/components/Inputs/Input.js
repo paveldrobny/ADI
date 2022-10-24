@@ -2,23 +2,21 @@ import React from "react";
 import "./Inputs.css";
 
 const Input = ({ title, type, maxLength, value, onChange }) => {
-  const [labelActive, setLabelActive] = React.useState(false);
-
   const onFocus = () => {
-    setLabelActive(true);
+   // setActiveAnim(true);
   };
 
   const onBlur = () => {
     if (!value.trim()) {
-      setLabelActive(false);
+     // setActiveAnim(false);
     } else {
-      setLabelActive(true);
+     // setActiveAnim(true);
     }
   };
 
   return (
     <div className="input-container">
-      <label className={`input-title ${labelActive ? "is-active" : ""}`}>
+      <label className="input-title is-active">
         {title}:
       </label>
       <input

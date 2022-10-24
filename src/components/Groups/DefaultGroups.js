@@ -6,8 +6,9 @@ function DefaultGroups({ value, groups, index }) {
   const groupFilter = (group) => {
     return (
       group.category === value &&
+      group.faculty.length <= 1 &&
       group.category.length <= 1 &&
-      group.isReceived === true
+      group.isReceived === "Поступил"
     );
   };
 

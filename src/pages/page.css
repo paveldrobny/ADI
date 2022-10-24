@@ -566,6 +566,11 @@
   display: none;
 }
 
+.admin-groups-title{
+  width: 100%;
+  padding: 0 10px;
+}
+
 #admin-add-new {
   cursor: pointer;
   margin: 10px;
@@ -603,6 +608,35 @@
 #admin-news-date {
   margin-top: 10px;
   font-weight: 600;
+}
+
+.admin-add-note {
+  width: 100%;
+  font-size: 14px;
+  color: rgb(34, 34, 34);
+  padding: 5px 20px;
+}
+
+#admin-update-list {
+  cursor: pointer;
+  color: white;
+  padding: 8px 15px;
+  border: none;
+  border-radius: var(--global-border-radius);
+  background: rgb(0, 153, 255);
+}
+
+#admin-update-list:hover {
+  background: rgb(11, 135, 218);
+}
+
+.admin-update-btn-cont {
+  display: flex;
+  justify-content: right;
+  width: 100%;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .admin-input-content {

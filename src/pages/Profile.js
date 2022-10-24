@@ -4,6 +4,7 @@ import studentsData from "../data/studentsData";
 import { Context } from "../context";
 import "./page.css";
 import ProfileInfo from "../components/Profile/ProfileInfo";
+import InfoBlock from "../components/Blocks/InfoBlock";
 import ProfileAvatar from "../components/Profile/ProfileAvatar";
 
 function Profile() {
@@ -88,17 +89,34 @@ function Profile() {
                 </div>
               </div>
               <div className="profile-main">
-                <ProfileInfo title={"ФИО"} text={data.name} />
-                <ProfileInfo title={"Группа"} text={data.category} />
-                <ProfileInfo title={"Факультет"} text={data.faculty} />
-                <ProfileInfo
-                  title={"  Образовательная программа"}
-                  text={data.program}
+                <InfoBlock title={"Статус"} textData={data.status} />
+                <InfoBlock title={"ИНН"} textData={data.id} />
+                <InfoBlock title={"ФИО"} textData={data.name} />
+                <InfoBlock title={"Пол"} textData={data.sex} />
+                <InfoBlock
+                  title={"Образовательная программа"}
+                  textData={data.program}
                 />
-                <ProfileInfo title={"План"} text={data.plan} />
-                <ProfileInfo
+                <InfoBlock title={"Факультет"} textData={data.faculty} />
+                <InfoBlock
                   title={"Форма обучения"}
-                  text={data.formEducation}
+                  textData={data.formEducation}
+                />
+                <InfoBlock title={"План"} textData={data.plan} />
+                <InfoBlock title={"Группа"} textData={data.category} />
+                <InfoBlock title={"Наличие льгот"} textData={data.privileges} />
+                <InfoBlock
+                  title={"Преимущественное право зачисления"}
+                  textData={data.primary}
+                />
+                <InfoBlock
+                  title={"Номер документа"}
+                  textData={data.documentsSeries}
+                />
+                <InfoBlock title={"Конкурсный балл"} textData={data.score} />
+                <InfoBlock
+                  title={"Дата подачи документов"}
+                  textData={data.documentsDate}
                 />
               </div>
             </div>

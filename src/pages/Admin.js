@@ -1,55 +1,185 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Parse from "parse/dist/parse.min.js";
 import ListButton from "../components/Buttons/ListButton";
 import data from "../data/studentsData";
 import Input from "../components/Inputs/Input";
 import ToogleCategory from "../components/Categories/ToggleCategory";
 import Dropdown from "../components/Inputs/Dropdown";
+import DropdownMulti from "../components/Inputs/DropdownMulti";
+import AdminListButton from "../components/Buttons/AdminListButton";
+import InputDefault from "../components/Inputs/InputDefault";
 
 function Admin() {
-  const [studentsData, setStudentsData] = React.useState(data);
-  const [valueICode, setValueICode] = React.useState("");
-  const [valueName, setValueName] = React.useState("");
-  const [valueProgram, setValueProgram] = React.useState("");
-  const [valueFaculty, setValueFaculty] = React.useState("");
-  const [selectBlock, setSelectBlock] = React.useState("Студенты");
+  const [studentsData, setStudentsData] = useState([]);
+  const [valueICode, setValueICode] = useState("");
+  const [valueName, setValueName] = useState("");
+  const [valueSex, setValueSex] = useState("");
+  const [valueProgram, setValueProgram] = useState("");
+  const [valueFaculty, setValueFaculty] = useState([]);
+  const [valueForm, setValueForm] = useState("");
+  const [valuePlan, setValuePlan] = useState("");
+  const [valueGroup, setValueGroup] = useState([]);
+  const [valuePrivileges, setValuePrivileges] = useState("");
+  const [valuePrimary, setValuePrimary] = useState("");
+  const [valueDocumentNum, setValueDocumentNum] = useState("");
+  const [valueScore, setValueScore] = useState("");
+  const [valueStatus, setValueStatus] = useState("");
+  const [valueDateDocument, setValueDateDocument] = useState("");
+
+  const [selectBlock, setSelectBlock] = useState("Студенты");
 
   // List
-  const [programList, setProgramList] = React.useState([
-    {
-      name: "Бакалавриат",
-    },
-    {
-      name: "Магистратура",
-    },
+
+  const [sexList, setSexList] = useState(["Муж.", "Жен."]);
+  const [programList, setProgramList] = useState([
+    "Бакалавриат",
+    "Магистратура",
   ]);
-  const [facultyList, setFacultyList] = React.useState([
-    {
-      name: "ДТ",
-    },
-    {
-      name: "ТиИТ",
-    },
+  const [facultyList, setFacultyList] = useState(["ДТ", "ТиИТ"]);
+
+  const [formList, setFormList] = useState(["Очная", "Заочная"]);
+
+  const [planList, setPlanList] = useState(["Бюджет", "Контракт"]);
+
+  const [groupList, setGroupList] = useState([
+    "ЭТТМиК-23",
+    "ЭТТМиК (маг.)",
+    "ЭТТМиК (заоч.)",
+    "Менеджмент-23",
+    "Менеджмент (маг.)",
+    "Менеджмент (заоч.)",
+    "ТСБ-23",
+    "ТСБ-23 (маг.)",
+    "ТСБ-23 (заоч.)",
+    "ИСиТ-23",
+    "ИСиТ-23 (маг.)",
+    "ИСиТ-23 (заоч.)",
+    "БИ-23",
+    "БИ-23 (маг.)",
+    "БИ-23 (заоч.)",
   ]);
 
+  const [statusList, setStatusList] = useState(["Зачисляется", "Поступил"]);
+
+  const [yesNoList, setYesNoList] = useState(["Да", "Нет"]);
+
   // Pages
-  const [pages, setPages] = React.useState([
+  const [pages, setPages] = useState([
     { name: "Новости" },
     { name: "Студенты" },
   ]);
 
-  async function addPerson() {
-    try {
-      // create a new Parse Object instance
-      const Person = new Parse.Object("Person");
-      // define the attributes you want for your Object
-      Person.set("ICode", valueICode);
-      Person.set("name", valueName);
+  // console.log(valueICode === "");
+  // console.log(valueName === "");
+  // console.log(valueSex === "");
+  // console.log(valueProgram === "");
+  // console.log(valueFaculty === "");
+  // console.log(valueForm === "");
+  // console.log(valueGroup === "");
+  // console.log(valuePrivileges === "");
+  // console.log(valuePrimary === "");
+  // console.log(valueDocumentNum === "");
+  // console.log(valueScore === "");
+  // console.log(valueStatus === "");
+  // console.log(valueDateDocument === "");
 
-      await Person.save();
-      // fetchStudents();
+  useEffect(() => {
+    fetchStudents();
+  }, []);
+
+  const onEditConfirm = async function (id) {};
+
+  const onEditUser = async function (id) {
+    if (
+      window.confirm(`Редактировать студента?\nИНН: ${data.id},\n${data.name}`)
+    ) {
+      let person = new Parse.Object("Person");
+      setValueICode(person.get("icode"));
+      setValueName(person.get("icode"));
+      setValueSex(person.get("icode"));
+      setValueProgram(person.get("icode"));
+      setValueFaculty(person.get("icode"));
+      setValueForm(person.get("icode"));
+      setValuePlan(person.get("icode"));
+      setValueGroup(person.get("icode"));
+      setValuePrivileges(person.get("icode"));
+      setValuePrimary(person.get("icode"));
+      setValueDocumentNum(person.get("icode"));
+      setValueScore(data.score);
+      setValueStatus(data.status);
+      setValueDateDocument(data.documentsDate);
+
+      try {
+        await person.save();
+        alert("Данные обновлены");
+        fetchStudents();
+        return true;
+      } catch (error) {
+        alert(`Ошибка! ${error.message}`);
+        return false;
+      }
+    }
+  };
+
+  const onDeleteUser = async function (id) {
+    let person = new Parse.Object("Person");
+    person.set("objectId", id);
+    try {
+      await person.destroy();
+      alert("Студент удален");
+      return true;
     } catch (error) {
-      console.log("Error saving new person: ", error);
+      alert(`Ошибка! ${error.message}`);
+      return false;
+    }
+  };
+
+  const isEmpty = () => {
+    return (
+      valueICode === "" &&
+      valueName === "" &&
+      valueSex === "" &&
+      valueProgram === "" &&
+      valueFaculty === "" &&
+      valueForm === "" &&
+      valueGroup === "" &&
+      valuePrivileges === "" &&
+      valuePrimary === "" &&
+      valueDocumentNum === "" &&
+      valueScore === "" &&
+      valueStatus === "" &&
+      valueDateDocument === ""
+    );
+  };
+
+  async function addPerson() {
+    let person = new Parse.Object("Person");
+    if (!isEmpty()) {
+      person.set("icode", valueICode);
+      person.set("name", valueName);
+      person.set("sex", valueSex);
+      person.set("program", valueProgram);
+      person.set("faculty", valueFaculty);
+      person.set("formEducation", valueForm);
+      person.set("plan", valuePlan);
+      person.set("category", valueGroup);
+      person.set("privileges", valuePrivileges);
+      person.set("primary", valuePrimary);
+      person.set("documentsSeries", valueDocumentNum);
+      person.set("score", valueScore);
+      person.set("status", valueStatus);
+      person.set("documentsDate", valueDateDocument);
+
+      try {
+        await person.save();
+        alert("Студент добавлен");
+        return true;
+      } catch (error) {
+        alert(`ОШИБКА! ${error.message}`);
+        return false;
+      }
+    } else {
+      alert("Не все поля заполнены");
     }
   }
 
@@ -59,6 +189,7 @@ function Admin() {
     try {
       let data = await query.find();
       setStudentsData(data);
+      console.log(studentsData);
       return true;
     } catch (error) {
       console.log(error.message);
@@ -81,14 +212,14 @@ function Admin() {
         <button id="test-btn-admin">Войти</button>
       </div>
 
-      <div id="admin-top-menu">
+      {/* <div id="admin-top-menu">
         <ToogleCategory
           title={"Блок"}
           buttonOne={pages[0].name}
           buttonTwo={pages[1].name}
           setFilter={setSelectBlock}
         />
-      </div>
+      </div> */}
 
       {/* <div
         className={`admin-groups ${
@@ -115,11 +246,12 @@ function Admin() {
       </div> */}
 
       <div className="admin-groups">
+        <h3 className="admin-groups-title">Добавить / редактировать данные</h3>
         <Input
           title="ИНН"
           type="text"
-          value={valueICode}
           maxLength={12}
+          value={valueICode}
           onChange={(e) => setValueICode(e.target.value)}
         />
         <Input
@@ -130,96 +262,136 @@ function Admin() {
           onChange={(e) => setValueName(e.target.value)}
         />
         <Dropdown
-          title="Образовательная программа"
+          title="Пол"
           size={"min"}
-          groupList={programList}
-          setFilter={setValueProgram}
+          list={sexList}
+          isShowLabel={false}
+          value={valueSex}
+          setFilter={setValueSex}
+          onChange={(e) => setValueSex(e.target.value)}
         />
         <Dropdown
-          title="Факультет"
+          title="Образовательная программа"
           size={"min"}
-          groupList={facultyList}
-          setFilter={setValueFaculty}
+          isShowLabel={false}
+          list={programList}
+          value={valueProgram}
+          setFilter={setValueProgram}
+          onChange={(e) => setValueProgram(e.target.value)}
         />
-
-        {/*
-        <Input
+        <DropdownMulti
           title="Факультет"
-          type="text"
-          maxLength={64}
-          value={valueName}
-          onChange={(e) => setValueName(e.target.value)}
+          size={"min-multi"}
+          list={facultyList}
+          setFilter={setValueFaculty}
+          value={valueFaculty}
+          onChange={(e) => setValueFaculty(e.target.value)}
         />
-        <Input
+        <Dropdown
           title="Форма обучения"
-          type="number"
-          value={valueICode}
-          maxLength={12}
-          onChange={(e) => setValueICode(e.target.value)}
+          size={"min"}
+          list={formList}
+          isShowLabel={false}
+          setFilter={setValueForm}
+          value={valueForm}
+          onChange={(e) => setValueForm(e.target.value)}
         />
-        <Input
-          title="План"
-          type="text"
-          maxLength={64}
-          value={valueName}
-          onChange={(e) => setValueName(e.target.value)}
+        <Dropdown
+          title="*План"
+          size={"min"}
+          list={planList}
+          isShowLabel={true}
+          setFilter={setValuePlan}
+          value={valuePlan}
+          onChange={(e) => setValuePlan(e.target.value)}
         />
-        <Input
+        <DropdownMulti
           title="Группа"
-          type="text"
-          maxLength={64}
-          value={valueName}
-          onChange={(e) => setValueName(e.target.value)}
+          size={"max-multi"}
+          list={groupList}
+          setFilter={setValueGroup}
+          value={valueGroup}
+          onChange={(e) => setValueGroup(e.target.value)}
         />
-        <Input
+        <Dropdown
           title="Наличие льгот"
-          type="text"
-          maxLength={64}
-          value={valueName}
-          onChange={(e) => setValueName(e.target.value)}
+          size={"min"}
+          list={yesNoList}
+          isShowLabel={true}
+          setFilter={setValuePrivileges}
+          value={valuePrivileges}
+          onChange={(e) => setValuePrivileges(e.target.value)}
         />
-        <Input
-          title="Преимущественное право зачисления"
-          type="text"
-          maxLength={64}
-          value={valueName}
-          onChange={(e) => setValueName(e.target.value)}
+        <Dropdown
+          title="Преим. право зачисления"
+          size={"min"}
+          list={yesNoList}
+          isShowLabel={true}
+          setFilter={setValuePrimary}
+          value={valuePrimary}
+          onChange={(e) => setValuePrimary(e.target.value)}
         />
         <Input
           title="Номер документа"
-          type="number"
-          maxLength={10}
-          value={valueName}
-          onChange={(e) => setValueName(e.target.value)}
+          type="text"
+          maxLength={15}
+          value={valueDocumentNum}
+          onChange={(e) => setValueDocumentNum(e.target.value)}
         />
         <Input
           title="Конкурсный балл"
-          type="number"
-          maxLength={5}
-          value={valueName}
-          onChange={(e) => setValueName(e.target.value)}
+          type="text"
+          maxLength={3}
+          value={valueScore}
+          onChange={(e) => setValueScore(e.target.value)}
+        />
+        <Dropdown
+          title="**Статус"
+          size={"min"}
+          list={statusList}
+          isShowLabel={true}
+          setFilter={setValueStatus}
+          value={valueStatus}
+          onChange={(e) => setValueStatus(e.target.value)}
         />
         <Input
-          title="Статус"
-          type="text"
-          maxLength={64}
-          value={valueName}
-          onChange={(e) => setValueName(e.target.value)}
-        /> */}
-        <button id="admin-add-new">Добавить студента</button>
+          title="Дата подачи документов"
+          type="date"
+          maxLength={15}
+          value={valueDateDocument}
+          onChange={(e) => setValueDateDocument(e.target.value)}
+        />
+        <div className="admin-add-note">* можно оставить пустым</div>
+        <div className="admin-add-note">
+          ** при статусе "Поступил", у студента не может быть больше чем 1
+          пункта, в категориях: Факультет, План, Группа.
+        </div>
+        <button id="admin-add-new" onClick={addPerson}>
+          Добавить студента
+        </button>
+        <button id="admin-add-new">Редактировать данные</button>
       </div>
 
-      {/* <div className="admin-groups">
-        {studentsData.map((data, value) => {
-          return (
-            <ListButton
-              path={"SD"}
-              setID={data.setID}
-              title={`${value + 1}. ${data.name}`}
-            />
-          );
-        })}
-      </div> */}
+      <div className="admin-groups">
+        <div className="admin-update-btn-cont">
+          <button id="admin-update-list" onClick={fetchStudents}>
+            Обновить список
+          </button>
+        </div>
+        <div>Кол-во студентов: {studentsData.length}</div>
+        {studentsData.length > 0
+          ? studentsData.map((data, value) => {
+              return (
+                <AdminListButton
+                  key={value}
+                  title={`${value + 1}. ${data.get("name")}`}
+                  onEditUser={() => onEditUser(data.id)}
+                  onDeleteUser={() => onDeleteUser(data.id)}
+                />
+              );
+            })
+          : "Данных нет"}
+      </div>
     </div>
   );
 }
