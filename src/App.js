@@ -12,6 +12,7 @@ import Admin from "./pages/Admin";
 import NotFound from "./pages/NotFound";
 import { Context } from "./context";
 import Favorites from "./pages/Favorites";
+import Received from "./pages/Received";
 
 const PARSE_APPLICATION_ID = "yxPnWbQX9w1aSveJmbTIEJyWJUO7Lg4emp6rEmSX";
 const PARSE_HOST_URL = "https://parseapi.back4app.com/";
@@ -79,6 +80,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/enrollment" element={<Enrollment />} />
+            <Route path="/received" element={<Received />} />
             <Route path="/profile/:id" element={<Profile />} />
             <Route path="/favorites" element={<Favorites />} />
             <Route path="/about" element={<About />} />

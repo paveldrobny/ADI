@@ -3,6 +3,8 @@ import { useLocation } from "react-router-dom";
 import studentsData from "../data/studentsData";
 import { Context } from "../context";
 import "./page.css";
+import ProfileInfo from "../components/Profile/ProfileInfo";
+import ProfileAvatar from "../components/Profile/ProfileAvatar";
 
 function Profile() {
   const location = useLocation();
@@ -32,7 +34,7 @@ function Profile() {
     }
   };
 
-  const addTest = (id) => {
+  const addToFavorites = (id) => {
     if (localStorage.getItem("favoritesData") === null) {
       const newArray = [];
       newArray.push(id);
@@ -60,92 +62,44 @@ function Profile() {
     <div className="profile">
       {studentsData.map((data) => {
         return data.id === getStudentID() ? (
-          <div key={data.id}>
-            <div className="profile-bg">
-              <div className="profile-img"></div>
-            </div>
-            <div className="profile-content">
-              <div className="profile-parallax">
-                <div className="profile-top">
-                  <div className="profile-avatar">
-                    <i className="fas fa-user" />
-                  </div>
-                  <div className="profile-id">
-                    {data.id}
-                    {!isSaveProfiles ? (
-                      <div className="profile-btn-content">
-                        {!isFavoritesList() ? (
-                          <button
-                            onClick={() => addTest(data.id)}
-                            className="profile-button"
-                          >
-                            В избранное
-                          </button>
-                        ) : (
-                          <div id="profile-in-favorites">Уже в избранном</div>
-                        )}
-                      </div>
-                    ) : (
-                      ""
-                    )}
-                  </div>
+          <div key={data.id} className="profile-content">
+            <div className="profile-img"></div>
+            <div className="profile-section">
+              <div className="profile-top">
+                <ProfileAvatar />
+                <div className="profile-id">
+                  {data.id}
+                  {!isSaveProfiles ? (
+                    <div className="profile-btn-content">
+                      {!isFavoritesList() ? (
+                        <button
+                          onClick={() => addToFavorites(data.id)}
+                          className="profile-button"
+                        >
+                          В избранное
+                        </button>
+                      ) : (
+                        <div id="profile-in-favorites">Уже в избранном</div>
+                      )}
+                    </div>
+                  ) : (
+                    ""
+                  )}
                 </div>
-                <div className="profile-main">
-                  <div className="profile-info">
-                    <div className="profile-info-title">ФИО</div>
-                    <div>{data.name}</div>
-                  </div>
-                  <div className="profile-info">
-                    <div className="profile-info-title">Группа</div>
-                    <div>{data.category}</div>
-                  </div>
-                  <div className="profile-info">
-                    <div className="profile-info-title">Факультет</div>
-                    <div>{data.faculty}</div>
-                  </div>
-                  <div className="profile-info">
-                    <div className="profile-info-title">
-                      Образовательная программа
-                    </div>
-                    <div>{data.program}</div>
-                  </div>
-                  <div className="profile-info">
-                    <div className="profile-info-title">План</div>
-                    <div>{data.plan}</div>
-                  </div>
-                  <div className="profile-info">
-                    <div className="profile-info-title">Форма обучения</div>
-                    <div>{data.formEducation}</div>
-                  </div>
-                  <div className="profile-info">
-                    <div className="profile-info-title">№ личного дела</div>
-                    <div>9644</div>
-                  </div>
-                  <div className="profile-info">
-                    <div className="profile-info-title">Серия документа</div>
-                    <div>3565434</div>
-                  </div>
-                  <div className="profile-info">
-                    <div className="profile-info-title">Конкурсный балл</div>
-                    <div>95</div>
-                  </div>
-                  <div className="profile-info">
-                    <div className="profile-info-title">Наличие льгот</div>
-                    <div>Да</div>
-                  </div>
-                  <div className="profile-info">
-                    <div className="profile-info-title">
-                      Преимущественное право зачисления
-                    </div>
-                    <div>Да</div>
-                  </div>
-                  <div className="profile-info">
-                    <div className="profile-info-title">
-                      Дата подачи документов
-                    </div>
-                    <div>05.05.2022</div>
-                  </div>
-                </div>
+              </div>
+              <div className="profile-main">
+                <ProfileInfo title={"ФИО"} text={data.name} />
+                <ProfileInfo title={"Группа"} text={data.category} />
+                <ProfileInfo title={"Факультет"} text={data.faculty} />
+                <ProfileInfo
+                  title={"  Образовательная программа"}
+                  text={data.program}
+                />
+                <ProfileInfo title={"План"} text={data.plan} />
+                <ProfileInfo
+                  title={"Форма обучения"}
+                  text={data.formEducation}
+                />
               </div>
             </div>
           </div>

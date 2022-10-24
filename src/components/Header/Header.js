@@ -10,6 +10,7 @@ const Header = ({ changeTheme, changeFavorites }) => {
   const [links, setLinks] = React.useState([
     { name: "Главная", route: "/", icon: "fa-home" },
     { name: "Зачисление", route: "/enrollment", icon: "fa-list-alt" },
+    { name: "Поступившие", route: "/received", icon: "fa-check-square" },
     { name: "Об институте", route: "/about", icon: "fa-info-circle" },
     { name: "", route: "/admin", icon: "fa-user-shield" },
   ]);
@@ -35,7 +36,7 @@ const Header = ({ changeTheme, changeFavorites }) => {
                     isActive ? "app-link selected" : "app-link"
                   }
                 >
-                  <i className={`fas ${link.icon}`}></i>
+                  <i className={`fa ${link.icon}`}></i>
                   <div className="nav-text">{link.name}</div>
                 </NavLink>
               </li>

@@ -1,11 +1,35 @@
 import React from "react";
-import "./Inputs.css"
+import "./Inputs.css";
 
-const Input = ({ title, type, value, onChange }) => {
+const Input = ({ title, type, maxLength, value, onChange }) => {
+  const [labelActive, setLabelActive] = React.useState(false);
+
+  const onFocus = () => {
+    setLabelActive(true);
+  };
+
+  const onBlur = () => {
+    if (!value.trim()) {
+      setLabelActive(false);
+    } else {
+      setLabelActive(true);
+    }
+  };
+
   return (
     <div className="input-container">
-      <input className="input" type={type} value={value} onChange={onChange} />
-      <label className="input-title">{title}</label>
+      <label className={`input-title ${labelActive ? "is-active" : ""}`}>
+        {title}:
+      </label>
+      <input
+        className="input"
+        onFocus={onFocus}
+        type={type}
+        maxLength={maxLength}
+        onBlur={onBlur}
+        value={value}
+        onChange={onChange}
+      />
     </div>
   );
 };

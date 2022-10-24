@@ -2,7 +2,7 @@ import React from "react";
 import ToggleCategory from "../components/Categories/ToggleCategory";
 import ComboBoxCategory from "../components/Categories/DropdownCategory";
 import FilterGroups from "../components/Groups/FilterGroups";
-import DefaultGroups from "../components/Groups/DefaultGroups";
+import ListButton from "../components/Buttons/ListButton";
 import SearchGroups from "../components/Groups/SearchGroups";
 import data from "../data/studentsData";
 import "./page.css";
@@ -42,18 +42,22 @@ const Enrollment = () => {
       return array.indexOf(item) === index;
     });
   };
+
   const onChange = (event) => setQuery(event.target.value);
-
   const categories = unique(groups.map((group) => group.category));
-
-  const [groupsList, setGroupsList] = React.useState(categories);
+  const [groupsList, setGroupsList] = React.useState([
+    "ИСиТ-23",
+    "БИ-23",
+    "ТСБ-23",
+    "ОПУТ-23",
+  ]);
 
   const filterStudents = groups.filter((group) => {
     return group.name.toLowerCase().includes(query.toLowerCase());
   });
 
   const checkCategories = (group) => {
-    if (filterGroup !== "") {
+    if (filterGroup !== "" && group.category.indexOf(filterGroup)) {
       return (
         group.faculty === filterFaculty &&
         group.program === filterProgram &&
@@ -76,8 +80,16 @@ const Enrollment = () => {
 
   let component;
   if (!query.trim() && filterEnable === "Все") {
-    component = categories.map((value, index) => {
-      return <DefaultGroups key={index} value={value} groups={groups} />;
+    component = groups.map((value, index) => {
+      return (
+        <div id="group-search">
+          <ListButton
+            key={index}
+            path={`/profile/${value.id}`}
+            title={`${index + 1}. ${value.name}`}
+          />
+        </div>
+      );
     });
   } else if (!query.trim() && filterEnable === "Категории") {
     component = (

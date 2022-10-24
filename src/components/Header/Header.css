@@ -220,7 +220,7 @@
   border-top: 6px solid var(--text-color-nav);
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 950px) {
   .nav-text {
     display: none;
   }

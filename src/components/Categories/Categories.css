@@ -16,7 +16,8 @@
 .tabs-nav-right {
   position: relative;
   width: 256px;
-  border-radius: var(--global-border-radius);;
+  border-radius: var(--global-border-radius);
+  ;
   background: var(--enrollment-tabs-content-bg);
 }
 
@@ -33,7 +34,8 @@
   padding: 6px 0;
   margin: 4px;
   user-select: none;
-  border-radius: var(--global-border-radius);;
+  border-radius: var(--global-border-radius);
+  ;
   border: none;
   font-size: 13px;
   color: var(--text-color);
@@ -82,12 +84,13 @@
 .enrollment-list {
   position: relative;
   height: calc(100% - 10px);
-  overflow-y: scroll;
+  overflow-y: auto;
   margin: 5px 0;
 }
 
 .enrollment-list-item {
   cursor: pointer;
+  overflow: hidden;
   height: 30px;
   line-height: 30px;
   margin: 0 5px;
@@ -115,12 +118,15 @@
     font-size: 12px;
     word-wrap: break-all;
   }
+
   .tabs-nav-right {
     width: 100px;
   }
+
   .tabs-nav-right.min {
     width: 100px;
   }
+
   .enrollment-tabs {
     font-size: 10px;
     width: 90px;
