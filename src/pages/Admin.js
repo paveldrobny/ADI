@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Parse from "parse/dist/parse.min.js";
-import ListButton from "../components/Buttons/ListButton";
 import data from "../data/studentsData";
 import Input from "../components/Inputs/Input";
 import ToogleCategory from "../components/Categories/ToggleCategory";
@@ -11,6 +10,7 @@ import InputDefault from "../components/Inputs/InputDefault";
 
 function Admin() {
   const [studentsData, setStudentsData] = useState([]);
+  const [currentEditID, setCurrentEditID] = useState("");
   const [valueICode, setValueICode] = useState("");
   const [valueName, setValueName] = useState("");
   const [valueSex, setValueSex] = useState("");
@@ -69,50 +69,105 @@ function Admin() {
     { name: "Студенты" },
   ]);
 
-  // console.log(valueICode === "");
-  // console.log(valueName === "");
-  // console.log(valueSex === "");
-  // console.log(valueProgram === "");
-  // console.log(valueFaculty === "");
-  // console.log(valueForm === "");
-  // console.log(valueGroup === "");
-  // console.log(valuePrivileges === "");
-  // console.log(valuePrimary === "");
-  // console.log(valueDocumentNum === "");
-  // console.log(valueScore === "");
-  // console.log(valueStatus === "");
-  // console.log(valueDateDocument === "");
-
   useEffect(() => {
     fetchStudents();
   }, []);
 
-  const onEditConfirm = async function (id) {};
+  const clearInputData = () => {
+    setValueICode("");
+    setValueName("");
+    setValueFaculty([]);
+    setValuePlan("");
+    setValueGroup([]);
+    setValuePrivileges("");
+    setValuePrimary("");
+    setValueDocumentNum("");
+    setValueScore("");
+    setValueStatus("");
+  };
+
+  const onEditConfirm = async function () {
+    if (currentEditID !== "") {
+      let person = new Parse.Object("Person");
+      person.set("objectId", currentEditID);
+
+      if (
+        window.confirm(
+          `Применить текущие данные для \nИНН: ${person.get(
+            "icode"
+          )},\n${person.get("name")}`
+        )
+      ) {
+        person.set("icode", valueICode);
+        person.set("name", valueName);
+        person.set("sex", valueSex);
+        person.set("program", valueProgram);
+        person.set("faculty", valueFaculty);
+        person.set("formEducation", valueForm);
+        person.set("plan", valuePlan);
+        person.set("category", valueGroup);
+        person.set("privileges", valuePrivileges);
+        person.set("primary", valuePrimary);
+        person.set("documentsSeries", valueDocumentNum);
+        person.set("score", valueScore);
+        person.set("status", valueStatus);
+        person.set("documentsDate", valueDateDocument);
+        try {
+          await person.save();
+          clearInputData();
+          setCurrentEditID("");
+          alert("Данные были изменены, обновите список");
+          return true;
+        } catch (error) {
+          alert(`Ошибка! ${error.message}`);
+          return false;
+        }
+      }
+    }
+  };
 
   const onEditUser = async function (id) {
+    let person = new Parse.Object("Person");
+    person.set("objectId", id);
+    setCurrentEditID(id);
     if (
-      window.confirm(`Редактировать студента?\nИНН: ${data.id},\n${data.name}`)
+      window.confirm(
+        `Редактировать студента?\nИНН: ${person.get("icode")},\n${person.get(
+          "name"
+        )}`
+      )
     ) {
-      let person = new Parse.Object("Person");
       setValueICode(person.get("icode"));
-      setValueName(person.get("icode"));
-      setValueSex(person.get("icode"));
-      setValueProgram(person.get("icode"));
-      setValueFaculty(person.get("icode"));
-      setValueForm(person.get("icode"));
-      setValuePlan(person.get("icode"));
-      setValueGroup(person.get("icode"));
-      setValuePrivileges(person.get("icode"));
-      setValuePrimary(person.get("icode"));
-      setValueDocumentNum(person.get("icode"));
-      setValueScore(data.score);
-      setValueStatus(data.status);
-      setValueDateDocument(data.documentsDate);
+      setValueName(person.get("name"));
+      setValueSex(person.get("sex"));
+      setValueProgram(person.get("program"));
+      setValueFaculty(person.get("faculty"));
+      setValueForm(person.get("formEducation"));
+      setValuePlan(person.get("plan"));
+      setValueGroup(person.get("category"));
+      setValuePrivileges(person.get("privileges"));
+      setValuePrimary(person.get("primary"));
+      setValueDocumentNum(person.get("documentsSeries"));
+      setValueScore(person.get("score"));
+      setValueStatus(person.get("status"));
+      setValueDateDocument(person.get("documentsDate"));
+      clearInputData();
+    }
+  };
 
+  const onDeleteUser = async function (id) {
+    let person = new Parse.Object("Person");
+    person.set("objectId", id);
+
+    if (
+      window.confirm(
+        `Удалить студента?\nИНН: ${person.get("icode")},\n${person.get("name")}`
+      )
+    ) {
       try {
-        await person.save();
-        alert("Данные обновлены");
-        fetchStudents();
+        await person.destroy();
+        clearInputData();
+        alert("Студент удален, обновите список");
         return true;
       } catch (error) {
         alert(`Ошибка! ${error.message}`);
@@ -121,40 +176,28 @@ function Admin() {
     }
   };
 
-  const onDeleteUser = async function (id) {
-    let person = new Parse.Object("Person");
-    person.set("objectId", id);
-    try {
-      await person.destroy();
-      alert("Студент удален");
-      return true;
-    } catch (error) {
-      alert(`Ошибка! ${error.message}`);
-      return false;
-    }
-  };
-
   const isEmpty = () => {
     return (
-      valueICode === "" &&
-      valueName === "" &&
-      valueSex === "" &&
-      valueProgram === "" &&
-      valueFaculty === "" &&
-      valueForm === "" &&
-      valueGroup === "" &&
-      valuePrivileges === "" &&
-      valuePrimary === "" &&
-      valueDocumentNum === "" &&
-      valueScore === "" &&
-      valueStatus === "" &&
-      valueDateDocument === ""
+      valueICode !== "" &&
+      valueName !== "" &&
+      valueSex !== "" &&
+      valueProgram !== "" &&
+      valuePlan !== "" &&
+      valueFaculty.length > 0 &&
+      valueForm !== "" &&
+      valueGroup.length > 0 &&
+      valuePrivileges !== "" &&
+      valuePrimary !== "" &&
+      valueDocumentNum !== "" &&
+      valueScore !== "" &&
+      valueStatus !== "" &&
+      valueDateDocument !== ""
     );
   };
 
   async function addPerson() {
     let person = new Parse.Object("Person");
-    if (!isEmpty()) {
+    if (isEmpty()) {
       person.set("icode", valueICode);
       person.set("name", valueName);
       person.set("sex", valueSex);
@@ -172,7 +215,8 @@ function Admin() {
 
       try {
         await person.save();
-        alert("Студент добавлен");
+        clearInputData();
+        alert("Студент добавлен, обновите список");
         return true;
       } catch (error) {
         alert(`ОШИБКА! ${error.message}`);
@@ -189,7 +233,6 @@ function Admin() {
     try {
       let data = await query.find();
       setStudentsData(data);
-      console.log(studentsData);
       return true;
     } catch (error) {
       console.log(error.message);
@@ -297,7 +340,7 @@ function Admin() {
           onChange={(e) => setValueForm(e.target.value)}
         />
         <Dropdown
-          title="*План"
+          title="План"
           size={"min"}
           list={planList}
           isShowLabel={true}
@@ -346,7 +389,7 @@ function Admin() {
           onChange={(e) => setValueScore(e.target.value)}
         />
         <Dropdown
-          title="**Статус"
+          title="*Статус"
           size={"min"}
           list={statusList}
           isShowLabel={true}
@@ -361,15 +404,16 @@ function Admin() {
           value={valueDateDocument}
           onChange={(e) => setValueDateDocument(e.target.value)}
         />
-        <div className="admin-add-note">* можно оставить пустым</div>
         <div className="admin-add-note">
-          ** при статусе "Поступил", у студента не может быть больше чем 1
-          пункта, в категориях: Факультет, План, Группа.
+          * при статусе "Поступил", у студента не может быть больше чем 1
+          пункта, в категориях: Факультет, Группа.
         </div>
         <button id="admin-add-new" onClick={addPerson}>
           Добавить студента
         </button>
-        <button id="admin-add-new">Редактировать данные</button>
+        <button id="admin-add-new" onClick={onEditConfirm}>
+          Редактировать данные
+        </button>
       </div>
 
       <div className="admin-groups">
@@ -378,19 +422,21 @@ function Admin() {
             Обновить список
           </button>
         </div>
-        <div>Кол-во студентов: {studentsData.length}</div>
-        {studentsData.length > 0
+        <div id="admin-list-count">Кол-во студентов: {studentsData.length}</div>
+        {studentsData !== null &&
+        studentsData !== undefined &&
+        studentsData.length > 0
           ? studentsData.map((data, value) => {
               return (
                 <AdminListButton
                   key={value}
-                  title={`${value + 1}. ${data.get("name")}`}
+                  title={`${value + 1}. ${data.get("name")} (${data.get("icode")})`}
                   onEditUser={() => onEditUser(data.id)}
                   onDeleteUser={() => onDeleteUser(data.id)}
                 />
               );
             })
-          : "Данных нет"}
+          : "Данных нет..."}
       </div>
     </div>
   );

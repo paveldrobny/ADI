@@ -5,16 +5,16 @@ import "./Groups.css";
 function DefaultGroups({ value, groups, index }) {
   const groupFilter = (group) => {
     return (
-      group.category === value &&
-      group.faculty.length <= 1 &&
-      group.category.length <= 1 &&
-      group.isReceived === "Поступил"
+     group.get("category") === value &&
+      group.get("faculty").length <= 1 &&
+      group.get("category").length <= 1 &&
+      group.get("status") === "Поступил"
     );
   };
 
   const isGroupEmpty = groups
     .filter(groupFilter)
-    .map((group) => group.category);
+    .map((group) => group.get("category"));
 
   return (
     <details
@@ -30,8 +30,8 @@ function DefaultGroups({ value, groups, index }) {
           return (
             <ListButton
               key={index}
-              path={`/profile/${group.id}`}
-              title={`${index + 1}. ` + group.name}
+              path={`/profile/${group.get("icode")}`}
+              title={`${index + 1}. ` + group.get("name")}
             />
           );
         })}

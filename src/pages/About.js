@@ -41,7 +41,13 @@ function About() {
         <div id="about-title">{title}</div>
         <div>
           {aboutData.map((data) => {
-            return <InfoBlock title={data.title} textData={data.content} />;
+            return (
+              <InfoBlock
+                key={data.title}
+                title={data.title}
+                textData={data.content}
+              />
+            );
           })}
         </div>
       </div>

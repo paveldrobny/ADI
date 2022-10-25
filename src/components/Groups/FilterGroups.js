@@ -16,9 +16,9 @@ function FilterGroups({ filter, myGroup }) {
         return (
           <ListButton
             key={index}
-            path={`/profile/${group.id}`}
-            title={`${index + 1}. ${group.name} ${
-              myGroup === "" ? `(${group.category})` : ""
+            path={`/profile/${group.get("icode")}`}
+            title={`${index + 1}. ${group.get("name")} ${
+              myGroup === "" ? `(${group.get("category")})` : ""
             }`}
           />
         );

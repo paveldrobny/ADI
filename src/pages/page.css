@@ -569,6 +569,7 @@
 .admin-groups-title{
   width: 100%;
   padding: 0 10px;
+  color: var(--text-color);
 }
 
 #admin-add-new {
@@ -613,7 +614,7 @@
 .admin-add-note {
   width: 100%;
   font-size: 14px;
-  color: rgb(34, 34, 34);
+  color: var(--description);
   padding: 5px 20px;
 }
 
@@ -637,6 +638,11 @@
   padding-bottom: 10px;
   margin-bottom: 10px;
   border-bottom: 1px solid var(--border-color);
+}
+
+#admin-list-count{
+  padding: 15px 0;
+ color: var(--text-color)
 }
 
 .admin-input-content {

@@ -18,9 +18,11 @@ function SearchGroups({ filter, query }) {
       {filter.map((group, value) => {
         return (
           <ListButton
-            key={group.id}
-            path={`/profile/${group.id}`}
-            title={`${value + 1}. ${group.name} (${group.category})`}
+            key={group.get("icode")}
+            path={`/profile/${group.get("icode")}`}
+            title={`${value + 1}. ${group.get("name")} (${group.get(
+              "category"
+            )})`}
           />
         );
       })}

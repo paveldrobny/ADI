@@ -81,7 +81,6 @@ const Home = () => {
             })}
           </div>
           {tableData.map((data, index) => {
-            console.log(index);
             return (
               <TableMain
                 key={index}

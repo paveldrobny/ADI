@@ -4,7 +4,7 @@ import ComboBoxCategory from "../components/Categories/DropdownCategory";
 import FilterGroups from "../components/Groups/FilterGroups";
 import ListButton from "../components/Buttons/ListButton";
 import SearchGroups from "../components/Groups/SearchGroups";
-import data from "../data/studentsData";
+import Parse from "parse/dist/parse.min.js";
 import "./page.css";
 
 const Enrollment = () => {
@@ -25,8 +25,7 @@ const Enrollment = () => {
     { name: "План" },
     { name: "Форма обучения" },
   ]);
-  const [groups, setGroups] = React.useState(data);
-
+  const [groups, setGroups] = React.useState([]);
   const [query, setQuery] = React.useState("");
 
   // Filters
@@ -58,42 +57,59 @@ const Enrollment = () => {
   ]);
 
   const filterStudents = groups.filter((group) => {
-    return group.name.toLowerCase().includes(query.toLowerCase());
+    return group.get("name").toLowerCase().includes(query.toLowerCase());
   });
 
   const checkCategories = (group) => {
-    if (filterGroup !== "" && group.category.indexOf(filterGroup)) {
-      return group.faculty.indexOf(filterFaculty) === 1
-        ? true
-        : false &&
-            group.program === filterProgram &&
-            group.plan === filterPlan &&
-            group.formEducation === filterEducation &&
-            group.category === filterGroup;
+    if (filterGroup !== "" && group.get("category").indexOf(filterGroup)) {
+      return (
+        group.get("faculty").indexOf(filterFaculty) !== -1 &&
+        group.get("program").indexOf(filterProgram) !== -1 &&
+        group.get("plan").indexOf(filterPlan) !== -1 &&
+        group.get("formEducation").indexOf(filterEducation) !== -1 &&
+        group.get("category").indexOf(filterGroup) !== -1
+      );
     }
-    return group.faculty.indexOf(filterFaculty) === 1
-      ? true
-      : false &&
-          group.program === filterProgram &&
-          group.plan === filterPlan &&
-          group.formEducation === filterEducation;
+
+    return (
+      group.get("faculty").indexOf(filterFaculty) !== -1 &&
+      group.get("program").indexOf(filterProgram) !== -1 &&
+      group.get("plan").indexOf(filterPlan) !== -1 &&
+      group.get("formEducation").indexOf(filterEducation) !== -1
+    );
   };
 
   const categoryStudents = groups.filter((group) => {
     return checkCategories(group);
   });
 
+  React.useEffect(() => {
+    fetchStudents();
+  }, []);
+
+  async function fetchStudents() {
+    const query = new Parse.Query("Person");
+    try {
+      let data = await query.find();
+      setGroups(data);
+      return true;
+    } catch (error) {
+      console.log(error.message);
+      return false;
+    }
+  }
+
   let component;
   if (!query.trim() && filterEnable === "Все") {
     component = groups
-      .filter((group) => group.isReceived !== "Поступил")
+      .filter((group) => group.get("status") !== "Поступил")
       .map((value, index) => {
         return (
           <div key={index} id="group-search">
             <ListButton
               key={index}
-              path={`/profile/${value.id}`}
-              title={`${index + 1}. ${value.name}`}
+              path={`/profile/${value.get("icode")}`}
+              title={`${index + 1}. ${value.get("name")}`}
             />
           </div>
         );

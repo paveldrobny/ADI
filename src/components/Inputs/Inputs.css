@@ -10,9 +10,9 @@
     top: 11px;
     left: 7px;
     font-size: 16px;
-    transition: .15s;
     padding: 0 5px;
-    background: white;
+    color: var(--text-color);
+    background: var(--btn-bg);
 }
 
 .input-title.is-active {
@@ -27,10 +27,16 @@
     height: 45px;
     padding: 0 10px;
     font-size: 15px;
-    border: 1px solid #E0E0E0;
+    border: 1px solid var(--border-color);
     border-radius: var(--global-border-radius);
     box-sizing: border-box;
-    background: white;
+    color-scheme: revert;
+    color: var(--text-color);
+    background: var(--btn-bg);
+}
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(0.5);
 }
 
 .dropdown {
@@ -50,6 +56,8 @@
     padding: 0 5px;
     border: none;
     box-sizing: border-box;
+    color: var(--text-color);
+    background: var(--btn-bg);
 }
 
 .dropdown-list {
@@ -65,7 +73,7 @@
     padding: 0 5px;
     border-radius: var(--global-border-radius);
     box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.3);
-    background: white;
+    background: var(--bg)
 }
 
 .dropdown-list.min {
@@ -105,11 +113,11 @@
     margin: 5px 0;
     border: none;
     border-radius: var(--global-border-radius);
-    background: rgb(228, 228, 228);
+    background: var(--btn-bg)
 }
 
 .dropdown-list-item:hover {
-    background: rgb(187, 187, 187);
+    background: var(--border-color);
 }
 
 .dropdown-list-item-content {
@@ -117,7 +125,7 @@
     top: 0;
     position: sticky;
     padding: 5px;
-    background: white;
+    background: var(--bg)
 }
 
 .dropdown-list-item.delete {

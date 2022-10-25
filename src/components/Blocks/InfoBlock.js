@@ -2,7 +2,6 @@ import React from "react";
 import "./Blocks.css";
 
 function InfoBlock({ title, textData }) {
-  console.log(typeof title);
   return (
     <div className="info-block">
       <div className="info-block-title">{title}:</div>

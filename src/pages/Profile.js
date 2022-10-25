@@ -1,22 +1,40 @@
 import React, { useContext } from "react";
 import { useLocation } from "react-router-dom";
-import studentsData from "../data/studentsData";
 import { Context } from "../context";
 import "./page.css";
 import ProfileInfo from "../components/Profile/ProfileInfo";
 import InfoBlock from "../components/Blocks/InfoBlock";
 import ProfileAvatar from "../components/Profile/ProfileAvatar";
+import Parse from "parse/dist/parse.min.js";
 
 function Profile() {
   const location = useLocation();
   const [favoritesData, setFavoritesData] = React.useState([]);
   const { isSaveProfiles } = useContext(Context);
+  const [studentsData, setStudentsData] = React.useState([]);
 
   const getStudentID = () => {
     let str = location.pathname;
     let newPath = str.replace("/profile/", "");
     return Number(newPath);
   };
+
+  React.useEffect(() => {
+    fetchStudents();
+  }, []);
+
+  async function fetchStudents() {
+    const query = new Parse.Query("Person");
+
+    try {
+      let data = await query.find();
+      setStudentsData(data);
+      return true;
+    } catch (error) {
+      console.log(error.message);
+      return false;
+    }
+  }
 
   React.useEffect(() => {
     getValue();
@@ -61,70 +79,86 @@ function Profile() {
 
   return (
     <div className="profile">
-      {studentsData.map((data) => {
-        return data.id === getStudentID() ? (
-          <div key={data.id} className="profile-content">
-            <div className="profile-img"></div>
-            <div className="profile-section">
-              <div className="profile-top">
-                <ProfileAvatar />
-                <div className="profile-id">
-                  {data.id}
-                  {!isSaveProfiles ? (
-                    <div className="profile-btn-content">
-                      {!isFavoritesList() ? (
-                        <button
-                          onClick={() => addToFavorites(data.id)}
-                          className="profile-button"
-                        >
-                          В избранное
-                        </button>
+      {studentsData !== null &&
+      studentsData !== undefined &&
+      studentsData.length > 0
+        ? studentsData.map((data) => {
+            return data.get("icode") === getStudentID().toString() ? (
+              <div key={data.get("icode")} className="profile-content">
+                <div className="profile-img"></div>
+                <div className="profile-section">
+                  <div className="profile-top">
+                    <ProfileAvatar />
+                    <div className="profile-id">
+                      {data.get("icode")}
+                      {!isSaveProfiles ? (
+                        <div className="profile-btn-content">
+                          {!isFavoritesList() ? (
+                            <button
+                              onClick={() => addToFavorites(data.get("icode"))}
+                              className="profile-button"
+                            >
+                              В избранное
+                            </button>
+                          ) : (
+                            <div id="profile-in-favorites">Уже в избранном</div>
+                          )}
+                        </div>
                       ) : (
-                        <div id="profile-in-favorites">Уже в избранном</div>
+                        ""
                       )}
                     </div>
-                  ) : (
-                    ""
-                  )}
+                  </div>
+                  <div className="profile-main">
+                    <InfoBlock title={"Статус"} textData={data.get("status")} />
+                    <InfoBlock title={"ИНН"} textData={data.get("icode")} />
+                    <InfoBlock title={"ФИО"} textData={data.get("name")} />
+                    <InfoBlock title={"Пол"} textData={data.get("sex")} />
+                    <InfoBlock
+                      title={"Образовательная программа"}
+                      textData={data.get("program")}
+                    />
+                    <InfoBlock
+                      title={"Факультет"}
+                      textData={data.get("faculty")}
+                    />
+                    <InfoBlock
+                      title={"Форма обучения"}
+                      textData={data.get("formEducation")}
+                    />
+                    <InfoBlock title={"План"} textData={data.get("plan")} />
+                    <InfoBlock
+                      title={"Группа"}
+                      textData={data.get("category")}
+                    />
+                    <InfoBlock
+                      title={"Наличие льгот"}
+                      textData={data.get("privileges")}
+                    />
+                    <InfoBlock
+                      title={"Преимущественное право зачисления"}
+                      textData={data.get("primary")}
+                    />
+                    <InfoBlock
+                      title={"Номер документа"}
+                      textData={data.get("documentsSeries")}
+                    />
+                    <InfoBlock
+                      title={"Конкурсный балл"}
+                      textData={data.get("score")}
+                    />
+                    <InfoBlock
+                      title={"Дата подачи документов"}
+                      textData={data.get("documentsDate")}
+                    />
+                  </div>
                 </div>
               </div>
-              <div className="profile-main">
-                <InfoBlock title={"Статус"} textData={data.status} />
-                <InfoBlock title={"ИНН"} textData={data.id} />
-                <InfoBlock title={"ФИО"} textData={data.name} />
-                <InfoBlock title={"Пол"} textData={data.sex} />
-                <InfoBlock
-                  title={"Образовательная программа"}
-                  textData={data.program}
-                />
-                <InfoBlock title={"Факультет"} textData={data.faculty} />
-                <InfoBlock
-                  title={"Форма обучения"}
-                  textData={data.formEducation}
-                />
-                <InfoBlock title={"План"} textData={data.plan} />
-                <InfoBlock title={"Группа"} textData={data.category} />
-                <InfoBlock title={"Наличие льгот"} textData={data.privileges} />
-                <InfoBlock
-                  title={"Преимущественное право зачисления"}
-                  textData={data.primary}
-                />
-                <InfoBlock
-                  title={"Номер документа"}
-                  textData={data.documentsSeries}
-                />
-                <InfoBlock title={"Конкурсный балл"} textData={data.score} />
-                <InfoBlock
-                  title={"Дата подачи документов"}
-                  textData={data.documentsDate}
-                />
-              </div>
-            </div>
-          </div>
-        ) : (
-          ""
-        );
-      })}
+            ) : (
+              ""
+            );
+          })
+        : "Данных нет..."}
     </div>
   );
 }

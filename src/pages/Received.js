@@ -1,21 +1,39 @@
 import React from "react";
 import DefaultGroups from "../components/Groups/DefaultGroups";
-import data from "../data/studentsData";
+import Parse from "parse/dist/parse.min.js";
 
 const Received = () => {
-  const [groups, setGroups] = React.useState(data);
+  const [groups, setGroups] = React.useState([]);
 
   const unique = (array) => {
     return array.filter((item, index) => {
       return array.indexOf(item) === index;
     });
   };
-  const categories = unique(groups.map((group) => group.category));
+
+  const category = unique(groups.map((group) => group.get("category")));
+
+  React.useEffect(() => {
+    fetchStudents();
+  }, []);
+
+  async function fetchStudents() {
+    const query = new Parse.Query("Person");
+    try {
+      let data = await query.find();
+      setGroups(data);
+      return true;
+    } catch (error) {
+      console.log(error.message);
+      return false;
+    }
+  }
 
   return (
     <div className="page">
       <div id="groups">
-        {categories.map((value, index) => {
+        <h3 style={{padding: 10}}>Список поступивших</h3>
+        {category.map((value, index) => {
           return <DefaultGroups key={index} value={value} groups={groups} />;
         })}
       </div>

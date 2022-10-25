@@ -22,7 +22,7 @@ function DropdownCategory({ title, groupList, setFilter }) {
       <div className="tabs-nav-right min">
         <button
           onClick={() => setShowList(!isShowList)}
-          className="enrollment-tabs active"
+          className="enrollment-tabs max active"
         >
           {label}
         </button>

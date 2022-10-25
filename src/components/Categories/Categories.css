@@ -17,12 +17,11 @@
   position: relative;
   width: 256px;
   border-radius: var(--global-border-radius);
-  ;
   background: var(--enrollment-tabs-content-bg);
 }
 
 .tabs-nav-right.min {
-  width: 128px;
+  width: 180px;
 }
 
 .enrollment-tabs {
@@ -35,11 +34,14 @@
   margin: 4px;
   user-select: none;
   border-radius: var(--global-border-radius);
-  ;
   border: none;
   font-size: 13px;
   color: var(--text-color);
   background: transparent;
+}
+
+.enrollment-tabs.max {
+  width: 170px;
 }
 
 .enrollment-tabs-label {
