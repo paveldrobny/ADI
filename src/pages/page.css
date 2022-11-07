@@ -234,6 +234,23 @@
   color: var(--text-color);
 }
 
+#warning {
+  display: flex;
+  align-items: center;
+  margin: 10px 0px 20px;
+  padding: 15px;
+  font-size: 15px;
+  color: #996A13;
+  border: 1px solid #FFB020;
+  border-radius: var(--global-border-radius);
+  background: rgba(255, 176, 32, 0.1)
+}
+
+.fa-exclamation-triangle{
+  color: #FFB020;
+  margin-right: 15px;
+}
+
 @media screen and (max-width: 550px) {
   .profile-section {
     top: -20px;
@@ -566,7 +583,7 @@
   display: none;
 }
 
-.admin-groups-title{
+.admin-groups-title {
   width: 100%;
   padding: 0 10px;
   color: var(--text-color);
@@ -575,8 +592,8 @@
 #admin-add-new {
   cursor: pointer;
   margin: 10px;
-  font-size: 20px;
-  padding: 8px 20px;
+  font-size: 18px;
+  padding: 8px 15px;
   border: none;
   color: white;
   border-radius: var(--global-border-radius);
@@ -640,9 +657,9 @@
   border-bottom: 1px solid var(--border-color);
 }
 
-#admin-list-count{
+#admin-list-count {
   padding: 15px 0;
- color: var(--text-color)
+  color: var(--text-color)
 }
 
 .admin-input-content {

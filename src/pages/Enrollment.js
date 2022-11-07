@@ -18,7 +18,7 @@ const Enrollment = () => {
     { name: "Преимущественное право зачисления" },
   ]);
   const [headersSearch, setHeadersSearch] = React.useState([
-    { name: "Группа" },
+    { name: "Специальность" },
     { name: "ФИО" },
     { name: "Факультет" },
     { name: "Образовательная программа" },
@@ -29,7 +29,7 @@ const Enrollment = () => {
   const [query, setQuery] = React.useState("");
 
   // Filters
-  const [filterEnable, setFilterEnable] = React.useState("Все");
+  const [filterEnable, setFilterEnable] = React.useState("Категории");
   const [filterFaculty, setFilterFaculty] = React.useState("ДТ");
   const [filterProgram, setFilterProgram] = React.useState("Бакалавриат");
   const [filterPlan, setFilterPlan] = React.useState("Бюджет");
@@ -102,14 +102,16 @@ const Enrollment = () => {
   let component;
   if (!query.trim() && filterEnable === "Все") {
     component = groups
-      .filter((group) => group.get("status") !== "Поступил")
+      .filter((group) => group.get("status") !== "Зачислен")
       .map((value, index) => {
         return (
           <div key={index} id="group-search">
             <ListButton
               key={index}
-              path={`/profile/${value.get("icode")}`}
-              title={`${index + 1}. ${value.get("name")}`}
+              path={`/profile/${value.get("personalID")}`}
+              title={`${index + 1}. ${value.get(
+                "icode"
+              )}, №${value.get("personalID")}`}
             />
           </div>
         );
@@ -131,6 +133,7 @@ const Enrollment = () => {
         buttonOne="Все"
         buttonTwo="Категории"
         setFilter={setFilterEnable}
+        defaultValue={1}
       />
 
       <div
@@ -144,27 +147,31 @@ const Enrollment = () => {
           buttonOne="ДТ"
           buttonTwo="ТиИТ"
           setFilter={setFilterFaculty}
+          defaultValue={0}
         />
         <ToggleCategory
           title="Образовательная программа"
           buttonOne="Бакалавриат"
           buttonTwo="Магистратура"
           setFilter={setFilterProgram}
+          defaultValue={0}
         />
         <ToggleCategory
           title="План"
           buttonOne="Бюджет"
           buttonTwo="Контракт"
           setFilter={setFilterPlan}
+          defaultValue={0}
         />
         <ToggleCategory
           title="Форма обучения"
           buttonOne="Очная"
           buttonTwo="Заочная"
           setFilter={setFilterEducation}
+          defaultValue={0}
         />
         <ComboBoxCategory
-          title="Группа"
+          title="Специальность"
           groupList={groupsList}
           setFilter={setFilterGroup}
         />

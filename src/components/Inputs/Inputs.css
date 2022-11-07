@@ -30,7 +30,7 @@
     border: 1px solid var(--border-color);
     border-radius: var(--global-border-radius);
     box-sizing: border-box;
-    color-scheme: revert;
+
     color: var(--text-color);
     background: var(--btn-bg);
 }
@@ -77,8 +77,8 @@
 }
 
 .dropdown-list.min {
-    height: 87px;
-    bottom: -89px;
+    height: 91px;
+    bottom: -93px;
 }
 
 .dropdown-list.min-multi {
@@ -96,6 +96,10 @@
     bottom: -268px;
 }
 
+.dropdown:focus > .dropdown-list{
+    display: block;
+}
+
 .dropdown-list.show {
     display: block
 }
@@ -111,7 +115,7 @@
     width: calc(100% - 20px);
     padding: 8px 10px;
     margin: 5px 0;
-    border: none;
+    border: 1px solid var(--border-color);
     border-radius: var(--global-border-radius);
     background: var(--btn-bg)
 }
@@ -140,5 +144,9 @@
 }
 
 .input:focus {
+    outline: 2px solid rgb(7, 154, 239);
+}
+
+.dropdown:focus {
     outline: 2px solid rgb(7, 154, 239);
 }

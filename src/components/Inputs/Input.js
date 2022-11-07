@@ -3,22 +3,20 @@ import "./Inputs.css";
 
 const Input = ({ title, type, maxLength, value, onChange }) => {
   const onFocus = () => {
-   // setActiveAnim(true);
+    // setActiveAnim(true);
   };
 
   const onBlur = () => {
     if (!value.trim()) {
-     // setActiveAnim(false);
+      // setActiveAnim(false);
     } else {
-     // setActiveAnim(true);
+      // setActiveAnim(true);
     }
   };
 
   return (
     <div className="input-container">
-      <label className="input-title is-active">
-        {title}:
-      </label>
+      <label className="input-title is-active">{title}:</label>
       <input
         className="input"
         onFocus={onFocus}

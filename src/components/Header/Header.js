@@ -9,8 +9,8 @@ const Header = ({ changeTheme, changeFavorites }) => {
   const [title, setTitle] = React.useState("Абитуриент АДИ");
   const [links, setLinks] = React.useState([
     { name: "Главная", route: "/", icon: "fa-home" },
-    { name: "Зачисление", route: "/enrollment", icon: "fa-list-alt" },
-    { name: "Поступившие", route: "/received", icon: "fa-check-square" },
+    { name: "Конкурс", route: "/enrollment", icon: "fa-list-alt" },
+    { name: "Зачисление", route: "/received", icon: "fa-check-square" },
     { name: "Об институте", route: "/about", icon: "fa-info-circle" },
     { name: "", route: "/admin", icon: "fa-user-shield" },
   ]);

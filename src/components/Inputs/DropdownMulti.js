@@ -26,8 +26,9 @@ const DropdownMulti = ({ title, size, list, setFilter, value, onChange }) => {
   return (
     <div className="input-container">
       <div
+        tabIndex={1}
         className={`input dropdown ${isShowList ? "is-active" : ""}`}
-        onClick={() => setShowList(!isShowList)}
+        // onClick={() => setShowList(!isShowList)}
       >
         <input
           className="dropdown-title"

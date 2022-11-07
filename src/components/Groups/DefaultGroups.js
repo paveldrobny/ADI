@@ -5,10 +5,7 @@ import "./Groups.css";
 function DefaultGroups({ value, groups, index }) {
   const groupFilter = (group) => {
     return (
-     group.get("category") === value &&
-      group.get("faculty").length <= 1 &&
-      group.get("category").length <= 1 &&
-      group.get("status") === "Поступил"
+      group.get("category") === value && group.get("status") === "Зачислен"
     );
   };
 
@@ -18,9 +15,7 @@ function DefaultGroups({ value, groups, index }) {
 
   return (
     <details
-      className={`details ${
-        value.indexOf(isGroupEmpty.toString()) ? "hide" : ""
-      }`}
+      className={`details ${!isGroupEmpty.toString() ? "hide" : ""}`}
       key={index}
     >
       <summary className="details-title">{value}</summary>
@@ -30,8 +25,8 @@ function DefaultGroups({ value, groups, index }) {
           return (
             <ListButton
               key={index}
-              path={`/profile/${group.get("icode")}`}
-              title={`${index + 1}. ` + group.get("name")}
+              path={`/profile/${group.get("personalID")}`}
+              title={`${index + 1}. ` + group.get("icode")}
             />
           );
         })}

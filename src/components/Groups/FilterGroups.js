@@ -16,10 +16,10 @@ function FilterGroups({ filter, myGroup }) {
         return (
           <ListButton
             key={index}
-            path={`/profile/${group.get("icode")}`}
-            title={`${index + 1}. ${group.get("name")} ${
-              myGroup === "" ? `(${group.get("category")})` : ""
-            }`}
+            path={`/profile/${group.get("personalID")}`}
+            title={`${index + 1}. ${group.get("icode")}, №${group.get(
+              "personalID"
+            )} ${myGroup === "" ? `(${group.get("category")})` : ""}`}
           />
         );
       })}

@@ -1,12 +1,18 @@
 import React from "react";
 import "./Categories.css";
 
-function ToogleCategory({ title, buttonOne, buttonTwo, setFilter }) {
+function ToogleCategory({
+  title,
+  buttonOne,
+  buttonTwo,
+  setFilter,
+  defaultValue,
+}) {
   const [buttons, setButtons] = React.useState([
     { id: 0, name: buttonOne, value: false },
     { id: 1, name: buttonTwo, value: true },
   ]);
-  const [active, setActive] = React.useState(buttons[0].name);
+  const [active, setActive] = React.useState(buttons[defaultValue].name);
   const action = (button) => {
     setFilter(button.name);
     setActive(button.name);

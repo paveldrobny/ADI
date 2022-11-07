@@ -11,14 +11,15 @@ import InputDefault from "../components/Inputs/InputDefault";
 function Admin() {
   const [studentsData, setStudentsData] = useState([]);
   const [currentEditID, setCurrentEditID] = useState("");
+  const [valueDataID, setValueDataID] = useState("");
   const [valueICode, setValueICode] = useState("");
   const [valueName, setValueName] = useState("");
   const [valueSex, setValueSex] = useState("");
   const [valueProgram, setValueProgram] = useState("");
-  const [valueFaculty, setValueFaculty] = useState([]);
+  const [valueFaculty, setValueFaculty] = useState("");
   const [valueForm, setValueForm] = useState("");
   const [valuePlan, setValuePlan] = useState("");
-  const [valueGroup, setValueGroup] = useState([]);
+  const [valueGroup, setValueGroup] = useState("");
   const [valuePrivileges, setValuePrivileges] = useState("");
   const [valuePrimary, setValuePrimary] = useState("");
   const [valueDocumentNum, setValueDocumentNum] = useState("");
@@ -29,7 +30,6 @@ function Admin() {
   const [selectBlock, setSelectBlock] = useState("Студенты");
 
   // List
-
   const [sexList, setSexList] = useState(["Муж.", "Жен."]);
   const [programList, setProgramList] = useState([
     "Бакалавриат",
@@ -59,26 +59,21 @@ function Admin() {
     "БИ-23 (заоч.)",
   ]);
 
-  const [statusList, setStatusList] = useState(["Зачисляется", "Поступил"]);
+  const [statusList, setStatusList] = useState(["Конкурс", "Зачислен"]);
 
   const [yesNoList, setYesNoList] = useState(["Да", "Нет"]);
-
-  // Pages
-  const [pages, setPages] = useState([
-    { name: "Новости" },
-    { name: "Студенты" },
-  ]);
 
   useEffect(() => {
     fetchStudents();
   }, []);
 
   const clearInputData = () => {
+    setValueDataID("");
     setValueICode("");
     setValueName("");
-    setValueFaculty([]);
+    setValueFaculty("");
     setValuePlan("");
-    setValueGroup([]);
+    setValueGroup("");
     setValuePrivileges("");
     setValuePrimary("");
     setValueDocumentNum("");
@@ -98,6 +93,7 @@ function Admin() {
           )},\n${person.get("name")}`
         )
       ) {
+        person.set("personalID", valueDataID);
         person.set("icode", valueICode);
         person.set("name", valueName);
         person.set("sex", valueSex);
@@ -132,11 +128,14 @@ function Admin() {
     setCurrentEditID(id);
     if (
       window.confirm(
-        `Редактировать студента?\nИНН: ${person.get("icode")},\n${person.get(
-          "name"
-        )}`
+        `Редактировать студента?\n № ${person.get(
+          "personalID"
+        )}, \n ИНН: ${person.get("icode")},\n ${person.get(
+          "category"
+        )}, \n ${person.get("name")}`
       )
     ) {
+      setValueDataID(person.get("personalID"));
       setValueICode(person.get("icode"));
       setValueName(person.get("name"));
       setValueSex(person.get("sex"));
@@ -151,7 +150,7 @@ function Admin() {
       setValueScore(person.get("score"));
       setValueStatus(person.get("status"));
       setValueDateDocument(person.get("documentsDate"));
-      clearInputData();
+      // clearInputData();
     }
   };
 
@@ -161,7 +160,9 @@ function Admin() {
 
     if (
       window.confirm(
-        `Удалить студента?\nИНН: ${person.get("icode")},\n${person.get("name")}`
+        `Удалить студента?\n № ${person.get(
+          "personalID"
+        )},\n ИНН: ${person.get("icode")},\n ${person.get("category")},\n ${person.get("name")}`
       )
     ) {
       try {
@@ -178,14 +179,15 @@ function Admin() {
 
   const isEmpty = () => {
     return (
+      valueDataID !== "" &&
       valueICode !== "" &&
       valueName !== "" &&
       valueSex !== "" &&
       valueProgram !== "" &&
       valuePlan !== "" &&
-      valueFaculty.length > 0 &&
+      valueFaculty !== "" &&
       valueForm !== "" &&
-      valueGroup.length > 0 &&
+      valueGroup !== "" &&
       valuePrivileges !== "" &&
       valuePrimary !== "" &&
       valueDocumentNum !== "" &&
@@ -198,6 +200,7 @@ function Admin() {
   async function addPerson() {
     let person = new Parse.Object("Person");
     if (isEmpty()) {
+      person.set("personalID", valueDataID);
       person.set("icode", valueICode);
       person.set("name", valueName);
       person.set("sex", valueSex);
@@ -255,41 +258,15 @@ function Admin() {
         <button id="test-btn-admin">Войти</button>
       </div>
 
-      {/* <div id="admin-top-menu">
-        <ToogleCategory
-          title={"Блок"}
-          buttonOne={pages[0].name}
-          buttonTwo={pages[1].name}
-          setFilter={setSelectBlock}
-        />
-      </div> */}
-
-      {/* <div
-        className={`admin-groups ${
-          selectBlock === pages[0].name ? "" : "hide"
-        }`}
-      >
-        <div id="admin-news">
-          <h3 id="admin-news-title">Титулка</h3>
-          <div id="admin-news-text">
-            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-            commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-            penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-            Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem.
-            Nulla consequat massa quis enim. Donec pede justo, fringilla vel,
-            aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
-            imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede
-            mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum
-            semper nisi. Aenean vulputate eleifend tellus.
-          </div>
-          <div id="admin-news-date">23.10.2022</div>
-        </div>
-
-        <button id="admin-add-new">Добавить запись</button>
-      </div> */}
-
       <div className="admin-groups">
         <h3 className="admin-groups-title">Добавить / редактировать данные</h3>
+        <Input
+          title="№ личного дела"
+          type="text"
+          maxLength={9}
+          value={valueDataID}
+          onChange={(e) => setValueDataID(e.target.value)}
+        />
         <Input
           title="ИНН"
           type="text"
@@ -322,9 +299,9 @@ function Admin() {
           setFilter={setValueProgram}
           onChange={(e) => setValueProgram(e.target.value)}
         />
-        <DropdownMulti
+        <Dropdown
           title="Факультет"
-          size={"min-multi"}
+          size={"min"}
           list={facultyList}
           setFilter={setValueFaculty}
           value={valueFaculty}
@@ -334,7 +311,7 @@ function Admin() {
           title="Форма обучения"
           size={"min"}
           list={formList}
-          isShowLabel={false}
+          isShowLabel={true}
           setFilter={setValueForm}
           value={valueForm}
           onChange={(e) => setValueForm(e.target.value)}
@@ -348,10 +325,11 @@ function Admin() {
           value={valuePlan}
           onChange={(e) => setValuePlan(e.target.value)}
         />
-        <DropdownMulti
-          title="Группа"
-          size={"max-multi"}
+        <Dropdown
+          title="Специальность"
+          size={"max"}
           list={groupList}
+          isShowLabel={true}
           setFilter={setValueGroup}
           value={valueGroup}
           onChange={(e) => setValueGroup(e.target.value)}
@@ -389,7 +367,7 @@ function Admin() {
           onChange={(e) => setValueScore(e.target.value)}
         />
         <Dropdown
-          title="*Статус"
+          title="Статус"
           size={"min"}
           list={statusList}
           isShowLabel={true}
@@ -404,10 +382,6 @@ function Admin() {
           value={valueDateDocument}
           onChange={(e) => setValueDateDocument(e.target.value)}
         />
-        <div className="admin-add-note">
-          * при статусе "Поступил", у студента не может быть больше чем 1
-          пункта, в категориях: Факультет, Группа.
-        </div>
         <button id="admin-add-new" onClick={addPerson}>
           Добавить студента
         </button>
@@ -430,13 +404,15 @@ function Admin() {
               return (
                 <AdminListButton
                   key={value}
-                  title={`${value + 1}. ${data.get("name")} (${data.get("icode")})`}
+                  title={`${value + 1}. ${data.get("icode")}, №${data.get(
+                    "personalID"
+                  )}, ${data.get("category")}`}
                   onEditUser={() => onEditUser(data.id)}
                   onDeleteUser={() => onDeleteUser(data.id)}
                 />
               );
             })
-          : "Данных нет..."}
+          : ""}
       </div>
     </div>
   );
