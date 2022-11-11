@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/ADI/static/css/main.cb6d1c4f.css",
+    "main.css": "/ADI/static/css/main.05801d04.css",
     "main.js": "/ADI/static/js/main.7fa8b90f.js",
     "static/js/787.76849462.chunk.js": "/ADI/static/js/787.76849462.chunk.js",
     "static/media/ProfileBG.png": "/ADI/static/media/ProfileBG.ee92a83b8acad33500a7.png",
     "static/media/banner.jpg": "/ADI/static/media/banner.c8a2fd251db071a4c0d0.jpg",
     "static/media/zeropoint_logo.jpg": "/ADI/static/media/zeropoint_logo.34eb358b3f495f9f497f.jpg",
     "index.html": "/ADI/index.html",
-    "main.cb6d1c4f.css.map": "/ADI/static/css/main.cb6d1c4f.css.map",
+    "main.05801d04.css.map": "/ADI/static/css/main.05801d04.css.map",
     "main.7fa8b90f.js.map": "/ADI/static/js/main.7fa8b90f.js.map",
     "787.76849462.chunk.js.map": "/ADI/static/js/787.76849462.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.cb6d1c4f.css",
+    "static/css/main.05801d04.css",
     "static/js/main.7fa8b90f.js"
   ]
 }
