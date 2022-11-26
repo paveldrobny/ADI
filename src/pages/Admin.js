@@ -7,6 +7,7 @@ import Dropdown from "../components/Inputs/Dropdown";
 import DropdownMulti from "../components/Inputs/DropdownMulti";
 import AdminListButton from "../components/Buttons/AdminListButton";
 import InputDefault from "../components/Inputs/InputDefault";
+import GroupSize from "../components/Blocks/GroupSize";
 
 function Admin() {
   const [studentsData, setStudentsData] = useState([]);
@@ -42,9 +43,6 @@ function Admin() {
   const [planList, setPlanList] = useState(["Бюджет", "Контракт"]);
 
   const [groupList, setGroupList] = useState([
-    "ЭТТМиК-23",
-    "ЭТТМиК (маг.)",
-    "ЭТТМиК (заоч.)",
     "Менеджмент-23",
     "Менеджмент (маг.)",
     "Менеджмент (заоч.)",
@@ -59,9 +57,34 @@ function Admin() {
     "БИ-23 (заоч.)",
   ]);
 
+  const [groupSizeList, setGroupSizeList] = useState([
+    { name: groupList[0], size: 5 },
+    { name: groupList[1], size: 11 },
+    { name: groupList[2], size: 5 },
+    { name: groupList[3], size: 15 },
+    { name: groupList[4], size: 5 },
+    { name: groupList[5], size: 5 },
+    { name: groupList[6], size: 65 },
+    { name: groupList[7], size: 6 },
+    { name: groupList[8], size: 5 },
+    { name: groupList[9], size: 4 },
+    { name: groupList[10], size: 7 },
+    { name: groupList[11], size: 6 },
+  ]);
+
   const [statusList, setStatusList] = useState(["Конкурс", "Зачислен"]);
 
   const [yesNoList, setYesNoList] = useState(["Да", "Нет"]);
+  const [primaryList, setPrimaryList] = useState([
+    "Нет",
+    "а) дети-сироты и дети, оставшиеся без попечения родителей, а также лица из числа детей-сирот и детей, оставшихся без попечения родителей;",
+    "б) дети-инвалиды; инвалиды I и II групп;",
+    "в) дети военнослужащих и ополченцев, погибших при исполнении ими обязанностей военной службы или умерших вследствие увечья (ранения, травмы, контузии) либо заболевания, полученных ими при исполнении обязанностей военной службы;",
+    "д) инвалиды и участники боевых действий;",
+    "е) дети погибших шахтеров;",
+    "ж) шахтеры, имеющие непрерывный стаж подземной работы не менее трех лет;",
+    "з) лица до 21 года на протяжении трех лет после получения общего среднего образования, родители или один из родителей которых (шахтеры) имеют стаж подземной работы не менее 15 лет или погибли (погиб) в результате несчастного случая на производстве; либо стали (стал) инвалидами I  или II группы вследствие производственных травм или профессиональных заболеваний",
+  ]);
 
   useEffect(() => {
     fetchStudents();
@@ -160,9 +183,9 @@ function Admin() {
 
     if (
       window.confirm(
-        `Удалить студента?\n № ${person.get(
-          "personalID"
-        )},\n ИНН: ${person.get("icode")},\n ${person.get("category")},\n ${person.get("name")}`
+        `Удалить студента?\n № ${person.get("personalID")},\n ИНН: ${person.get(
+          "icode"
+        )},\n ${person.get("category")},\n ${person.get("name")}`
       )
     ) {
       try {
@@ -259,6 +282,19 @@ function Admin() {
       </div>
 
       <div className="admin-groups">
+        <h3 className="admin-groups-title">Кол-во мест</h3>
+        <div className="admin-update-btn-cont left">
+          <button id="admin-update-list" onClick={fetchStudents}>
+            Обновить
+          </button>
+        </div>
+
+        {groupSizeList.map((list) => {
+          return <GroupSize key={list.name} title={list.name} size={list.size} />;
+        })}
+      </div>
+
+      <div className="admin-groups">
         <h3 className="admin-groups-title">Добавить / редактировать данные</h3>
         <Input
           title="№ личного дела"
@@ -345,9 +381,9 @@ function Admin() {
         />
         <Dropdown
           title="Преим. право зачисления"
-          size={"min"}
-          list={yesNoList}
-          isShowLabel={true}
+          size={"max"}
+          list={primaryList}
+          isShowLabel={false}
           setFilter={setValuePrimary}
           value={valuePrimary}
           onChange={(e) => setValuePrimary(e.target.value)}
@@ -382,18 +418,20 @@ function Admin() {
           value={valueDateDocument}
           onChange={(e) => setValueDateDocument(e.target.value)}
         />
-        <button id="admin-add-new" onClick={addPerson}>
-          Добавить студента
-        </button>
-        <button id="admin-add-new" onClick={onEditConfirm}>
-          Редактировать данные
-        </button>
+        <div style={{ width: "100%", textAlign: "center" }}>
+          <button id="admin-add-new" onClick={addPerson}>
+            Добавить студента
+          </button>
+          <button id="admin-add-new" onClick={onEditConfirm}>
+            Редактировать данные
+          </button>
+        </div>
       </div>
 
       <div className="admin-groups">
         <div className="admin-update-btn-cont">
           <button id="admin-update-list" onClick={fetchStudents}>
-            Обновить список
+            Обновить
           </button>
         </div>
         <div id="admin-list-count">Кол-во студентов: {studentsData.length}</div>
@@ -404,6 +442,7 @@ function Admin() {
               return (
                 <AdminListButton
                   key={value}
+                  status={data.get("status") === "Зачислен"}
                   title={`${value + 1}. ${data.get("icode")}, №${data.get(
                     "personalID"
                   )}, ${data.get("category")}`}

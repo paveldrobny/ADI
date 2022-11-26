@@ -58,7 +58,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: calc(100% - 30px);
+    width: calc(100% - 32px);
     padding: 10px;
     margin: 5px 0;
     border: 1px solid var(--border-color);
@@ -74,12 +74,28 @@
     background: rgba(1, 102, 102, 0.9);
 }
 
+.admin-list-button:hover .admin-list-active{
+    color: white;
+}
+
+.admin-list-active{
+    color: green;
+    font-weight: bold;
+    padding-left: 10px;
+}
+
+.admin-list-right {
+    display: flex;
+    justify-content: right;
+    flex-wrap: wrap;
+}
+
 .admin-list-button-edit, .admin-list-button-delete {
     width: 35px;
     height: 35px;
     cursor: pointer;
     border: 1px solid var(--text-color);
-    margin: 0 10px;
+    margin: 5px;
     border-radius: var(--global-border-radius);
 }
 

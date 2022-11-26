@@ -30,7 +30,7 @@ const Enrollment = () => {
 
   // Filters
   const [filterEnable, setFilterEnable] = React.useState("Категории");
-  const [filterFaculty, setFilterFaculty] = React.useState("ДТ");
+  const [filterFaculty, setFilterFaculty] = React.useState("ТиИТ");
   const [filterProgram, setFilterProgram] = React.useState("Бакалавриат");
   const [filterPlan, setFilterPlan] = React.useState("Бюджет");
   const [filterEducation, setFilterEducation] = React.useState("Очная");
@@ -57,10 +57,11 @@ const Enrollment = () => {
   ]);
 
   const filterStudents = groups.filter((group) => {
-    return group.get("name").toLowerCase().includes(query.toLowerCase());
+    return group.get("icode").toLowerCase().includes(query.toLowerCase());
   });
 
   const checkCategories = (group) => {
+    
     if (filterGroup !== "" && group.get("category").indexOf(filterGroup)) {
       return (
         group.get("faculty").indexOf(filterFaculty) !== -1 &&
@@ -80,8 +81,10 @@ const Enrollment = () => {
   };
 
   const categoryStudents = groups.filter((group) => {
-    return checkCategories(group);
+    return group.get("status") !== "Зачислен" ? checkCategories(group) : "";
   });
+
+  console.log(categoryStudents)
 
   React.useEffect(() => {
     fetchStudents();
@@ -147,7 +150,7 @@ const Enrollment = () => {
           buttonOne="ДТ"
           buttonTwo="ТиИТ"
           setFilter={setFilterFaculty}
-          defaultValue={0}
+          defaultValue={1}
         />
         <ToggleCategory
           title="Образовательная программа"

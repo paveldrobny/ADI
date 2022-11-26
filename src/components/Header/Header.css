@@ -5,7 +5,6 @@
   align-items: center;
   justify-content: space-between;
   position: relative;
-  top: 0;
   height: 60px;
   padding: 0 5px;
   box-shadow: rgba(9, 30, 66, 0.1) 0px 4px 8px -2px,
@@ -145,7 +144,7 @@
   top: 70px;
   right: 15px;
   width: 300px;
-  height: 184px;
+  height: auto;
   border-radius: 5px;
   border: 1px solid var(--border-color);
   box-shadow: 0 3px 10px 1px rgba(0, 0, 0, 0.3);
@@ -154,7 +153,7 @@
 
 #settings-menu.show {
   display: block;
-  padding: 8px;
+  padding: 8px 8px 0;
 }
 
 .header-settings-item {

@@ -11,7 +11,14 @@ const Received = () => {
     });
   };
 
-  const category = unique(groups.map((group) => group.get("category")));
+  const category = unique(
+    groups.map(
+      (group) =>
+        `${group.get("program")} / ${
+          group.get("primary") === "Нет" ? group.get("plan") : "Особая квота"
+        } / ${group.get("faculty")}`
+    )
+  );
 
   React.useEffect(() => {
     fetchStudents();
@@ -32,7 +39,7 @@ const Received = () => {
   return (
     <div className="page">
       <div id="groups">
-        <h3 style={{padding: 10}}>Список поступивших</h3>
+        <h3 style={{ padding: 10 }}>Список поступивших</h3>
         {category.map((value, index) => {
           return <DefaultGroups key={index} value={value} groups={groups} />;
         })}

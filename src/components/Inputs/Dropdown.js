@@ -19,7 +19,6 @@ const Dropdown = ({
       setShowList(false);
     } else {
       setFilter(group);
-      setLabel("");
       setShowList(false);
     }
   };
@@ -31,11 +30,10 @@ const Dropdown = ({
         className={`input dropdown ${isShowList ? "is-active" : ""}`}
         // onClick={() => setShowList(!isShowList)}
       >
+        <label className="input-title is-active">{label}</label>
         <input
           className="dropdown-title"
-          value={`${
-            value.length > 0 && !isShowLabel ? value : `${label}: ${value}`
-          }`}
+          value={`${value.length > 0 ? value : ""}`}
           onChange={onChange}
         />
         <i className="fas fa-caret-down"></i>

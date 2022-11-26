@@ -1,0 +1,37 @@
+.admin-group-size {
+  padding: 10px;
+  width: calc(25% - 20px - 10px);
+  margin: 5px;
+  color: var(--text-color);
+  border-radius: var(--global-border-radius);
+  box-shadow: 0px 1px 5px 1px rgba(12, 12, 12, 0.2);
+  background: var(--bg);
+}
+
+.admin-group-size-title {
+  font-weight: bold;
+}
+
+.admin-group-size-input {
+  max-width: 90px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--global-border-radius);
+  padding: 5px 8px;
+  margin: 0 2px;
+  color: var(--color-text);
+  background: var(--btn-bg)
+}
+
+.admin-group-size-btn {
+  cursor: pointer;
+  color: white;
+  border: none;
+  padding: 5px 8px;
+  margin: 0 2px;
+  border-radius: var(--global-border-radius);
+  background: green;
+}
+
+.admin-group-size-btn:hover{
+  background: rgb(8, 90, 8);
+}

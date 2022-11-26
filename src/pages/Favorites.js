@@ -7,7 +7,7 @@ function Favorites() {
   const [title, setTitle] = React.useState("Ваши избранные профили");
   const [btnText, setBtnText] = React.useState("Удалить все профили");
   const [emptyDataText, setEmptyDataText] = React.useState(
-    "Ваши избранные профили"
+    "Подсказка: В нужном профиле нажмите 'В избранное'."
   );
 
   React.useEffect(() => {

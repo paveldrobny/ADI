@@ -5,7 +5,9 @@ import "./Groups.css";
 function DefaultGroups({ value, groups, index }) {
   const groupFilter = (group) => {
     return (
-      group.get("category") === value && group.get("status") === "Зачислен"
+      `${group.get("program")} / ${group.get("primary") === "Нет" ? group.get("plan") : "Особая квота"} / ${group.get(
+        "faculty"
+      )}` === value && group.get("status") === "Зачислен"
     );
   };
 
@@ -26,7 +28,9 @@ function DefaultGroups({ value, groups, index }) {
             <ListButton
               key={index}
               path={`/profile/${group.get("personalID")}`}
-              title={`${index + 1}. ` + group.get("icode")}
+              title={`${index + 1}. ${group.get("icode")}, №${group.get(
+                "personalID"
+              )}`}
             />
           );
         })}

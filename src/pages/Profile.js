@@ -123,7 +123,7 @@ function Profile() {
                           arr.length - 1 !== 0 ? (
                           <div id="warning" key={index}>
                             <div id="warning-title">
-                              <i class="fas fa-exclamation-triangle"></i>У
+                              <i className="fas fa-exclamation-triangle"></i>У
                               студента есть еще личных дел:{" "}
                               <b>{arr.length - 1} шт.</b>
                             </div>

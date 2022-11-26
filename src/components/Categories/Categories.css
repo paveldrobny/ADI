@@ -133,4 +133,7 @@
     font-size: 10px;
     width: 90px;
   }
+  .enrollment-tabs.max{
+    width: calc(100% - 10px);
+  }
 }
