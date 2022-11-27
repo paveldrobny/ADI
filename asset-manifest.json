@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/ADI/static/css/main.3fdbc11b.css",
-    "main.js": "/ADI/static/js/main.85812338.js",
+    "main.css": "/ADI/static/css/main.9fbab62a.css",
+    "main.js": "/ADI/static/js/main.089def0d.js",
     "static/js/787.76849462.chunk.js": "/ADI/static/js/787.76849462.chunk.js",
     "static/media/ProfileBG.png": "/ADI/static/media/ProfileBG.ee92a83b8acad33500a7.png",
     "static/media/banner.jpg": "/ADI/static/media/banner.c8a2fd251db071a4c0d0.jpg",
     "static/media/zeropoint_logo.jpg": "/ADI/static/media/zeropoint_logo.34eb358b3f495f9f497f.jpg",
     "index.html": "/ADI/index.html",
-    "main.3fdbc11b.css.map": "/ADI/static/css/main.3fdbc11b.css.map",
-    "main.85812338.js.map": "/ADI/static/js/main.85812338.js.map",
+    "main.9fbab62a.css.map": "/ADI/static/css/main.9fbab62a.css.map",
+    "main.089def0d.js.map": "/ADI/static/js/main.089def0d.js.map",
     "787.76849462.chunk.js.map": "/ADI/static/js/787.76849462.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.3fdbc11b.css",
-    "static/js/main.85812338.js"
+    "static/css/main.9fbab62a.css",
+    "static/js/main.089def0d.js"
   ]
 }
