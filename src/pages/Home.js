@@ -3,6 +3,7 @@ import SelectedButton from "../components/Buttons/SelectedButton";
 import TableMain from "../components/Table/TableMain";
 import { NavLink } from "react-router-dom";
 import banner from "../image/banner.jpg";
+import { YMaps, Map, Placemark, ZoomControl } from "@pbe/react-yandex-maps";
 import "./page.css";
 
 const Home = () => {
@@ -56,6 +57,10 @@ const Home = () => {
     "Магистратура",
   ]);
   const [selectID, setSelectID] = React.useState(0);
+  const defaultState = {
+    center: [48.299503, 38.002891],
+    zoom: 17,
+  };
 
   return (
     <div className="page min">
@@ -73,6 +78,7 @@ const Home = () => {
             {selectedButtons.map((button, index) => {
               return (
                 <SelectedButton
+                  key={index}
                   title={button}
                   isActive={index === selectID}
                   setID={() => setSelectID(index)}
@@ -112,6 +118,18 @@ const Home = () => {
               </div>
             </NavLink>
           </div>
+        </div>
+
+        <div className="groups">
+          <YMaps className="ymap">
+            <Map
+              style={{ width: "100%", minHeight: "250px", maxHeight: "350px" }}
+              defaultState={defaultState}
+            >
+              <Placemark geometry={[48.299503, 38.002891]} />
+              <ZoomControl />
+            </Map>
+          </YMaps>
         </div>
       </div>
     </div>

@@ -1,7 +1,6 @@
 .admin-group-size {
-  padding: 10px;
-  width: calc(25% - 20px - 10px);
-  margin: 5px;
+  padding: 8px 10px;
+  margin: 10px;
   color: var(--text-color);
   border-radius: var(--global-border-radius);
   box-shadow: 0px 1px 5px 1px rgba(12, 12, 12, 0.2);
@@ -13,12 +12,12 @@
 }
 
 .admin-group-size-input {
-  max-width: 90px;
+  width: 110px;
   border: 1px solid var(--border-color);
   border-radius: var(--global-border-radius);
   padding: 5px 8px;
   margin: 0 2px;
-  color: var(--color-text);
+  color: var(--text-color);
   background: var(--btn-bg)
 }
 

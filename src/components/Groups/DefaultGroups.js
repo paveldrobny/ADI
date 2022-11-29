@@ -5,9 +5,9 @@ import "./Groups.css";
 function DefaultGroups({ value, groups, index }) {
   const groupFilter = (group) => {
     return (
-      `${group.get("program")} / ${group.get("primary") === "Нет" ? group.get("plan") : "Особая квота"} / ${group.get(
-        "faculty"
-      )}` === value && group.get("status") === "Зачислен"
+      `${group.get("program")} / ${
+        group.get("primary") === "Нет" ? group.get("plan") : "Особая квота"
+      }` === value && group.get("status") === "Зачислен"
     );
   };
 

@@ -7,13 +7,13 @@ function TableMain({ isShow, headers, tableData }) {
       <thead>
         <tr>
           {headers.map((header) => {
-            return <th>{header.name}</th>;
+            return <th key={header.name}>{header.name}</th>;
           })}
         </tr>
       </thead>
       {tableData.map((table) => {
         return (
-          <tr>
+          <tr key={table.left}>
             <td>{table.left}</td>
             <td> {table.right}</td>
           </tr>

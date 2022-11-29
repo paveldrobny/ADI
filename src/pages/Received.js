@@ -16,7 +16,7 @@ const Received = () => {
       (group) =>
         `${group.get("program")} / ${
           group.get("primary") === "Нет" ? group.get("plan") : "Особая квота"
-        } / ${group.get("faculty")}`
+        }`
     )
   );
 

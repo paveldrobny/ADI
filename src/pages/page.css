@@ -658,7 +658,7 @@
 }
 
 .admin-update-btn-cont.left{
-  justify-content: right;
+  justify-content: space-between;
 }
 
 #admin-list-count {
@@ -762,4 +762,8 @@
   font-weight: 400;
   margin-top: 5px;
   color: var(--text-color);
+}
+
+.ymap{
+  width: 100%;
 }

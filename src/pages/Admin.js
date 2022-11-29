@@ -11,6 +11,8 @@ import GroupSize from "../components/Blocks/GroupSize";
 
 function Admin() {
   const [studentsData, setStudentsData] = useState([]);
+  const [groupSizeData, setGroupSizeData] = useState([]);
+  const [currentGroupSizeID, setCurrentGroupSize] = useState(0);
   const [currentEditID, setCurrentEditID] = useState("");
   const [valueDataID, setValueDataID] = useState("");
   const [valueICode, setValueICode] = useState("");
@@ -57,21 +59,6 @@ function Admin() {
     "БИ-23 (заоч.)",
   ]);
 
-  const [groupSizeList, setGroupSizeList] = useState([
-    { name: groupList[0], size: 5 },
-    { name: groupList[1], size: 11 },
-    { name: groupList[2], size: 5 },
-    { name: groupList[3], size: 15 },
-    { name: groupList[4], size: 5 },
-    { name: groupList[5], size: 5 },
-    { name: groupList[6], size: 65 },
-    { name: groupList[7], size: 6 },
-    { name: groupList[8], size: 5 },
-    { name: groupList[9], size: 4 },
-    { name: groupList[10], size: 7 },
-    { name: groupList[11], size: 6 },
-  ]);
-
   const [statusList, setStatusList] = useState(["Конкурс", "Зачислен"]);
 
   const [yesNoList, setYesNoList] = useState(["Да", "Нет"]);
@@ -88,6 +75,7 @@ function Admin() {
 
   useEffect(() => {
     fetchStudents();
+    fetchGroupSize();
   }, []);
 
   const clearInputData = () => {
@@ -222,7 +210,7 @@ function Admin() {
 
   async function addPerson() {
     let person = new Parse.Object("Person");
-    if (isEmpty()) {
+    if (isEmpty() && isGroupFreeSize()) {
       person.set("personalID", valueDataID);
       person.set("icode", valueICode);
       person.set("name", valueName);
@@ -248,6 +236,8 @@ function Admin() {
         alert(`ОШИБКА! ${error.message}`);
         return false;
       }
+    } else if (!isGroupFreeSize()) {
+      alert(`В ${valueGroup} все места заполнены`);
     } else {
       alert("Не все поля заполнены");
     }
@@ -266,6 +256,63 @@ function Admin() {
     }
   }
 
+  async function addGroupSize(id) {
+    if (currentGroupSizeID > 0) {
+      let groupSize = new Parse.Object("GroupSize");
+      groupSize.set("objectId", id);
+      groupSize.set("size", Number(currentGroupSizeID));
+
+      try {
+        await groupSize.save();
+        fetchGroupSize();
+        alert(`Теперь в ${groupSize.get("groupName")} кол-во мест: ${currentGroupSizeID} шт.`);
+        return true;
+      } catch (error) {
+        alert(`ОШИБКА! ${error.message}`);
+        return false;
+      }
+    }
+  }
+
+  async function fetchGroupSize() {
+    const query = new Parse.Query("GroupSize");
+
+    try {
+      let data = await query.find();
+      setGroupSizeData(data);
+      return true;
+    } catch (error) {
+      console.log(error.message);
+      return false;
+    }
+  }
+
+  function getStudentsInGroup(groupName) {
+    const studentInGroupCount = studentsData
+      .filter((data) => data.get("category") === groupName)
+      .map((data) => {
+        return data.get("category");
+      });
+
+    return studentInGroupCount.length;
+  }
+
+  function isGroupFreeSize() {
+    const studentInGroupCount = studentsData
+      .filter((data) => data.get("category") === valueGroup)
+      .map((data) => {
+        return data.get("category");
+      });
+
+    const groupSizeCount = groupSizeData
+      .filter((data) => data.get("groupName") === valueGroup)
+      .map((data) => {
+        return data.get("size");
+      });
+
+    return studentInGroupCount.length < groupSizeCount;
+  }
+
   return (
     <div className="page">
       <div id="admin-secure">
@@ -282,15 +329,33 @@ function Admin() {
       </div>
 
       <div className="admin-groups">
-        <h3 className="admin-groups-title">Кол-во мест</h3>
+        <h3 className="admin-groups-title">Указать кол-во мест</h3>
         <div className="admin-update-btn-cont left">
-          <button id="admin-update-list" onClick={fetchStudents}>
+          <input
+            className="admin-group-size-input"
+            type={"number"}
+            max={50}
+            min={1}
+            placeholder={"Кол-во мест..."}
+            onChange={(e) => setCurrentGroupSize(e.target.value)}
+          />
+          {/* <div>{currentGroupSizeID}</div> */}
+          {/* <button id="admin-update-list" onClick={fetchGroupSize}>
             Обновить
-          </button>
+          </button> */}
         </div>
 
-        {groupSizeList.map((list) => {
-          return <GroupSize key={list.name} title={list.name} size={list.size} />;
+        {groupSizeData.map((list) => {
+          return (
+            <GroupSize
+              key={list.get("groupName")}
+              title={list.get("groupName")}
+              currentSize={getStudentsInGroup(list.get("groupName"))}
+              size={list.get("size")}
+              setCurrentGroupSize={setCurrentGroupSize}
+              onClick={() => addGroupSize(list.id)}
+            />
+          );
         })}
       </div>
 
