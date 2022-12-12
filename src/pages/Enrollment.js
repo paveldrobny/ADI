@@ -5,6 +5,7 @@ import FilterGroups from "../components/Groups/FilterGroups";
 import ListButton from "../components/Buttons/ListButton";
 import SearchGroups from "../components/Groups/SearchGroups";
 import Parse from "parse/dist/parse.min.js";
+import students from "../image/undraw_newsletter_re_wrob.svg";
 import "./page.css";
 
 const Enrollment = () => {
@@ -61,7 +62,6 @@ const Enrollment = () => {
   });
 
   const checkCategories = (group) => {
-    
     if (filterGroup !== "" && group.get("category").indexOf(filterGroup)) {
       return (
         group.get("faculty").indexOf(filterFaculty) !== -1 &&
@@ -84,7 +84,7 @@ const Enrollment = () => {
     return group.get("status") !== "Зачислен" ? checkCategories(group) : "";
   });
 
-  console.log(categoryStudents)
+  console.log(categoryStudents);
 
   React.useEffect(() => {
     fetchStudents();
@@ -112,9 +112,9 @@ const Enrollment = () => {
             <ListButton
               key={index}
               path={`/profile/${value.get("personalID")}`}
-              title={`${index + 1}. ${value.get(
-                "icode"
-              )}, №${value.get("personalID")}`}
+              title={`${index + 1}. ${value.get("icode")}, №${value.get(
+                "personalID"
+              )}`}
             />
           </div>
         );
@@ -131,6 +131,19 @@ const Enrollment = () => {
 
   return (
     <div className="page">
+      <div className="groups space">
+        <div className="img-row">
+          <h1 className="undraw-title">Конкурс</h1>
+          <img
+            className="undraw-img"
+            src={students}
+            style={{ objectPosition: "top" }}
+            alt="..."
+            width={380}
+            height={150}
+          />
+        </div>
+      </div>
       <ToggleCategory
         title="Список"
         buttonOne="Все"

@@ -1,5 +1,6 @@
 import React from "react";
 import ListButton from "../components/Buttons/ListButton";
+import students from "../image/undraw_team_page_re_cffb.svg";
 import "./page.css";
 
 function Favorites() {
@@ -7,7 +8,7 @@ function Favorites() {
   const [title, setTitle] = React.useState("Ваши избранные профили");
   const [btnText, setBtnText] = React.useState("Удалить все профили");
   const [emptyDataText, setEmptyDataText] = React.useState(
-    "Подсказка: В нужном профиле нажмите 'В избранное'."
+    "Подсказка: В понравившемся профиле нажмите 'В избранное'."
   );
 
   React.useEffect(() => {
@@ -32,17 +33,31 @@ function Favorites() {
   return (
     <div className="page min">
       <div className="favorites">
-        <div className="favorites-title">{title}</div>
-        <button className="favorites-btn-delete" onClick={deleteFavorites}>
-          {btnText}
-        </button>
-        {favoritesData.length > 0 ? (
-          favoritesData.map((data) => {
-            return <ListButton path={`/profile/${data}`} title={data} />;
-          })
-        ) : (
-          <div className="favorites-list-empty">{emptyDataText}</div>
-        )}
+        <div className="groups space">
+          <div className="img-row">
+            <h1 className="undraw-title">{title}</h1>
+            <img
+              className="undraw-img"
+              src={students}
+              style={{ objectPosition: "center" }}
+              alt="..."
+              width={210}
+              height={135}
+            />
+          </div>
+        </div>
+        <div className="groups noBG">
+          <button className="favorites-btn-delete" onClick={deleteFavorites}>
+            {btnText}
+          </button>
+          {favoritesData.length > 0 ? (
+            favoritesData.map((data) => {
+              return <ListButton path={`/profile/${data}`} title={data} />;
+            })
+          ) : (
+            <div className="favorites-list-empty">{emptyDataText}</div>
+          )}
+        </div>
       </div>
     </div>
   );

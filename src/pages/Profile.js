@@ -6,6 +6,7 @@ import ProfileInfo from "../components/Profile/ProfileInfo";
 import InfoBlock from "../components/Blocks/InfoBlock";
 import ProfileAvatar from "../components/Profile/ProfileAvatar";
 import Parse from "parse/dist/parse.min.js";
+import students from "../image/undraw_wall_post_re_y78d.svg"
 
 function Profile() {
   const location = useLocation();
@@ -89,12 +90,23 @@ function Profile() {
         ? studentsData.map((data) => {
             return data.get("personalID") === getStudentID().toString() ? (
               <div key={data.get("personalID")} className="profile-content">
-                <div className="profile-img"></div>
+                <div className="groups space">
+                  <div className="img-row">
+                    <h1 className="undraw-title">№{data.get("personalID")}</h1>
+                    <img
+                      className="undraw-img"
+                      src={students}
+                      style={{ objectPosition: "top" }}
+                      alt="..."
+                      width={350}
+                      height={120}
+                    />
+                  </div>
+                </div>
                 <div className="profile-section">
                   <div className="profile-top">
                     <ProfileAvatar />
                     <div className="profile-id">
-                      №{data.get("personalID")}
                       {!isSaveProfiles ? (
                         <div className="profile-btn-content">
                           {!isFavoritesList() ? (

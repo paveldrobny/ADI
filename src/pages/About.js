@@ -1,5 +1,6 @@
 import React from "react";
 import InfoBlock from "../components/Blocks/InfoBlock";
+import students from "../image/undraw_educator_re_ju47.svg";
 import "./page.css";
 
 function About() {
@@ -37,8 +38,15 @@ function About() {
   return (
     <div className="page">
       <div id="about">
-        <div id="about-img"></div>
-        <div id="about-title">{title}</div>
+        <h3 style={{ textAlign: "justify" }}>{title}</h3>
+        <img
+          id="about-img"
+          src={require("../image/ProfileBG.png")}
+          alt="banner"
+        />
+        {/* <div className="groups">
+          <img className="undraw-img max" style={{obje}} height={400} src={students} alt="..." />
+        </div> */}
         <div>
           {aboutData.map((data) => {
             return (

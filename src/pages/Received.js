@@ -1,6 +1,7 @@
 import React from "react";
 import DefaultGroups from "../components/Groups/DefaultGroups";
 import Parse from "parse/dist/parse.min.js";
+import list from "../image/undraw_happy_news_re_tsbd.svg";
 
 const Received = () => {
   const [groups, setGroups] = React.useState([]);
@@ -39,7 +40,12 @@ const Received = () => {
   return (
     <div className="page">
       <div id="groups">
-        <h3 style={{ padding: 10 }}>Список поступивших</h3>
+        <div className="groups space">
+        <div className="img-row">
+          <h1 className="undraw-title">Список поступивших</h1>
+          <img className="undraw-img" style={{objectPosition: "top"}} width={232} src={list} alt="..." height={150} />
+        </div>
+      </div>
         {category.map((value, index) => {
           return <DefaultGroups key={index} value={value} groups={groups} />;
         })}

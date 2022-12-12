@@ -4,6 +4,7 @@ import TableMain from "../components/Table/TableMain";
 import { NavLink } from "react-router-dom";
 import banner from "../image/banner.jpg";
 import { YMaps, Map, Placemark, ZoomControl } from "@pbe/react-yandex-maps";
+import devices from "../image/undraw_mobile_re_q4nk.svg";
 import "./page.css";
 
 const Home = () => {
@@ -65,9 +66,15 @@ const Home = () => {
   return (
     <div className="page min">
       <div id="banner-content">
-        <div className="groups">
-          <img id="banner" src={require("../image/banner.jpg")} alt="banner" />
+      <div className="groups space">
+        <div className="img-row wrap">
+          <h1 className="undraw-title size">ВСТУПИТЕЛЬНАЯ КАМПАНИЯ</h1>
+          <div className="date">2022</div>
         </div>
+      </div>
+        {/* <div className="groups">
+          <img id="banner" src={require("../image/banner.jpg")} alt="banner" />
+        </div> */}
         <div className="groups">
           <div className="groups-title">
             Сроки вступительной компании в рамках дополнительного приема на
@@ -97,26 +104,25 @@ const Home = () => {
             );
           })}
         </div>
-        <div className="groups">
-          <div id="tiles-content">
-            <NavLink to="/download" className="tiles max space">
+
+        <div className="groups space">
+          <div className="img-row">
+            <NavLink to="/download" className="tiles one space">
               <div className="tiles-flex">
                 <div className="tiles-title">
                   Мобильное приложение "Абитуриент АДИ"
                   <i className="fas fa-external-link-alt"></i>
                 </div>
-                <div className="tiles-text">Доступно на Android и IOS</div>
+                {/* <div className="tiles-text">Доступно на Android и IOS</div> */}
               </div>
             </NavLink>
-            <NavLink to="/enrollment" className="tiles min">
-              <div className="tiles-flex">
-                <div className="tiles-title">
-                  Приказы о зачислении
-                  <i className="fas fa-external-link-alt"></i>
-                </div>
-                <div className="tiles-text"></div>
-              </div>
-            </NavLink>
+            <img
+              className="undraw-img"
+              src={devices}
+              style={{ objectPosition: "top" }}
+              alt="..."
+              height={155}
+            />
           </div>
         </div>
 
