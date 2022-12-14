@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/ADI/static/css/main.8b0a3537.css",
-    "main.js": "/ADI/static/js/main.5e541ba2.js",
+    "main.css": "/ADI/static/css/main.5c701638.css",
+    "main.js": "/ADI/static/js/main.0d3ba928.js",
     "static/js/787.76849462.chunk.js": "/ADI/static/js/787.76849462.chunk.js",
     "static/media/ProfileBG.png": "/ADI/static/media/ProfileBG.ee92a83b8acad33500a7.png",
     "static/media/banner.jpg": "/ADI/static/media/banner.c8a2fd251db071a4c0d0.jpg",
@@ -15,12 +15,12 @@
     "static/media/undraw_newsletter_re_wrob.svg": "/ADI/static/media/undraw_newsletter_re_wrob.30cac13bc3950ad8e21a205226b9d2b1.svg",
     "static/media/undraw_cloud_files_wmo8.svg": "/ADI/static/media/undraw_cloud_files_wmo8.9b5f9dbb636b7174daf2f9a47ab36afa.svg",
     "index.html": "/ADI/index.html",
-    "main.8b0a3537.css.map": "/ADI/static/css/main.8b0a3537.css.map",
-    "main.5e541ba2.js.map": "/ADI/static/js/main.5e541ba2.js.map",
+    "main.5c701638.css.map": "/ADI/static/css/main.5c701638.css.map",
+    "main.0d3ba928.js.map": "/ADI/static/js/main.0d3ba928.js.map",
     "787.76849462.chunk.js.map": "/ADI/static/js/787.76849462.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.8b0a3537.css",
-    "static/js/main.5e541ba2.js"
+    "static/css/main.5c701638.css",
+    "static/js/main.0d3ba928.js"
   ]
 }
