@@ -8,6 +8,10 @@
   max-width: 900px;
 }
 
+.page.max {
+  max-width: 1350px;
+}
+
 #banner-content {
   text-align: center;
 }
@@ -621,7 +625,7 @@
   border: none;
   color: white;
   border-radius: var(--global-border-radius);
-  background: green;
+  background: rgb(1, 102, 102);
 }
 
 #admin-add-new:hover {
@@ -835,12 +839,15 @@
     padding: 0;
     text-align: center;
   }
+
   .undraw-title.size {
     font-size: 20px;
   }
+
   .date {
     font-size: 30px;
   }
+
   .undraw-img {
     display: none;
   }

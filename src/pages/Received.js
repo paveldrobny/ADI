@@ -41,14 +41,27 @@ const Received = () => {
     <div className="page">
       <div id="groups">
         <div className="groups space">
-        <div className="img-row">
-          <h1 className="undraw-title">Список поступивших</h1>
-          <img className="undraw-img" style={{objectPosition: "top"}} width={232} src={list} alt="..." height={150} />
+          <div className="img-row">
+            <h1 className="undraw-title">Список поступивших</h1>
+            <img
+              className="undraw-img"
+              style={{ objectPosition: "top" }}
+              width={232}
+              src={list}
+              alt="..."
+              height={150}
+            />
+          </div>
         </div>
-      </div>
-        {category.map((value, index) => {
-          return <DefaultGroups key={index} value={value} groups={groups} />;
-        })}
+        {category.length > 0 ? (
+          category.map((value, index) => {
+            return <DefaultGroups key={index} value={value} groups={groups} />;
+          })
+        ) : (
+          <div className="groups">
+            <h3>На данный момент поступивших нет</h3>
+          </div>
+        )}
       </div>
     </div>
   );

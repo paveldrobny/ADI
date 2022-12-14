@@ -1,6 +1,6 @@
 .input-container {
     position: relative;
-    width: calc(50% - 16px);
+    width: calc(33.33% - 24px);
     margin: 8px;
 }
 
@@ -152,8 +152,14 @@
     outline: 2px solid rgb(7, 154, 239);
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 810px) {
     .input-container {
         width: 100%;
+    }
+}
+
+@media screen and (min-width: 811px) and (max-width: 1200px) {
+    .input-container {
+        width: calc(50% - 16px);
     }
 }
