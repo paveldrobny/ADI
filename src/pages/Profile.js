@@ -274,9 +274,7 @@ function Profile() {
                   </div>
                 </div>
               </div>
-            ) : (
-              ""
-            );
+            ) : null;
           })
         : "Данных нет..."}
     </div>

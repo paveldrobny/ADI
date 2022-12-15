@@ -160,6 +160,7 @@
 }
 
 .groups-search.small {
+  width: 100%;
   padding: 0;
 }
 
@@ -170,7 +171,6 @@
   padding: 0px 0 20px;
   color: var(--text-color);
 }
-
 
 /* Profile page */
 
@@ -275,7 +275,7 @@
 
 @media screen and (max-width: 550px) {
   .profile-section {
-    top: -20px;
+    top: -30px;
     margin: 10px;
   }
 
@@ -285,6 +285,9 @@
 
   .profile-parallax {
     top: -27px;
+  }
+  .profile-main{
+    top: 20px
   }
 }
 
