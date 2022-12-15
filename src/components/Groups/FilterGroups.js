@@ -4,7 +4,7 @@ import "./Groups.css";
 
 function FilterGroups({ filter, myGroup }) {
   return (
-    <div id="group-search">
+    <>
       <div className={`group-result ${filter.length > 0 ? "" : "hide"}`}>
         Найдено совпадений (Категории):
         <span className="group-result-text">{filter.length}</span>
@@ -17,13 +17,13 @@ function FilterGroups({ filter, myGroup }) {
           <ListButton
             key={index}
             path={`/profile/${group.get("personalID")}`}
-            title={`${index + 1}. ${group.get("icode")}, №${group.get(
+            title={`${index + 1}) ${group.get("icode")}, №${group.get(
               "personalID"
-            )} ${myGroup === "" ? `(${group.get("category")})` : ""}`}
+            )}`}
           />
         );
       })}
-    </div>
+    </>
   );
 }
 

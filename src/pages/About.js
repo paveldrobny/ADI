@@ -38,7 +38,7 @@ function About() {
   return (
     <div className="page">
       <div id="about">
-        <h3 style={{ textAlign: "justify" }}>{title}</h3>
+        <h3>{title}</h3>
         <img
           id="about-img"
           src={require("../image/ProfileBG.png")}

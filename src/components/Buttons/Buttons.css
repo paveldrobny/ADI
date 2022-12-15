@@ -2,9 +2,9 @@
     cursor: pointer;
     display: flex;
     justify-content: space-between;
-    width: calc(100% - 30px);
+    width: calc(33.33% - 42px);
     padding: 15px;
-    margin: 10px 0;
+    margin: 6px;
     border: none;
     border-radius: var(--global-border-radius);
     text-decoration: none;
@@ -44,6 +44,16 @@
     background: var(--select-table-bg);
 }
 
+.select-table-btn.left {
+    border-top-left-radius: var(--global-border-radius);
+    border-top-right-radius: 0;
+}
+
+.select-table-btn.right {
+    border-top-left-radius: 0;
+    border-top-right-radius: var(--global-border-radius);
+}
+
 .select-table-btn:hover {
     background: var(--select-table-hover);
 }
@@ -74,11 +84,11 @@
     background: rgba(1, 102, 102, 0.9);
 }
 
-.admin-list-button:hover .admin-list-active{
+.admin-list-button:hover .admin-list-active {
     color: white;
 }
 
-.admin-list-active{
+.admin-list-active {
     color: green;
     font-weight: bold;
     padding-left: 10px;
@@ -124,5 +134,17 @@
 
     .select-table-btn.is-active {
         font-weight: normal;
+    }
+}
+
+@media screen and (max-width: 830px) {
+    .list-button {
+        width: calc(50% - 42px);
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .list-button {
+        width: calc(100% - 21px);
     }
 }

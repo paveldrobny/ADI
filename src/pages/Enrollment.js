@@ -33,28 +33,20 @@ const Enrollment = () => {
   const [filterEnable, setFilterEnable] = React.useState("Категории");
   const [filterFaculty, setFilterFaculty] = React.useState("ТиИТ");
   const [filterProgram, setFilterProgram] = React.useState("Бакалавриат");
-  const [filterPlan, setFilterPlan] = React.useState("Бюджет");
-  const [filterEducation, setFilterEducation] = React.useState("Очная");
+  const [filterPlan, setFilterPlan] = React.useState("Контракт");
+  const [filterEducation, setFilterEducation] = React.useState("Заочная");
   const [filterGroup, setFilterGroup] = React.useState("");
 
   const onChange = (event) => setQuery(event.target.value);
 
   const [groupsList, setGroupsList] = React.useState([
-    "ЭТТМиК-23",
-    "ЭТТМиК (маг.)",
-    "ЭТТМиК (заоч.)",
-    "Менеджмент-23",
-    "Менеджмент (маг.)",
-    "Менеджмент (заоч.)",
-    "ТСБ-23",
-    "ТСБ-23 (маг.)",
-    "ТСБ-23 (заоч.)",
-    "ИСиТ-23",
-    "ИСиТ-23 (маг.)",
-    "ИСиТ-23 (заоч.)",
-    "БИ-23",
-    "БИ-23 (маг.)",
-    "БИ-23 (заоч.)",
+    "«Технология транспортных процессов ОПУТ»",
+    "«Эксплуатация транспортно-технологических машин и комплексов»",
+    "«Технология транспортных процессов ОБД",
+    "«Менеджмент»",
+    "«Бизнес-информатика»",
+    "«Техносферная безопасность»",
+    "«Наземные транспортно-технологические средства»",
   ]);
 
   const filterStudents = groups.filter((group) => {
@@ -66,7 +58,7 @@ const Enrollment = () => {
       return (
         group.get("faculty").indexOf(filterFaculty) !== -1 &&
         group.get("program").indexOf(filterProgram) !== -1 &&
-        group.get("plan").indexOf(filterPlan) !== -1 &&
+        // group.get("plan").indexOf(filterPlan) !== -1 &&
         group.get("formEducation").indexOf(filterEducation) !== -1 &&
         group.get("category").indexOf(filterGroup) !== -1
       );
@@ -75,7 +67,7 @@ const Enrollment = () => {
     return (
       group.get("faculty").indexOf(filterFaculty) !== -1 &&
       group.get("program").indexOf(filterProgram) !== -1 &&
-      group.get("plan").indexOf(filterPlan) !== -1 &&
+      // group.get("plan").indexOf(filterPlan) !== -1 &&
       group.get("formEducation").indexOf(filterEducation) !== -1
     );
   };
@@ -83,8 +75,6 @@ const Enrollment = () => {
   const categoryStudents = groups.filter((group) => {
     return group.get("status") !== "Зачислен" ? checkCategories(group) : "";
   });
-
-  console.log(categoryStudents);
 
   React.useEffect(() => {
     fetchStudents();
@@ -108,15 +98,13 @@ const Enrollment = () => {
       .filter((group) => group.get("status") !== "Зачислен")
       .map((value, index) => {
         return (
-          <div key={index} id="group-search">
-            <ListButton
-              key={index}
-              path={`/profile/${value.get("personalID")}`}
-              title={`${index + 1}. ${value.get("icode")}, №${value.get(
-                "personalID"
-              )}`}
-            />
-          </div>
+          <ListButton
+            key={index}
+            path={`/profile/${value.get("personalID")}`}
+            title={`${index + 1}) ${value.get("icode")}, №${value.get(
+              "personalID"
+            )}`}
+          />
         );
       });
   } else if (!query.trim() && filterEnable === "Категории") {
@@ -157,7 +145,7 @@ const Enrollment = () => {
           display: filterEnable === "Категории" ? "block" : "none",
         }}
       >
-        <div id="category-title">Категории</div>
+        <div className="category-title">Категории</div>
         <ToggleCategory
           title="Факультет"
           buttonOne="ДТ"
@@ -172,19 +160,19 @@ const Enrollment = () => {
           setFilter={setFilterProgram}
           defaultValue={0}
         />
-        <ToggleCategory
+        {/* <ToggleCategory
           title="План"
           buttonOne="Бюджет"
           buttonTwo="Контракт"
           setFilter={setFilterPlan}
-          defaultValue={0}
-        />
+          defaultValue={1}
+        /> */}
         <ToggleCategory
           title="Форма обучения"
           buttonOne="Очная"
           buttonTwo="Заочная"
           setFilter={setFilterEducation}
-          defaultValue={0}
+          defaultValue={1}
         />
         <ComboBoxCategory
           title="Специальность"
@@ -205,7 +193,7 @@ const Enrollment = () => {
           placeholder="Найти по ИНН"
         />
       </div>
-      <div id="groups">{component}</div>
+      <div id="groups-search">{component}</div>
     </div>
   );
 };

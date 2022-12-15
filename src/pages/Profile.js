@@ -6,13 +6,50 @@ import ProfileInfo from "../components/Profile/ProfileInfo";
 import InfoBlock from "../components/Blocks/InfoBlock";
 import ProfileAvatar from "../components/Profile/ProfileAvatar";
 import Parse from "parse/dist/parse.min.js";
-import students from "../image/undraw_wall_post_re_y78d.svg"
+import students from "../image/undraw_wall_post_re_y78d.svg";
 
 function Profile() {
   const location = useLocation();
   const [favoritesData, setFavoritesData] = React.useState([]);
   const { isSaveProfiles } = useContext(Context);
   const [studentsData, setStudentsData] = React.useState([]);
+  const [studentInfo, setStudentsInfo] = React.useState([
+    { name: "Статус", key: "status" },
+    { name: "№ личного дела", key: "personalID" },
+    { name: "Конкурсный балл", key: "score" },
+    { name: "ИНН", key: "icode" },
+    { name: "ФИО", key: "name" },
+    { name: "Факультет", key: "faculty" },
+    { name: "Форма обучения", key: "formEducation" },
+    { name: "Специальность", key: "category" },
+    { name: "Образовательная программа", key: "program" },
+    { name: "План", key: "plan" },
+    { name: "Наличие льгот", key: "privileges" },
+    { name: "Преим. право зачисления", key: "primary" },
+  ]);
+
+  const [studentAdditionInfo, setStudentAdditionInfo] = React.useState([
+    { name: "Дата подачи документов", key: "documentsDate" },
+    { name: "Балл по русскому языку", key: "scoreRussian" },
+    { name: "Балл по математике", key: "scoreMath" },
+    { name: "Балл по иностранному", key: "scoreForeign" },
+    { name: "Профильный предмет", key: "profileSubject" },
+    { name: "Балл по проф. предмету", key: "scoreProfileSubject" },
+    { name: "Балл по ГИА", key: "scoreGIA" },
+    { name: "Средний балл аттестата", key: "averageScoreCertificate" },
+    {
+      name: "Средний балл диплома бакалавра / специалиста",
+      key: "averageScoreDegree",
+    },
+    {
+      name: "Средний балл диплома специалиста среднего звена",
+      key: "averageScoreMiddle",
+    },
+    { name: "Дополнительный балл / причины начисления", key: "extraScore" },
+    { name: "Иностранный язык, который изучался", key: "foreignLang" },
+    { name: "Дата рождения", key: "birthday" },
+    { name: "Телефон для связи", key: "phone" },
+  ]);
 
   const getStudentID = () => {
     let str = location.pathname;
@@ -119,7 +156,7 @@ function Profile() {
                               В избранное
                             </button>
                           ) : (
-                            <div id="profile-in-favorites">Уже в избранном</div>
+                            <div id="profile-in-favorites">В избранном</div>
                           )}
                         </div>
                       ) : (
@@ -136,7 +173,7 @@ function Profile() {
                           <div id="warning" key={index}>
                             <div id="warning-title">
                               <i className="fas fa-exclamation-triangle"></i>У
-                              студента есть еще личных дел:{" "}
+                              студента есть еще личных дел:
                               <b>{arr.length - 1} шт.</b>
                             </div>
                           </div>
@@ -144,51 +181,34 @@ function Profile() {
                           ""
                         );
                       })}
-                    <InfoBlock title={"Статус"} textData={data.get("status")} />
-                    <InfoBlock
-                      title={"№ личного дела"}
-                      textData={data.get("personalID")}
-                    />
-                    <InfoBlock title={"ИНН"} textData={data.get("icode")} />
-                    <InfoBlock title={"ФИО"} textData={data.get("name")} />
-                    <InfoBlock title={"Пол"} textData={data.get("sex")} />
-                    <InfoBlock
-                      title={"Образовательная программа"}
-                      textData={data.get("program")}
-                    />
-                    <InfoBlock
-                      title={"Факультет"}
-                      textData={data.get("faculty")}
-                    />
-                    <InfoBlock
-                      title={"Форма обучения"}
-                      textData={data.get("formEducation")}
-                    />
-                    <InfoBlock title={"План"} textData={data.get("plan")} />
-                    <InfoBlock
-                      title={"Специальность"}
-                      textData={data.get("category")}
-                    />
-                    <InfoBlock
-                      title={"Наличие льгот"}
-                      textData={data.get("privileges")}
-                    />
-                    <InfoBlock
-                      title={"Преимущественное право зачисления"}
-                      textData={data.get("primary")}
-                    />
-                    <InfoBlock
-                      title={"Номер документа"}
-                      textData={data.get("documentsSeries")}
-                    />
-                    <InfoBlock
-                      title={"Конкурсный балл"}
-                      textData={data.get("score")}
-                    />
-                    <InfoBlock
-                      title={"Дата подачи документов"}
-                      textData={data.get("documentsDate")}
-                    />
+
+                    {studentInfo.map((info) => {
+                      return (
+                        <InfoBlock
+                          key={info.name}
+                          title={info.name}
+                          textData={data.get(info.key)}
+                        />
+                      );
+                    })}
+
+                    <div className="category-title no-space">
+                      Дополнительная информация
+                    </div>
+
+                    {studentAdditionInfo
+                      .filter(
+                        (f) => data.get(f.key) !== "" && data.get(f.key) !== 0
+                      )
+                      .map((info) => {
+                        return (
+                          <InfoBlock
+                            key={info.name}
+                            title={info.name}
+                            textData={data.get(info.key)}
+                          />
+                        );
+                      })}
                   </div>
                 </div>
               </div>

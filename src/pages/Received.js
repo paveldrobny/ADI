@@ -13,12 +13,14 @@ const Received = () => {
   };
 
   const category = unique(
-    groups.map(
-      (group) =>
-        `${group.get("program")} / ${
-          group.get("primary") === "Нет" ? group.get("plan") : "Особая квота"
-        }`
-    )
+    groups
+      .filter((f) => f.get("status") === "Зачислен")
+      .map(
+        (group) =>
+          `${group.get("program")} / ${
+            group.get("primary") === "Нет" ? group.get("plan") : "Особая квота"
+          }`
+      )
   );
 
   React.useEffect(() => {
@@ -42,7 +44,7 @@ const Received = () => {
       <div id="groups">
         <div className="groups space">
           <div className="img-row">
-            <h1 className="undraw-title">Список поступивших</h1>
+            <h1 className="undraw-title">Список зачисленных</h1>
             <img
               className="undraw-img"
               style={{ objectPosition: "top" }}
@@ -59,7 +61,7 @@ const Received = () => {
           })
         ) : (
           <div className="groups">
-            <h3>На данный момент поступивших нет</h3>
+            <h3>На данный момент зачисленных нет</h3>
           </div>
         )}
       </div>

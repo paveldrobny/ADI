@@ -57,13 +57,17 @@
   background-color: var(--enrollment-tabs-bg);
 }
 
-#category-title {
+.category-title {
   font-size: 20px;
   font-weight: bold;
   margin: 15px 15px 10px 15px;
   padding-bottom: 5px;
   color: var(--text-color);
   border-bottom: 1px solid var(--border-color);
+}
+
+.category-title.no-space{
+ margin: 20px 5px 0;
 }
 
 .enrollment-list-content {

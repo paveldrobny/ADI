@@ -50,13 +50,15 @@ function Favorites() {
           <button className="favorites-btn-delete" onClick={deleteFavorites}>
             {btnText}
           </button>
-          {favoritesData.length > 0 ? (
-            favoritesData.map((data) => {
-              return <ListButton path={`/profile/${data}`} title={data} />;
-            })
-          ) : (
-            <div className="favorites-list-empty">{emptyDataText}</div>
-          )}
+          <div id="groups-search">
+            {favoritesData.length > 0 ? (
+              favoritesData.map((data) => {
+                return <ListButton path={`/profile/${data}`} title={data} />;
+              })
+            ) : (
+              <div className="favorites-list-empty">{emptyDataText}</div>
+            )}
+          </div>
         </div>
       </div>
     </div>

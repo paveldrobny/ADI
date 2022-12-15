@@ -4,7 +4,7 @@ import "./Groups.css";
 
 function SearchGroups({ filter, query }) {
   return (
-    <div id="group-search">
+    <>
       <div className={`group-result ${filter.length > 0 ? "" : "hide"}`}>
         Найдено совпадений:
         <span className="group-result-text">{filter.length}</span>
@@ -20,13 +20,13 @@ function SearchGroups({ filter, query }) {
           <ListButton
             key={group.get("personalID")}
             path={`/profile/${group.get("personalID")}`}
-            title={`${value + 1}. ${group.get("icode")}, №${group.get(
+            title={`${value + 1}) ${group.get("icode")}, №${group.get(
               "personalID"
-            )} (${group.get("category")})`}
+            )}`}
           />
         );
       })}
-    </div>
+    </>
   );
 }
 

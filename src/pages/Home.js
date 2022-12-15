@@ -54,8 +54,8 @@ const Home = () => {
   ]);
   const [tableData, setTableData] = React.useState([tableOne, tableTwo]);
   const [selectedButtons, setSelectedButtons] = React.useState([
-    "Бакалавриат",
-    "Магистратура",
+    {name: "Бакалавриат", align: "left"},
+    {name: "Магистратура", align: "right"}
   ]);
   const [selectID, setSelectID] = React.useState(0);
   const defaultState = {
@@ -86,8 +86,9 @@ const Home = () => {
               return (
                 <SelectedButton
                   key={index}
-                  title={button}
+                  title={button.name}
                   isActive={index === selectID}
+                  align={button.align}
                   setID={() => setSelectID(index)}
                 />
               );

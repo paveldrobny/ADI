@@ -197,36 +197,36 @@ function Admin() {
         )}, \n ${person.get("name")}`
       )
     ) {
-      setValueDateDocument(person.get("documentsDate"));
-      setValueDataID(person.get("personalID"));
-      setValueName(person.get("name"));
-      setValueAdress(person.get("adress"));
-      setValueBirthday(person.get("birthday"));
-      setValueICode(person.get("icode"));
-      setValueIdentityDocument(person.get("identityDocument"));
-      setValuePreviouslyEducation(person.get("previouslyEducation"));
-      setValueAverageScoreCertificate(person.get("averageScoreCertificate"));
-      setValueScoreRussian(person.get("scoreRussian"));
-      setValueScoreMath(person.get("scoreMath"));
-      setValueProfileSubject(person.get("profileSubject"));
-      setValueScoreProfileSubject(person.get("scoreProfileSubject"));
-      setValueAverageScoreDegree(person.get("averageScoreDegree"));
-      setValueScoreGIA(person.get("scoreGIA"));
-      setValueScoreForeign(person.get("scoreForeign"));
-      setValueAverageScoreMiddle(person.get("averageScoreMiddle"));
-      setValueExtraScore(person.get("extraScore"));
-      setValueScore(person.get("score"));
-      setValueFaculty(person.get("faculty"));
-      setValueForm(person.get("formEducation"));
-      setValueGroup(person.get("category"));
-      setValueProgram(person.get("program"));
-      setValuePlan(person.get("plan"));
-      setValuePrivileges(person.get("privileges"));
-      setValuePrimary(person.get("primary"));
-      setValueForeignLang(person.get("foreignLang"));
-      setValuePhone(person.get("phone"));
-      setValueParent(person.get("parent"));
-      setValueStatus(person.get("status"));
+      person.set("documentsDate", valueDateDocument);
+      person.set("personalID", valueDataID);
+      person.set("name", valueName);
+      person.set("adress", valueAdress);
+      person.set("birthday", valueBirthday);
+      person.set("icode", valueICode);
+      person.set("identityDocument", valueIdentityDocument);
+      person.set("previouslyEducation", valuePreviouslyEducation);
+      person.set("averageScoreCertificate", Number(valueAverageScoreCertificate));
+      person.set("scoreRussian", Number(valueScoreRussian));
+      person.set("scoreMath", Number(valueScoreMath));
+      person.set("profileSubject", valueProfileSubject);
+      person.set("scoreProfileSubject", Number(valueScoreProfileSubject));
+      person.set("averageScoreDegree", Number(valueAverageScoreDegree));
+      person.set("scoreGIA", Number(valueScoreGIA));
+      person.set("scoreForeign", Number(valueScoreForeign));
+      person.set("averageScoreMiddle", Number(valueAverageScoreMiddle));
+      person.set("extraScore", Number(valueExtraScore));
+      person.set("score", Number(valueScore));
+      person.set("faculty", valueFaculty);
+      person.set("formEducation", valueForm);
+      person.set("category", valueGroup);
+      person.set("program", valueProgram);
+      person.set("plan", valuePlan);
+      person.set("privileges", valuePrivileges);
+      person.set("primary", valuePrimary);
+      person.set("foreignLang", valueForeignLang);
+      person.set("phone", valuePhone);
+      person.set("parent", valueParent);
+      person.set("status", valueStatus);
       // clearInputData();
     }
   };
@@ -270,7 +270,6 @@ function Admin() {
       valuePlan !== "" &&
       valueForeignLang !== "" &&
       valuePhone !== "" &&
-      valueParent !== "" &&
       valueStatus !== ""
     );
   };
@@ -286,17 +285,17 @@ function Admin() {
       person.set("icode", valueICode);
       person.set("identityDocument", valueIdentityDocument);
       person.set("previouslyEducation", valuePreviouslyEducation);
-      person.set("averageScoreCertificate", valueAverageScoreCertificate);
-      person.set("scoreRussian", valueScoreRussian);
-      person.set("scoreMath", valueScoreMath);
+      person.set("averageScoreCertificate", Number(valueAverageScoreCertificate));
+      person.set("scoreRussian", Number(valueScoreRussian));
+      person.set("scoreMath", Number(valueScoreMath));
       person.set("profileSubject", valueProfileSubject);
-      person.set("scoreProfileSubject", valueScoreProfileSubject);
-      person.set("averageScoreDegree", valueAverageScoreDegree);
-      person.set("scoreGIA", valueScoreGIA);
-      person.set("scoreForeign", valueScoreForeign);
-      person.set("averageScoreMiddle", valueAverageScoreMiddle);
-      person.set("extraScore", valueExtraScore);
-      person.set("score", valueScore);
+      person.set("scoreProfileSubject", Number(valueScoreProfileSubject));
+      person.set("averageScoreDegree", Number(valueAverageScoreDegree));
+      person.set("scoreGIA", Number(valueScoreGIA));
+      person.set("scoreForeign", Number(valueScoreForeign));
+      person.set("averageScoreMiddle", Number(valueAverageScoreMiddle));
+      person.set("extraScore", Number(valueExtraScore));
+      person.set("score", Number(valueScore));
       person.set("faculty", valueFaculty);
       person.set("formEducation", valueForm);
       person.set("category", valueGroup);
@@ -322,7 +321,7 @@ function Admin() {
       alert(`В ${valueGroup} все места заполнены`);
     } else {
       alert(
-        "Должны быть заполнены поля:\n-Дата подачи документов\n-№ личного дела\n-ФИО\n-Адрес проживания\n-Дата рождения\n-ИНН\n-Данные документа удостоверяющего личность\n-Данные документа о ранее полученном образовании\n-Факультет\n-Форма обучения\n-Специальность\n-Образовательная программа\n-План\n-Инностранный язык, который изучался\n-Телефон для связи\n-Сведения о родителях\n-Статус"
+        "Должны быть заполнены поля:\n-Дата подачи документов\n-№ личного дела\n-ФИО\n-Адрес проживания\n-Дата рождения\n-ИНН\n-Данные документа удостоверяющего личность\n-Данные документа о ранее полученном образовании\n-Факультет\n-Форма обучения\n-Специальность\n-Образовательная программа\n-План\n-Инностранный язык, который изучался\n-Телефон для связи\n-Статус"
       );
     }
   }
@@ -416,7 +415,7 @@ function Admin() {
         <button id="test-btn-admin">Войти</button>
       </div>
 
-      <div className="admin-groups">
+      <div className="admin-groups left">
         <h3 className="admin-groups-title">Указать кол-во мест</h3>
         <div className="admin-update-btn-cont left">
           <input
@@ -494,35 +493,32 @@ function Admin() {
         <Input
           title="Данные документа удостоверяющего личность"
           type="text"
-          maxLength={64}
+          maxLength={220}
           value={valueIdentityDocument}
           onChange={(e) => setValueIdentityDocument(e.target.value)}
         />
         <Input
           title="Данные документа о ранее полученном образовании"
           type="text"
-          maxLength={64}
+          maxLength={220}
           value={valuePreviouslyEducation}
           onChange={(e) => setValuePreviouslyEducation(e.target.value)}
         />
         <Input
           title="Средний балл аттестата"
           type="number"
-          maxLength={3}
           value={valueAverageScoreCertificate}
           onChange={(e) => setValueAverageScoreCertificate(e.target.value)}
         />
         <Input
           title="Балл по русскому языку"
           type="number"
-          maxLength={3}
           value={valueScoreRussian}
           onChange={(e) => setValueScoreRussian(e.target.value)}
         />
         <Input
           title="Балл по математике"
           type="number"
-          maxLength={3}
           value={valueScoreMath}
           onChange={(e) => setValueScoreMath(e.target.value)}
         />
@@ -538,49 +534,42 @@ function Admin() {
         <Input
           title="Балл по проф предмету"
           type="number"
-          maxLength={3}
           value={valueScoreProfileSubject}
           onChange={(e) => setValueScoreProfileSubject(e.target.value)}
         />
         <Input
           title="Средний балл диплома бакалавра / специалиста"
           type="number"
-          maxLength={3}
           value={valueAverageScoreDegree}
           onChange={(e) => setValueAverageScoreDegree(e.target.value)}
         />
         <Input
           title="Балл по ГИА"
           type="number"
-          maxLength={3}
           value={valueScoreGIA}
           onChange={(e) => setValueScoreGIA(e.target.value)}
         />
         <Input
           title="Балл по иностранному"
           type="number"
-          maxLength={3}
           value={valueScoreForeign}
           onChange={(e) => setValueScoreForeign(e.target.value)}
         />
         <Input
           title="Средний балл диплома специалиста среднего звена"
           type="number"
-          maxLength={3}
           value={valueAverageScoreMiddle}
           onChange={(e) => setValueAverageScoreMiddle(e.target.value)}
         />
         <Input
           title="Дополнительный балл/ причины начисления"
           type="number"
-          maxLength={3}
           value={valueExtraScore}
           onChange={(e) => setValueExtraScore(e.target.value)}
         />
         <Input
           title="Конкурсный балл"
           type="number"
-          maxLength={3}
           value={valueScore}
           onChange={(e) => setValueScore(e.target.value)}
         />
@@ -651,7 +640,7 @@ function Admin() {
           size={"min"}
           list={otherLangList}
           isShowLabel={false}
-          setFilter={setOtherLangList}
+          setFilter={setValueForeignLang}
           value={valueForeignLang}
           onChange={(e) => setValueForeignLang(e.target.value)}
         />
@@ -705,7 +694,7 @@ function Admin() {
                   status={data.get("status") === "Зачислен"}
                   title={`${value + 1}. ${data.get("icode")}, №${data.get(
                     "personalID"
-                  )}, ${data.get("category")}`}
+                  )}`}
                   onEditUser={() => onEditUser(data.id)}
                   onDeleteUser={() => onDeleteUser(data.id)}
                 />
