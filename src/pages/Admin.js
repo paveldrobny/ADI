@@ -34,7 +34,7 @@ function Admin() {
   const [valueScoreGIA, setValueScoreGIA] = useState(0);
   const [valueScoreForeign, setValueScoreForeign] = useState(0);
   const [valueAverageScoreMiddle, setValueAverageScoreMiddle] = useState(0);
-  const [valueExtraScore, setValueExtraScore] = useState(0);
+  const [valueExtra, setValueExtra] = useState("");
   const [valueScore, setValueScore] = useState(0);
   const [valueFaculty, setValueFaculty] = useState("");
   const [valueForm, setValueForm] = useState("");
@@ -55,7 +55,12 @@ function Admin() {
     "Специалитет",
   ]);
   const [facultyList, setFacultyList] = useState(["ДТ", "ТиИТ"]);
-  const [formList, setFormList] = useState(["Очная", "Заочная"]);
+  const [formList, setFormList] = useState([
+    "Очная",
+    "Заочная",
+    "Очная ССО",
+    "Заочная ССО",
+  ]);
   const [planList, setPlanList] = useState(["Бюджет", "Контракт"]);
   const [groupList, setGroupList] = useState([
     "23.03.01 «Технология транспортных процессов ОПУТ»",
@@ -88,6 +93,55 @@ function Admin() {
     "Иностранный язык",
     "История",
   ]);
+  const [extraList, setExtraList] = useState([
+    "Нет",
+    "а) наличие золотого, серебряного или бронзового знака отличия Государственного физкультурно-спортивного комплекса «Готов к труду и обороне Донецкой Народной Республики» – 2 балла",
+    "б) наличие полученных в образовательных организациях Донецкой Народной Республики документов об образовании или об образовании и о квалификации с отличием – 5 баллов",
+    "в) наличие Золотой медали «За особые успехи в учении» – 7 баллов",
+    "г) наличие Серебряной медали «За особые успехи в учении» – 5 баллов",
+    "д) волонтерская (добровольческая) деятельность - 2 балла",
+  ]);
+
+  const getIndividualScore = (data) => {
+    let extraScore;
+
+    switch (data.get("extra")) {
+      case extraList[0]:
+        extraScore = 0;
+        break;
+      case extraList[1]:
+        extraScore = 2;
+        break;
+      case extraList[2]:
+        extraScore = 5;
+        break;
+      case extraList[3]:
+        extraScore = 7;
+        break;
+      case extraList[4]:
+        extraScore = 6;
+        break;
+      case extraList[5]:
+        extraScore = 2;
+        break;
+      default:
+        extraScore = 0;
+    }
+
+    return extraScore;
+  };
+
+  const getTotalScore = (data) => {
+    return (
+      data.get("scoreRussian") +
+      data.get("scoreMath") +
+      data.get("scoreForeign") +
+      data.get("scoreProfileSubject") +
+      data.get("scoreGIA") +
+      getIndividualScore(data)
+    );
+  };
+  
 
   useEffect(() => {
     fetchStudents();
@@ -112,7 +166,7 @@ function Admin() {
     setValueScoreGIA(0);
     setValueScoreForeign(0);
     setValueAverageScoreMiddle(0);
-    setValueExtraScore(0);
+    setValueExtra("");
     setValueScore(0);
     setValueFaculty("");
     setValueForm("");
@@ -147,17 +201,20 @@ function Admin() {
         person.set("icode", valueICode);
         person.set("identityDocument", valueIdentityDocument);
         person.set("previouslyEducation", valuePreviouslyEducation);
-        person.set("averageScoreCertificate", valueAverageScoreCertificate);
-        person.set("scoreRussian", valueScoreRussian);
-        person.set("scoreMath", valueScoreMath);
+        person.set(
+          "averageScoreCertificate",
+          Number(valueAverageScoreCertificate)
+        );
+        person.set("scoreRussian", Number(valueScoreRussian));
+        person.set("scoreMath", Number(valueScoreMath));
         person.set("profileSubject", valueProfileSubject);
-        person.set("scoreProfileSubject", valueScoreProfileSubject);
-        person.set("averageScoreDegree", valueAverageScoreDegree);
-        person.set("scoreGIA", valueScoreGIA);
-        person.set("scoreForeign", valueScoreForeign);
-        person.set("averageScoreMiddle", valueAverageScoreMiddle);
-        person.set("extraScore", valueExtraScore);
-        person.set("score", valueScore);
+        person.set("scoreProfileSubject", Number(valueScoreProfileSubject));
+        person.set("averageScoreDegree", Number(valueAverageScoreDegree));
+        person.set("scoreGIA", Number(valueScoreGIA));
+        person.set("scoreForeign", Number(valueScoreForeign));
+        person.set("averageScoreMiddle", Number(valueAverageScoreMiddle));
+        person.set("extra", valueExtra);
+        person.set("score", getTotalScore(person));
         person.set("faculty", valueFaculty);
         person.set("formEducation", valueForm);
         person.set("category", valueGroup);
@@ -197,36 +254,36 @@ function Admin() {
         )}, \n ${person.get("name")}`
       )
     ) {
-      person.set("documentsDate", valueDateDocument);
-      person.set("personalID", valueDataID);
-      person.set("name", valueName);
-      person.set("adress", valueAdress);
-      person.set("birthday", valueBirthday);
-      person.set("icode", valueICode);
-      person.set("identityDocument", valueIdentityDocument);
-      person.set("previouslyEducation", valuePreviouslyEducation);
-      person.set("averageScoreCertificate", Number(valueAverageScoreCertificate));
-      person.set("scoreRussian", Number(valueScoreRussian));
-      person.set("scoreMath", Number(valueScoreMath));
-      person.set("profileSubject", valueProfileSubject);
-      person.set("scoreProfileSubject", Number(valueScoreProfileSubject));
-      person.set("averageScoreDegree", Number(valueAverageScoreDegree));
-      person.set("scoreGIA", Number(valueScoreGIA));
-      person.set("scoreForeign", Number(valueScoreForeign));
-      person.set("averageScoreMiddle", Number(valueAverageScoreMiddle));
-      person.set("extraScore", Number(valueExtraScore));
-      person.set("score", Number(valueScore));
-      person.set("faculty", valueFaculty);
-      person.set("formEducation", valueForm);
-      person.set("category", valueGroup);
-      person.set("program", valueProgram);
-      person.set("plan", valuePlan);
-      person.set("privileges", valuePrivileges);
-      person.set("primary", valuePrimary);
-      person.set("foreignLang", valueForeignLang);
-      person.set("phone", valuePhone);
-      person.set("parent", valueParent);
-      person.set("status", valueStatus);
+      setValueDateDocument(person.get("documentsDate"));
+      setValueDataID(person.get("personalID"));
+      setValueName(person.get("name"));
+      setValueAdress(person.get("adress"));
+      setValueBirthday(person.get("birthday"));
+      setValueICode(person.get("icode"));
+      setValueIdentityDocument(person.get("identityDocument"));
+      setValuePreviouslyEducation(person.get("previouslyEducation"));
+      setValueAverageScoreCertificate(person.get("averageScoreCertificate"));
+      setValueScoreRussian(person.get("scoreRussian"));
+      setValueScoreMath(person.get("scoreMath"));
+      setValueProfileSubject(person.get("profileSubject"));
+      setValueScoreProfileSubject(person.get("scoreProfileSubject"));
+      setValueAverageScoreDegree(person.get("averageScoreDegree"));
+      setValueScoreGIA(person.get("scoreGIA"));
+      setValueScoreForeign(person.get("scoreForeign"));
+      setValueAverageScoreMiddle(person.get("averageScoreMiddle"));
+      setValueExtra(person.get("extra"));
+      setValueScore(person.get("score"));
+      setValueFaculty(person.get("faculty"));
+      setValueForm(person.get("formEducation"));
+      setValueGroup(person.get("category"));
+      setValueProgram(person.get("program"));
+      setValuePlan(person.get("plan"));
+      setValuePrivileges(person.get("privileges"));
+      setValuePrimary(person.get("primary"));
+      setValueForeignLang(person.get("foreignLang"));
+      setValuePhone(person.get("phone"));
+      setValueParent(person.get("parent"));
+      setValueStatus(person.get("status"));
       // clearInputData();
     }
   };
@@ -268,6 +325,7 @@ function Admin() {
       valueGroup !== "" &&
       valueProgram !== "" &&
       valuePlan !== "" &&
+      valueExtra !== "" &&
       valueForeignLang !== "" &&
       valuePhone !== "" &&
       valueStatus !== ""
@@ -285,7 +343,10 @@ function Admin() {
       person.set("icode", valueICode);
       person.set("identityDocument", valueIdentityDocument);
       person.set("previouslyEducation", valuePreviouslyEducation);
-      person.set("averageScoreCertificate", Number(valueAverageScoreCertificate));
+      person.set(
+        "averageScoreCertificate",
+        Number(valueAverageScoreCertificate)
+      );
       person.set("scoreRussian", Number(valueScoreRussian));
       person.set("scoreMath", Number(valueScoreMath));
       person.set("profileSubject", valueProfileSubject);
@@ -294,8 +355,8 @@ function Admin() {
       person.set("scoreGIA", Number(valueScoreGIA));
       person.set("scoreForeign", Number(valueScoreForeign));
       person.set("averageScoreMiddle", Number(valueAverageScoreMiddle));
-      person.set("extraScore", Number(valueExtraScore));
-      person.set("score", Number(valueScore));
+      person.set("extra", valueExtra);
+      person.set("score", getTotalScore(person));
       person.set("faculty", valueFaculty);
       person.set("formEducation", valueForm);
       person.set("category", valueGroup);
@@ -561,18 +622,26 @@ function Admin() {
           value={valueAverageScoreMiddle}
           onChange={(e) => setValueAverageScoreMiddle(e.target.value)}
         />
-        <Input
+        <Dropdown
+          title="Дополнительный балл/ причины начисления"
+          size={"max"}
+          list={extraList}
+          setFilter={setValueExtra}
+          value={valueExtra}
+          onChange={(e) => setValueExtra(e.target.value)}
+        />
+        {/* <Input
           title="Дополнительный балл/ причины начисления"
           type="number"
           value={valueExtraScore}
           onChange={(e) => setValueExtraScore(e.target.value)}
-        />
-        <Input
+        /> */}
+        {/* <Input
           title="Конкурсный балл"
           type="number"
           value={valueScore}
           onChange={(e) => setValueScore(e.target.value)}
-        />
+        /> */}
         <Dropdown
           title="Факультет"
           size={"min"}
@@ -692,7 +761,7 @@ function Admin() {
                 <AdminListButton
                   key={value}
                   status={data.get("status") === "Зачислен"}
-                  title={`${value + 1}. ${data.get("icode")}, №${data.get(
+                  title={`${value + 1}) ${data.get("icode")}, №${data.get(
                     "personalID"
                   )}`}
                   onEditUser={() => onEditUser(data.id)}

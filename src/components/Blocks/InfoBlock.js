@@ -1,12 +1,12 @@
 import React from "react";
 import "./Blocks.css";
 
-function InfoBlock({ title, textData }) {
+function InfoBlock({ title, textData, isDate }) {
   return (
     <div className="info-block">
       <div className="info-block-title">{title}:</div>
       <div className="info-block-text-content">
-        {typeof textData === "object" ? (
+        {typeof textData === "object" && isDate === false ? (
           textData.map((text) => {
             return (
               <div key={text} className="info-block-text">

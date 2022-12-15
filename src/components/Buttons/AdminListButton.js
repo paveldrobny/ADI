@@ -6,7 +6,9 @@ function AdminListButton({ status, title, onEditUser, onDeleteUser }) {
     <div className="admin-list-button">
       <div>
         {title}
-        <span className="admin-list-active">{status ? "ЗАЧИСЛЕН" : ""}</span>
+        <span className="admin-list-active">
+          {status ? "( ЗАЧИСЛЕН )" : ""}
+        </span>
       </div>
       <div className="admin-list-right">
         <button className="admin-list-button-edit" onClick={onEditUser}>

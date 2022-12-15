@@ -21,19 +21,22 @@ function DefaultGroups({ value, groups, index }) {
       key={index}
     >
       <summary className="details-title">{value}</summary>
-      {groups
-        .filter((group) => groupFilter(group))
-        .map((group, index) => {
-          return (
-            <ListButton
-              key={index}
-              path={`/profile/${group.get("personalID")}`}
-              title={`${index + 1}. ${group.get("icode")}, №${group.get(
-                "personalID"
-              )}`}
-            />
-          );
-        })}
+      <div className="groups-search small">
+        {groups
+          .sort((a, b) => b.get("score") - a.get("score"))
+          .filter((group) => groupFilter(group))
+          .map((group, index) => {
+            return (
+              <ListButton
+                key={index}
+                path={`/profile/${group.get("personalID")}`}
+                title={`${index + 1}) ${group.get("icode")}, №${group.get(
+                  "personalID"
+                )}`}
+              />
+            );
+          })}
+      </div>
     </details>
   );
 }

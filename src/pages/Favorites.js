@@ -50,7 +50,7 @@ function Favorites() {
           <button className="favorites-btn-delete" onClick={deleteFavorites}>
             {btnText}
           </button>
-          <div id="groups-search">
+          <div className="groups-search">
             {favoritesData.length > 0 ? (
               favoritesData.map((data) => {
                 return <ListButton path={`/profile/${data}`} title={data} />;

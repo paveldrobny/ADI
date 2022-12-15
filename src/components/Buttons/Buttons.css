@@ -68,9 +68,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: calc(100% - 32px);
+    width: calc(50% - 34px);
     padding: 10px;
-    margin: 5px 0;
+    margin: 5px;
     border: 1px solid var(--border-color);
     border-radius: var(--global-border-radius);
     text-decoration: none;
@@ -134,6 +134,12 @@
 
     .select-table-btn.is-active {
         font-weight: normal;
+    }
+}
+
+@media screen and (max-width: 880px) {
+    .admin-list-button {
+        width: calc(100% - 16px);
     }
 }
 

@@ -95,6 +95,7 @@ const Enrollment = () => {
   let component;
   if (!query.trim() && filterEnable === "Все") {
     component = groups
+      .sort((a, b) => b.get("score") - a.get("score"))
       .filter((group) => group.get("status") !== "Зачислен")
       .map((value, index) => {
         return (
@@ -193,7 +194,7 @@ const Enrollment = () => {
           placeholder="Найти по ИНН"
         />
       </div>
-      <div id="groups-search">{component}</div>
+      <div className="groups-search">{component}</div>
     </div>
   );
 };

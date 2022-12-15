@@ -241,3 +241,9 @@
     margin: 8px;
   }
 }
+
+@media screen and (max-width: 300px) {
+  .app-link {
+    margin: 0 1px;
+  }
+}

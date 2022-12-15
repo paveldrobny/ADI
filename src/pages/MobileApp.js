@@ -1,5 +1,5 @@
 import React from "react";
-import mobileApp from "../image/undraw_app_installation_re_h36x.svg";
+import mobileApp from "../image/undraw_mobile_app_re_catg.svg";
 import download from "../image/undraw_cloud_files_wmo8.svg";
 import "./page.css";
 
@@ -46,7 +46,11 @@ function MobileApp() {
           </div>
           <div id="list-content">
             {privilegeList.map((list) => {
-              return <div className="list">{list}</div>;
+              return (
+                <div key={list} className="list">
+                  {list}
+                </div>
+              );
             })}
           </div>
         </div>
@@ -56,7 +60,7 @@ function MobileApp() {
             src={mobileApp}
             style={{ objectPosition: "top" }}
             alt="..."
-            width={300}
+            width={320}
             height={300}
           />
         </div>

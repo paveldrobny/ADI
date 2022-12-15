@@ -12,17 +12,19 @@ function FilterGroups({ filter, myGroup }) {
       <div className={`group-result ${filter.length <= 0 ? "" : "hide"}`}>
         Ничего не найдено (Категории)
       </div>
-      {filter.map((group, index) => {
-        return (
-          <ListButton
-            key={index}
-            path={`/profile/${group.get("personalID")}`}
-            title={`${index + 1}) ${group.get("icode")}, №${group.get(
-              "personalID"
-            )}`}
-          />
-        );
-      })}
+      {filter
+      
+        .map((group, index) => {
+          return (
+            <ListButton
+              key={index}
+              path={`/profile/${group.get("personalID")}`}
+              title={`${index + 1}) ${group.get("icode")}, №${group.get(
+                "personalID"
+              )}`}
+            />
+          );
+        })}
     </>
   );
 }

@@ -16,7 +16,6 @@ function Profile() {
   const [studentInfo, setStudentsInfo] = React.useState([
     { name: "Статус", key: "status" },
     { name: "№ личного дела", key: "personalID" },
-    { name: "Конкурсный балл", key: "score" },
     { name: "ИНН", key: "icode" },
     { name: "ФИО", key: "name" },
     { name: "Факультет", key: "faculty" },
@@ -45,11 +44,51 @@ function Profile() {
       name: "Средний балл диплома специалиста среднего звена",
       key: "averageScoreMiddle",
     },
-    { name: "Дополнительный балл / причины начисления", key: "extraScore" },
+    { name: "Дополнительный балл / причины начисления", key: "extra" },
     { name: "Иностранный язык, который изучался", key: "foreignLang" },
     { name: "Дата рождения", key: "birthday" },
     { name: "Телефон для связи", key: "phone" },
   ]);
+
+  const getIndividualScore = (data) => {
+    let extraScore;
+
+    switch (data.get("extra")) {
+      case "Нет":
+        extraScore = 0;
+        break;
+      case "а) наличие золотого, серебряного или бронзового знака отличия Государственного физкультурно-спортивного комплекса «Готов к труду и обороне Донецкой Народной Республики» – 2 балла":
+        extraScore = 2;
+        break;
+      case "б) наличие полученных в образовательных организациях Донецкой Народной Республики документов об образовании или об образовании и о квалификации с отличием – 5 баллов":
+        extraScore = 5;
+        break;
+      case "в) наличие Золотой медали «За особые успехи в учении» – 7 баллов":
+        extraScore = 7;
+        break;
+      case "г) наличие Серебряной медали «За особые успехи в учении» – 5 баллов":
+        extraScore = 6;
+        break;
+      case "д) волонтерская (добровольческая) деятельность - 2 балла":
+        extraScore = 2;
+        break;
+      default:
+        extraScore = 0;
+    }
+
+    return extraScore;
+  };
+
+  const getTotalScore = (data) => {
+    return (
+      data.get("scoreRussian") +
+      data.get("scoreMath") +
+      data.get("scoreForeign") +
+      data.get("scoreProfileSubject") +
+      data.get("scoreGIA") +
+      getIndividualScore(data)
+    );
+  };
 
   const getStudentID = () => {
     let str = location.pathname;
@@ -182,15 +221,28 @@ function Profile() {
                         );
                       })}
 
-                    {studentInfo.map((info) => {
-                      return (
-                        <InfoBlock
-                          key={info.name}
-                          title={info.name}
-                          textData={data.get(info.key)}
-                        />
-                      );
-                    })}
+                    <InfoBlock
+                      title={"Последнее обновление данных профиля"}
+                      isDate={true}
+                      textData={`${data.get("updatedAt")}`}
+                    />
+                    <InfoBlock
+                      title={"Конкурсный балл"}
+                      isDate={false}
+                      textData={getTotalScore(data)}
+                    />
+                    {studentInfo
+                      .filter((f) => data.get(f.key) !== "Нет")
+                      .map((info) => {
+                        return (
+                          <InfoBlock
+                            key={info.name}
+                            title={info.name}
+                            isDate={false}
+                            textData={data.get(info.key)}
+                          />
+                        );
+                      })}
 
                     <div className="category-title no-space">
                       Дополнительная информация
@@ -198,14 +250,24 @@ function Profile() {
 
                     {studentAdditionInfo
                       .filter(
-                        (f) => data.get(f.key) !== "" && data.get(f.key) !== 0
+                        (f) =>
+                          data.get(f.key) !== "" &&
+                          data.get(f.key) !== 0 &&
+                          data.get(f.key) !== "Нет"
                       )
                       .map((info) => {
                         return (
                           <InfoBlock
                             key={info.name}
                             title={info.name}
-                            textData={data.get(info.key)}
+                            isDate={false}
+                            textData={
+                              info.name !== "Телефон для связи"
+                                ? data.get(info.key)
+                                : `********${data
+                                    .get(info.key)
+                                    .slice(data.get(info.key).length - 2)}`
+                            }
                           />
                         );
                       })}
