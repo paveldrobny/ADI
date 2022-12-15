@@ -1,26 +1,27 @@
 {
   "files": {
-    "main.css": "/ADI/static/css/main.5c701638.css",
-    "main.js": "/ADI/static/js/main.0d3ba928.js",
+    "main.css": "/ADI/static/css/main.eeca721f.css",
+    "main.js": "/ADI/static/js/main.9854aea9.js",
     "static/js/787.76849462.chunk.js": "/ADI/static/js/787.76849462.chunk.js",
     "static/media/ProfileBG.png": "/ADI/static/media/ProfileBG.ee92a83b8acad33500a7.png",
     "static/media/banner.jpg": "/ADI/static/media/banner.c8a2fd251db071a4c0d0.jpg",
+    "static/media/undraw_page_not_found_re_e9o6.svg": "/ADI/static/media/undraw_page_not_found_re_e9o6.8c84f6baadb04348e672076b17b40ce8.svg",
     "static/media/undraw_educator_re_ju47.svg": "/ADI/static/media/undraw_educator_re_ju47.89ad7a3080b110f80504d133a044d150.svg",
     "static/media/undraw_wall_post_re_y78d.svg": "/ADI/static/media/undraw_wall_post_re_y78d.3eb18e4f30f3211d5f3f28fb5891ceb3.svg",
     "static/media/undraw_team_page_re_cffb.svg": "/ADI/static/media/undraw_team_page_re_cffb.b39e287fe216f6ce88171e9c1aed9cb3.svg",
     "static/media/zeropoint_logo.jpg": "/ADI/static/media/zeropoint_logo.34eb358b3f495f9f497f.jpg",
     "static/media/undraw_happy_news_re_tsbd.svg": "/ADI/static/media/undraw_happy_news_re_tsbd.f7c50bc8c1d77524482f8ab744a552ee.svg",
-    "static/media/undraw_app_installation_re_h36x.svg": "/ADI/static/media/undraw_app_installation_re_h36x.c5fe292cdcb18c42ee07a1dacba4362f.svg",
     "static/media/undraw_mobile_re_q4nk.svg": "/ADI/static/media/undraw_mobile_re_q4nk.f67e8703e9cbf087af097bfc1a74bd81.svg",
     "static/media/undraw_newsletter_re_wrob.svg": "/ADI/static/media/undraw_newsletter_re_wrob.30cac13bc3950ad8e21a205226b9d2b1.svg",
+    "static/media/undraw_mobile_app_re_catg.svg": "/ADI/static/media/undraw_mobile_app_re_catg.04affafe179ab5be3bdc985174a69981.svg",
     "static/media/undraw_cloud_files_wmo8.svg": "/ADI/static/media/undraw_cloud_files_wmo8.9b5f9dbb636b7174daf2f9a47ab36afa.svg",
     "index.html": "/ADI/index.html",
-    "main.5c701638.css.map": "/ADI/static/css/main.5c701638.css.map",
-    "main.0d3ba928.js.map": "/ADI/static/js/main.0d3ba928.js.map",
+    "main.eeca721f.css.map": "/ADI/static/css/main.eeca721f.css.map",
+    "main.9854aea9.js.map": "/ADI/static/js/main.9854aea9.js.map",
     "787.76849462.chunk.js.map": "/ADI/static/js/787.76849462.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5c701638.css",
-    "static/js/main.0d3ba928.js"
+    "static/css/main.eeca721f.css",
+    "static/js/main.9854aea9.js"
   ]
 }
