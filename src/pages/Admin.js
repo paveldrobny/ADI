@@ -737,10 +737,10 @@ function Admin() {
           onChange={(e) => setValueStatus(e.target.value)}
         />
         <div style={{ width: "100%", textAlign: "center" }}>
-          <button id="admin-add-new" onClick={addPerson}>
+          <button className="admin-add-new" onClick={addPerson}>
             Добавить студента
           </button>
-          <button id="admin-add-new" onClick={onEditConfirm}>
+          <button className="admin-add-new" onClick={onEditConfirm}>
             Редактировать данные
           </button>
         </div>

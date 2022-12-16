@@ -5,6 +5,7 @@
   color: var(--text-color);
   border-radius: var(--global-border-radius);
   box-shadow: 0px 1px 5px 1px rgba(12, 12, 12, 0.2);
+  transition: .35s;
   background: var(--bg);
 }
 
@@ -22,15 +23,18 @@
   padding: 5px 8px;
   margin: 0 2px;
   color: var(--text-color);
+  transition: .35s;
   background: var(--btn-bg)
 }
 
 .admin-group-size-btn {
   cursor: pointer;
+  width: 100px;
   color: white;
   border: none;
   padding: 5px 8px;
   margin: 0 2px;
+  transition: .35s;
   border-radius: var(--global-border-radius);
   background: rgb(1, 102, 102);
 }
@@ -41,12 +45,23 @@
 
 @media screen and (max-width: 810px) {
   .admin-group-size {
-      width: 100%;
+      width: calc(100% - 32px);
   }
 }
 
 @media screen and (min-width: 811px) and (max-width: 1200px) {
   .admin-group-size {
       width: calc(50% - 32px);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .admin-group-size-input  {
+      width: 100%;
+      padding: 10px 8px;
+  }
+  .admin-group-size-btn{
+    width: calc(100% - 4px);
+    padding: 10px 8px;
   }
 }

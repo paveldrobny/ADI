@@ -286,7 +286,8 @@
   .profile-parallax {
     top: -27px;
   }
-  .profile-main{
+
+  .profile-main {
     top: 20px
   }
 }
@@ -542,8 +543,9 @@
   color: var(--text-color);
 }
 
-#admin-add-new {
+.admin-add-new {
   cursor: pointer;
+  width: 250px;
   margin: 10px;
   font-size: 18px;
   padding: 8px 15px;
@@ -553,8 +555,16 @@
   background: rgb(1, 102, 102);
 }
 
-#admin-add-new:hover {
+.admin-add-new:hover {
   background: rgb(23, 88, 23);
+}
+
+@media screen and (max-width: 600px) {
+  .admin-add-new {
+    width: calc(100% - 20px);
+    margin: 5px 10px;
+    padding: 10px 15px;
+  }
 }
 
 #admin-news {
@@ -599,6 +609,13 @@
 
 #admin-update-list:hover {
   background: rgb(11, 135, 218);
+}
+
+@media screen and (max-width: 600px) {
+  #admin-update-list {
+    width: 100%;
+    font-size: 18px;
+  }
 }
 
 .admin-update-btn-cont {
@@ -763,6 +780,7 @@
   .undraw-title {
     width: 100%;
     padding: 0;
+    margin: 0;
     text-align: center;
   }
 
