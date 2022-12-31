@@ -206,9 +206,7 @@ const Enrollment = () => {
         />
       </div>
       <div className="groups-search">
-        {component !== null &&
-        component !== undefined &&
-        component.length > 0 ? (
+        {component !== null && component !== undefined ? (
           component
         ) : (
           <div className="message-error">Не удалось подключиться к серверу</div>
