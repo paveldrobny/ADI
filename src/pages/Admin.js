@@ -8,6 +8,7 @@ import DropdownMulti from "../components/Inputs/DropdownMulti";
 import AdminListButton from "../components/Buttons/AdminListButton";
 import InputDefault from "../components/Inputs/InputDefault";
 import GroupSize from "../components/Blocks/GroupSize";
+import SelectedButton from "../components/Buttons/SelectedButton";
 
 function Admin() {
   const [studentsData, setStudentsData] = useState([]);
@@ -141,7 +142,6 @@ function Admin() {
       getIndividualScore(data)
     );
   };
-  
 
   useEffect(() => {
     fetchStudents();
@@ -463,7 +463,7 @@ function Admin() {
 
   return (
     <div className="page max">
-      <div id="admin-secure">
+      {/* <div id="admin-secure">
         <div id="admin-sign-in">Админ-панель</div>
         <div className="admin-input-content">
           <label>Логин</label>
@@ -474,302 +474,301 @@ function Admin() {
           <input type="password"></input>
         </div>
         <button id="test-btn-admin">Войти</button>
-      </div>
+      </div> */}
 
-      <div className="admin-groups left">
+      <div className="panel">
         <h3 className="admin-groups-title">Указать кол-во мест</h3>
-        <div className="admin-update-btn-cont left">
-          <input
-            className="admin-group-size-input"
-            type={"number"}
-            max={50}
-            min={1}
-            placeholder={"Кол-во мест..."}
-            onChange={(e) => setCurrentGroupSize(e.target.value)}
-          />
-          {/* <div>{currentGroupSizeID}</div> */}
-          {/* <button id="admin-update-list" onClick={fetchGroupSize}>
-            Обновить
-          </button> */}
-        </div>
-
-        {groupSizeData.map((list) => {
-          return (
-            <GroupSize
-              key={list.get("groupName")}
-              title={list.get("groupName")}
-              currentSize={getStudentsInGroup(list.get("groupName"))}
-              size={list.get("size")}
-              setCurrentGroupSize={setCurrentGroupSize}
-              onClick={() => addGroupSize(list.id)}
+        <div className="admin-groups">
+          <div className="admin-update-btn-cont left">
+            <input
+              className="admin-group-size-input"
+              type={"number"}
+              max={50}
+              min={1}
+              placeholder={"Кол-во мест..."}
+              onChange={(e) => setCurrentGroupSize(e.target.value)}
             />
-          );
-        })}
-      </div>
+          </div>
+          <div className="separator"></div>
 
-      <div className="admin-groups">
+          {groupSizeData.map((list) => {
+            return (
+              <GroupSize
+                key={list.get("groupName")}
+                title={list.get("groupName")}
+                currentSize={getStudentsInGroup(list.get("groupName"))}
+                size={list.get("size")}
+                setCurrentGroupSize={setCurrentGroupSize}
+                onClick={() => addGroupSize(list.id)}
+              />
+            );
+          })}
+        </div>
         <h3 className="admin-groups-title">Добавить / редактировать данные</h3>
-        <Input
-          title="Дата подачи документов"
-          type="date"
-          maxLength={15}
-          value={valueDateDocument}
-          onChange={(e) => setValueDateDocument(e.target.value)}
-        />
-        <Input
-          title="№ личного дела"
-          type="text"
-          maxLength={9}
-          value={valueDataID}
-          onChange={(e) => setValueDataID(e.target.value)}
-        />
-        <Input
-          title="ФИО"
-          type="text"
-          maxLength={64}
-          value={valueName}
-          onChange={(e) => setValueName(e.target.value)}
-        />
-        <Input
-          title="Адрес проживания"
-          type="text"
-          maxLength={200}
-          value={valueAdress}
-          onChange={(e) => setValueAdress(e.target.value)}
-        />
-        <Input
-          title="Дата рождения"
-          type="date"
-          maxLength={15}
-          value={valueBirthday}
-          onChange={(e) => setValueBirthday(e.target.value)}
-        />
-        <Input
-          title="ИНН"
-          type="text"
-          maxLength={12}
-          value={valueICode}
-          onChange={(e) => setValueICode(e.target.value)}
-        />
-        <Input
-          title="Данные документа удостоверяющего личность"
-          type="text"
-          maxLength={220}
-          value={valueIdentityDocument}
-          onChange={(e) => setValueIdentityDocument(e.target.value)}
-        />
-        <Input
-          title="Данные документа о ранее полученном образовании"
-          type="text"
-          maxLength={220}
-          value={valuePreviouslyEducation}
-          onChange={(e) => setValuePreviouslyEducation(e.target.value)}
-        />
-        <Input
-          title="Средний балл аттестата"
-          type="number"
-          value={valueAverageScoreCertificate}
-          onChange={(e) => setValueAverageScoreCertificate(e.target.value)}
-        />
-        <Input
-          title="Балл по русскому языку"
-          type="number"
-          value={valueScoreRussian}
-          onChange={(e) => setValueScoreRussian(e.target.value)}
-        />
-        <Input
-          title="Балл по математике"
-          type="number"
-          value={valueScoreMath}
-          onChange={(e) => setValueScoreMath(e.target.value)}
-        />
-        <Dropdown
-          title="Профильный предмет"
-          size={"min"}
-          list={profileSubjectList}
-          isShowLabel={true}
-          setFilter={setValueProfileSubject}
-          value={valueProfileSubject}
-          onChange={(e) => setValueProfileSubject(e.target.value)}
-        />
-        <Input
-          title="Балл по проф предмету"
-          type="number"
-          value={valueScoreProfileSubject}
-          onChange={(e) => setValueScoreProfileSubject(e.target.value)}
-        />
-        <Input
-          title="Средний балл диплома бакалавра / специалиста"
-          type="number"
-          value={valueAverageScoreDegree}
-          onChange={(e) => setValueAverageScoreDegree(e.target.value)}
-        />
-        <Input
-          title="Балл по ГИА"
-          type="number"
-          value={valueScoreGIA}
-          onChange={(e) => setValueScoreGIA(e.target.value)}
-        />
-        <Input
-          title="Балл по иностранному"
-          type="number"
-          value={valueScoreForeign}
-          onChange={(e) => setValueScoreForeign(e.target.value)}
-        />
-        <Input
-          title="Средний балл диплома специалиста среднего звена"
-          type="number"
-          value={valueAverageScoreMiddle}
-          onChange={(e) => setValueAverageScoreMiddle(e.target.value)}
-        />
-        <Dropdown
-          title="Дополнительный балл/ причины начисления"
-          size={"max"}
-          list={extraList}
-          setFilter={setValueExtra}
-          value={valueExtra}
-          onChange={(e) => setValueExtra(e.target.value)}
-        />
-        {/* <Input
+        <div className="admin-groups">
+          <Input
+            title="Дата подачи документов"
+            type="date"
+            maxLength={15}
+            value={valueDateDocument}
+            onChange={(e) => setValueDateDocument(e.target.value)}
+          />
+          <Input
+            title="№ личного дела"
+            type="text"
+            maxLength={9}
+            value={valueDataID}
+            onChange={(e) => setValueDataID(e.target.value)}
+          />
+          <Input
+            title="ФИО"
+            type="text"
+            maxLength={64}
+            value={valueName}
+            onChange={(e) => setValueName(e.target.value)}
+          />
+          <Input
+            title="Адрес проживания"
+            type="text"
+            maxLength={200}
+            value={valueAdress}
+            onChange={(e) => setValueAdress(e.target.value)}
+          />
+          <Input
+            title="Дата рождения"
+            type="date"
+            maxLength={15}
+            value={valueBirthday}
+            onChange={(e) => setValueBirthday(e.target.value)}
+          />
+          <Input
+            title="ИНН"
+            type="text"
+            maxLength={12}
+            value={valueICode}
+            onChange={(e) => setValueICode(e.target.value)}
+          />
+          <Input
+            title="Данные документа удостоверяющего личность"
+            type="text"
+            maxLength={220}
+            value={valueIdentityDocument}
+            onChange={(e) => setValueIdentityDocument(e.target.value)}
+          />
+          <Input
+            title="Данные документа о ранее полученном образовании"
+            type="text"
+            maxLength={220}
+            value={valuePreviouslyEducation}
+            onChange={(e) => setValuePreviouslyEducation(e.target.value)}
+          />
+          <Input
+            title="Средний балл аттестата"
+            type="number"
+            value={valueAverageScoreCertificate}
+            onChange={(e) => setValueAverageScoreCertificate(e.target.value)}
+          />
+          <Input
+            title="Балл по русскому языку"
+            type="number"
+            value={valueScoreRussian}
+            onChange={(e) => setValueScoreRussian(e.target.value)}
+          />
+          <Input
+            title="Балл по математике"
+            type="number"
+            value={valueScoreMath}
+            onChange={(e) => setValueScoreMath(e.target.value)}
+          />
+          <Dropdown
+            title="Профильный предмет"
+            size={"min"}
+            list={profileSubjectList}
+            isShowLabel={true}
+            setFilter={setValueProfileSubject}
+            value={valueProfileSubject}
+            onChange={(e) => setValueProfileSubject(e.target.value)}
+          />
+          <Input
+            title="Балл по проф предмету"
+            type="number"
+            value={valueScoreProfileSubject}
+            onChange={(e) => setValueScoreProfileSubject(e.target.value)}
+          />
+          <Input
+            title="Средний балл диплома бакалавра / специалиста"
+            type="number"
+            value={valueAverageScoreDegree}
+            onChange={(e) => setValueAverageScoreDegree(e.target.value)}
+          />
+          <Input
+            title="Балл по ГИА"
+            type="number"
+            value={valueScoreGIA}
+            onChange={(e) => setValueScoreGIA(e.target.value)}
+          />
+          <Input
+            title="Балл по иностранному"
+            type="number"
+            value={valueScoreForeign}
+            onChange={(e) => setValueScoreForeign(e.target.value)}
+          />
+          <Input
+            title="Средний балл диплома специалиста среднего звена"
+            type="number"
+            value={valueAverageScoreMiddle}
+            onChange={(e) => setValueAverageScoreMiddle(e.target.value)}
+          />
+          <Dropdown
+            title="Дополнительный балл/ причины начисления"
+            size={"max"}
+            list={extraList}
+            setFilter={setValueExtra}
+            value={valueExtra}
+            onChange={(e) => setValueExtra(e.target.value)}
+          />
+          {/* <Input
           title="Дополнительный балл/ причины начисления"
           type="number"
           value={valueExtraScore}
           onChange={(e) => setValueExtraScore(e.target.value)}
         /> */}
-        {/* <Input
+          {/* <Input
           title="Конкурсный балл"
           type="number"
           value={valueScore}
           onChange={(e) => setValueScore(e.target.value)}
         /> */}
-        <Dropdown
-          title="Факультет"
-          size={"min"}
-          list={facultyList}
-          setFilter={setValueFaculty}
-          value={valueFaculty}
-          onChange={(e) => setValueFaculty(e.target.value)}
-        />
-        <Dropdown
-          title="Форма обучения"
-          size={"min"}
-          list={formList}
-          isShowLabel={true}
-          setFilter={setValueForm}
-          value={valueForm}
-          onChange={(e) => setValueForm(e.target.value)}
-        />
-        <Dropdown
-          title="Специальность"
-          size={"max"}
-          list={groupList}
-          isShowLabel={true}
-          setFilter={setValueGroup}
-          value={valueGroup}
-          onChange={(e) => setValueGroup(e.target.value)}
-        />
-        <Dropdown
-          title="Образовательная программа"
-          size={"min"}
-          isShowLabel={false}
-          list={programList}
-          value={valueProgram}
-          setFilter={setValueProgram}
-          onChange={(e) => setValueProgram(e.target.value)}
-        />
-        <Dropdown
-          title="План"
-          size={"min"}
-          list={planList}
-          isShowLabel={true}
-          setFilter={setValuePlan}
-          value={valuePlan}
-          onChange={(e) => setValuePlan(e.target.value)}
-        />
-        <Dropdown
-          title="Наличие льгот"
-          size={"min"}
-          list={yesNoList}
-          isShowLabel={true}
-          setFilter={setValuePrivileges}
-          value={valuePrivileges}
-          onChange={(e) => setValuePrivileges(e.target.value)}
-        />
-        <Dropdown
-          title="Преим. право зачисления"
-          size={"max"}
-          list={primaryList}
-          isShowLabel={false}
-          setFilter={setValuePrimary}
-          value={valuePrimary}
-          onChange={(e) => setValuePrimary(e.target.value)}
-        />
-        <Dropdown
-          title="Иностранный язык, который изучался"
-          size={"min"}
-          list={otherLangList}
-          isShowLabel={false}
-          setFilter={setValueForeignLang}
-          value={valueForeignLang}
-          onChange={(e) => setValueForeignLang(e.target.value)}
-        />
-        <Input
-          title="Телефоны для связи"
-          type="text"
-          maxLength={20}
-          value={valuePhone}
-          onChange={(e) => setValuePhone(e.target.value)}
-        />
-        <Input
-          title="Сведения о родителях"
-          type="text"
-          maxLength={120}
-          value={valueParent}
-          onChange={(e) => setValueParent(e.target.value)}
-        />
-        <Dropdown
-          title="Статус"
-          size={"min"}
-          list={statusList}
-          isShowLabel={true}
-          setFilter={setValueStatus}
-          value={valueStatus}
-          onChange={(e) => setValueStatus(e.target.value)}
-        />
-        <div style={{ width: "100%", textAlign: "center" }}>
-          <button className="admin-add-new" onClick={addPerson}>
-            Добавить студента
-          </button>
-          <button className="admin-add-new" onClick={onEditConfirm}>
-            Редактировать данные
-          </button>
+          <Dropdown
+            title="Факультет"
+            size={"min"}
+            list={facultyList}
+            setFilter={setValueFaculty}
+            value={valueFaculty}
+            onChange={(e) => setValueFaculty(e.target.value)}
+          />
+          <Dropdown
+            title="Форма обучения"
+            size={"min"}
+            list={formList}
+            isShowLabel={true}
+            setFilter={setValueForm}
+            value={valueForm}
+            onChange={(e) => setValueForm(e.target.value)}
+          />
+          <Dropdown
+            title="Специальность"
+            size={"max"}
+            list={groupList}
+            isShowLabel={true}
+            setFilter={setValueGroup}
+            value={valueGroup}
+            onChange={(e) => setValueGroup(e.target.value)}
+          />
+          <Dropdown
+            title="Образовательная программа"
+            size={"min"}
+            isShowLabel={false}
+            list={programList}
+            value={valueProgram}
+            setFilter={setValueProgram}
+            onChange={(e) => setValueProgram(e.target.value)}
+          />
+          <Dropdown
+            title="План"
+            size={"min"}
+            list={planList}
+            isShowLabel={true}
+            setFilter={setValuePlan}
+            value={valuePlan}
+            onChange={(e) => setValuePlan(e.target.value)}
+          />
+          <Dropdown
+            title="Наличие льгот"
+            size={"min"}
+            list={yesNoList}
+            isShowLabel={true}
+            setFilter={setValuePrivileges}
+            value={valuePrivileges}
+            onChange={(e) => setValuePrivileges(e.target.value)}
+          />
+          <Dropdown
+            title="Преим. право зачисления"
+            size={"max"}
+            list={primaryList}
+            isShowLabel={false}
+            setFilter={setValuePrimary}
+            value={valuePrimary}
+            onChange={(e) => setValuePrimary(e.target.value)}
+          />
+          <Dropdown
+            title="Иностранный язык, который изучался"
+            size={"min"}
+            list={otherLangList}
+            isShowLabel={false}
+            setFilter={setValueForeignLang}
+            value={valueForeignLang}
+            onChange={(e) => setValueForeignLang(e.target.value)}
+          />
+          <Input
+            title="Телефоны для связи"
+            type="text"
+            maxLength={20}
+            value={valuePhone}
+            onChange={(e) => setValuePhone(e.target.value)}
+          />
+          <Input
+            title="Сведения о родителях"
+            type="text"
+            maxLength={120}
+            value={valueParent}
+            onChange={(e) => setValueParent(e.target.value)}
+          />
+          <Dropdown
+            title="Статус"
+            size={"min"}
+            list={statusList}
+            isShowLabel={true}
+            setFilter={setValueStatus}
+            value={valueStatus}
+            onChange={(e) => setValueStatus(e.target.value)}
+          />
+          <div style={{ width: "100%", textAlign: "center" }}>
+            <button className="admin-add-new" onClick={addPerson}>
+              Добавить студента
+            </button>
+            <button className="admin-add-new" onClick={onEditConfirm}>
+              Редактировать данные
+            </button>
+          </div>
         </div>
-      </div>
-
-      <div className="admin-groups">
-        <div className="admin-update-btn-cont">
-          <button id="admin-update-list" onClick={fetchStudents}>
-            Обновить
-          </button>
+        <div className="admin-groups">
+          <div className="admin-update-btn-cont">
+            <button id="admin-update-list" onClick={fetchStudents}>
+              Обновить
+            </button>
+          </div>
+          <div id="admin-list-count">
+            Кол-во студентов: {studentsData.length}
+          </div>
+          {studentsData !== null &&
+          studentsData !== undefined &&
+          studentsData.length > 0
+            ? studentsData.map((data, value) => {
+                return (
+                  <AdminListButton
+                    key={value}
+                    status={data.get("status") === "Зачислен"}
+                    title={`${value + 1}) ${data.get("icode")}, №${data.get(
+                      "personalID"
+                    )}`}
+                    onEditUser={() => onEditUser(data.id)}
+                    onDeleteUser={() => onDeleteUser(data.id)}
+                  />
+                );
+              })
+            : ""}
         </div>
-        <div id="admin-list-count">Кол-во студентов: {studentsData.length}</div>
-        {studentsData !== null &&
-        studentsData !== undefined &&
-        studentsData.length > 0
-          ? studentsData.map((data, value) => {
-              return (
-                <AdminListButton
-                  key={value}
-                  status={data.get("status") === "Зачислен"}
-                  title={`${value + 1}) ${data.get("icode")}, №${data.get(
-                    "personalID"
-                  )}`}
-                  onEditUser={() => onEditUser(data.id)}
-                  onDeleteUser={() => onDeleteUser(data.id)}
-                />
-              );
-            })
-          : ""}
       </div>
     </div>
   );

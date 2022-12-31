@@ -33,7 +33,7 @@ function Favorites() {
   return (
     <div className="page min">
       <div className="favorites">
-        <div className="groups space">
+        <div className="groups pHorizontal space">
           <div className="img-row">
             <h1 className="undraw-title">{title}</h1>
             <img
@@ -46,7 +46,7 @@ function Favorites() {
             />
           </div>
         </div>
-        <div className="groups noBG">
+        <div className="groups noPadding noBG">
           <button className="favorites-btn-delete" onClick={deleteFavorites}>
             {btnText}
           </button>

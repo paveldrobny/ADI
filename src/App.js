@@ -21,6 +21,14 @@ Parse.initialize(PARSE_APPLICATION_ID, PARSE_JAVASCRIPT_KEY);
 Parse.serverURL = PARSE_HOST_URL;
 
 function App() {
+  const [width, setWidth] = React.useState(window.innerWidth);
+  const [height, setHeight] = React.useState(window.innerHeight);
+
+  const updateDimensions = () => {
+    setWidth(window.innerWidth);
+    setHeight(window.innerHeight);
+  };
+
   const [isDarkTheme, setDarkTheme] = React.useState(
     localStorage.getItem("isDarkTheme") ? true : false
   );
@@ -70,25 +78,32 @@ function App() {
   React.useEffect(() => {
     getThemeValue();
     getValueFavorites();
+
+    window.addEventListener("resize", updateDimensions);
+    return () => window.removeEventListener("resize", updateDimensions);
   }, []);
 
   return (
     <Context.Provider value={{ isDarkTheme, isSaveProfiles }}>
       <div className="App">
         <Header changeTheme={changeTheme} changeFavorites={changeFavorites} />
-        <div id="main-content">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/enrollment" element={<Enrollment />} />
-            <Route path="/received" element={<Received />} />
-            <Route path="/profile/:id" element={<Profile />} />
-            <Route path="/favorites" element={<Favorites />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/admin" element={<Admin />} />
-            <Route path="/download" element={<MobileApp />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </div>
+        {width > 279 ? (
+          <div id="main-content">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/enrollment" element={<Enrollment />} />
+              <Route path="/received" element={<Received />} />
+              <Route path="/profile/:id" element={<Profile />} />
+              <Route path="/favorites" element={<Favorites />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/admin" element={<Admin />} />
+              <Route path="/download" element={<MobileApp />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
+        ) : (
+          <div className="message-warning">Маленькая ширина экрана</div>
+        )}
       </div>
     </Context.Provider>
   );

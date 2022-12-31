@@ -49,8 +49,14 @@ const Enrollment = () => {
     "«Наземные транспортно-технологические средства»",
   ]);
 
+  const [programList, setProgramList] = React.useState([
+    "Бакалавриат",
+    "Магистратура",
+    "Специалитет",
+  ]);
+
   const filterStudents = groups.filter((group) => {
-    return group.get("icode").toLowerCase().includes(query.toLowerCase());
+    return group.get("personalID").toLowerCase().includes(query.toLowerCase());
   });
 
   const checkCategories = (group) => {
@@ -120,7 +126,7 @@ const Enrollment = () => {
 
   return (
     <div className="page">
-      <div className="groups space">
+      <div className="groups pHorizontal space">
         <div className="img-row">
           <h1 className="undraw-title">Конкурс</h1>
           <img
@@ -154,12 +160,10 @@ const Enrollment = () => {
           setFilter={setFilterFaculty}
           defaultValue={1}
         />
-        <ToggleCategory
+        <ComboBoxCategory
           title="Образовательная программа"
-          buttonOne="Бакалавриат"
-          buttonTwo="Магистратура"
+          groupList={programList}
           setFilter={setFilterProgram}
-          defaultValue={0}
         />
         {/* <ToggleCategory
           title="План"
@@ -191,7 +195,7 @@ const Enrollment = () => {
           type="search"
           id="search-student"
           autoComplete="false"
-          placeholder="Найти по ИНН"
+          placeholder="Найти по № личного дела"
         />
       </div>
       <div className="groups-search">{component}</div>

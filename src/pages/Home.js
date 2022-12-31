@@ -3,7 +3,6 @@ import SelectedButton from "../components/Buttons/SelectedButton";
 import TableMain from "../components/Table/TableMain";
 import { NavLink } from "react-router-dom";
 import banner from "../image/banner.jpg";
-import { YMaps, Map, Placemark, ZoomControl } from "@pbe/react-yandex-maps";
 import devices from "../image/undraw_mobile_re_q4nk.svg";
 import "./page.css";
 
@@ -54,24 +53,20 @@ const Home = () => {
   ]);
   const [tableData, setTableData] = React.useState([tableOne, tableTwo]);
   const [selectedButtons, setSelectedButtons] = React.useState([
-    {name: "Бакалавриат", align: "left"},
-    {name: "Магистратура", align: "right"}
+    { name: "Бакалавриат" },
+    { name: "Магистратура" },
   ]);
   const [selectID, setSelectID] = React.useState(0);
-  const defaultState = {
-    center: [48.299503, 38.002891],
-    zoom: 17,
-  };
 
   return (
-    <div className="page min">
+    <div className="page">
       <div id="banner-content">
-      <div className="groups space">
-        <div className="img-row wrap">
-          <h1 className="undraw-title size">ВСТУПИТЕЛЬНАЯ КАМПАНИЯ</h1>
-          <div className="date">2022</div>
+        <div className="groups space">
+          <div className="img-row wrap">
+            <h1 className="undraw-title size">ВСТУПИТЕЛЬНАЯ КАМПАНИЯ</h1>
+            <div className="date">2022</div>
+          </div>
         </div>
-      </div>
         {/* <div className="groups">
           <img id="banner" src={require("../image/banner.jpg")} alt="banner" />
         </div> */}
@@ -81,7 +76,7 @@ const Home = () => {
             обучение с 01 по 15 сентября 2022г. Для поступающих по
             образовательным программам:
           </div>
-          <div id="select-table-content">
+          <div className="select-table-content">
             {selectedButtons.map((button, index) => {
               return (
                 <SelectedButton
@@ -125,18 +120,6 @@ const Home = () => {
               height={155}
             />
           </div>
-        </div>
-
-        <div className="groups">
-          <YMaps className="ymap">
-            <Map
-              style={{ width: "100%", minHeight: "250px", maxHeight: "350px" }}
-              defaultState={defaultState}
-            >
-              <Placemark geometry={[48.299503, 38.002891]} />
-              <ZoomControl />
-            </Map>
-          </YMaps>
         </div>
       </div>
     </div>

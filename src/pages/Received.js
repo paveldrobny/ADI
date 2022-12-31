@@ -42,7 +42,7 @@ const Received = () => {
   return (
     <div className="page">
       <div id="groups">
-        <div className="groups space">
+        <div className="groups pHorizontal space">
           <div className="img-row">
             <h1 className="undraw-title">Список зачисленных</h1>
             <img

@@ -159,7 +159,8 @@ function Profile() {
   };
 
   return (
-    <div className="profile">
+    <div className="page profile">
+      <div className="groups noPadding noBG">
       {studentsData !== null &&
       studentsData !== undefined &&
       studentsData.length > 0
@@ -277,6 +278,7 @@ function Profile() {
             ) : null;
           })
         : "Данных нет..."}
+        </div>
     </div>
   );
 }

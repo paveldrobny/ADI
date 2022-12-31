@@ -1,11 +1,11 @@
 import React from "react";
 import "./Buttons.css"
 
-function SelectedButton({ setID, isActive, title, align }) {
+function SelectedButton({ setID, isActive, title, size = "" }) {
   return (
     <button
       onClick={setID}
-      className={`select-table-btn ${align} ${isActive ? "is-active" : ""}`}
+      className={`select-table-btn ${size} ${isActive ? "is-active" : ""}`}
     >
       {title}
     </button>

@@ -8,7 +8,7 @@ function GroupSize({ title, currentSize, size, setCurrentGroupSize, onClick }) {
       <div className="admin-group-size-count">
         Студентов: {currentSize}/{size}
       </div>
-      <hr />
+      <div className="separator min"></div>
       <button className="admin-group-size-btn" onClick={onClick}>
         Применить
       </button>

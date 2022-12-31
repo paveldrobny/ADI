@@ -7,9 +7,8 @@
   position: relative;
   height: 60px;
   padding: 0 5px;
-  box-shadow: rgba(9, 30, 66, 0.1) 0px 4px 8px -2px,
-    rgba(9, 30, 66, 0.05) 0px 0px 0px 1px;
-  background-color: var(--btn-bg);
+  box-shadow: 0 2px 2px rgb(157 172 207 / 8%);
+  background-color: #fff;
 }
 
 .header-banner {
@@ -147,8 +146,8 @@
   height: auto;
   border-radius: 5px;
   border: 1px solid var(--border-color);
-  box-shadow: 0 3px 10px 1px rgba(0, 0, 0, 0.3);
-  background: var(--btn-bg);
+  box-shadow: 0 2px 5px 1px rgba(0, 0, 0, .15);
+  background: var(--bg);
 }
 
 #settings-menu.show {
@@ -166,13 +165,12 @@
   width: calc(100% - 20px);
   font-size: 15px;
   border-radius: var(--global-border-radius);
-  ;
   color: var(--text-color);
-  background: var(--settings-item-bg);
+  background: var(--border-color-light);
 }
 
 .header-settings-item:hover {
-  background: var(--bg);
+  background: var(--border-color);
 }
 
 .settings-item-content {

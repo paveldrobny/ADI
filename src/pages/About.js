@@ -1,6 +1,7 @@
 import React from "react";
 import InfoBlock from "../components/Blocks/InfoBlock";
 import students from "../image/undraw_educator_re_ju47.svg";
+import { YMaps, Map, Placemark, ZoomControl } from "@pbe/react-yandex-maps";
 import "./page.css";
 
 function About() {
@@ -34,11 +35,15 @@ function About() {
       content: ["priyomADI2022@yandex.ru"],
     },
   ]);
+  const defaultState = {
+    center: [48.299503, 38.002891],
+    zoom: 17,
+  };
 
   return (
     <div className="page">
-      <div id="about">
-        <h3>{title}</h3>
+      <div className="groups noPadding noBG">
+        <h3 style={{ marginTop: 0 }}>{title}</h3>
         <img
           id="about-img"
           src={require("../image/ProfileBG.png")}
@@ -57,6 +62,25 @@ function About() {
               />
             );
           })}
+        </div>
+
+        <div className="separator"></div>
+        <div className="groups noMargin">
+          <YMaps className="ymap">
+            <Map
+              style={{
+                width: "100%",
+                minHeight: "250px",
+                maxHeight: "350px",
+                borderRadius: 12,
+                overflow: "hidden",
+              }}
+              defaultState={defaultState}
+            >
+              <Placemark geometry={[48.299503, 38.002891]} />
+              <ZoomControl />
+            </Map>
+          </YMaps>
         </div>
       </div>
     </div>

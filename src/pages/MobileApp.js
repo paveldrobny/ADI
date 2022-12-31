@@ -20,7 +20,7 @@ function MobileApp() {
 
   return (
     <div className="page min">
-      <div className="groups space">
+      <div className="groups pHorizontal space">
         <div className="img-row">
           <h1 className="undraw-title">{title}</h1>
           <img

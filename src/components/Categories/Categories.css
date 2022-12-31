@@ -17,7 +17,7 @@
   position: relative;
   width: 256px;
   border-radius: var(--global-border-radius);
-  background: var(--enrollment-tabs-content-bg);
+  background: var(--border-color-light);
 }
 
 .tabs-nav-right.min {
