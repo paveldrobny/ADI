@@ -64,13 +64,14 @@ function Admin() {
   ]);
   const [planList, setPlanList] = useState(["Бюджет", "Контракт"]);
   const [groupList, setGroupList] = useState([
-    "23.03.01 «Технология транспортных процессов ОПУТ»",
-    "23.03.03 «Эксплуатация транспортно-технологических машин и комплексов»",
-    "23.03.01 «Технология транспортных процессов ОБД",
-    "38.03.02 «Менеджмент»",
     "38.03.05 «Бизнес-информатика»",
+    "23.03.01 «Технология транспортных процессов ОПУТ / ОБД»",
+    "20.04.01 «Техносферная безопасность» (Маг)",
+    "23.03.03 «Эксплуатация транспортно-технологических машин и комплексов»",
+    "23.05.01 «Наземные транспортно-технологические средства» (Маг)",
     "20.03.01 «Техносферная безопасность»",
-    "23.05.01 «Наземные транспортно-технологические средства»",
+    "38.04.02 «Менеджмент» (Маг)",
+    "38.03.02 «Менеджмент»",
   ]);
   const [statusList, setStatusList] = useState(["Конкурс", "Зачислен"]);
   const [yesNoList, setYesNoList] = useState(["Да", "Нет"]);
@@ -382,7 +383,7 @@ function Admin() {
       alert(`В ${valueGroup} все места заполнены`);
     } else {
       alert(
-        "Должны быть заполнены поля:\n-Дата подачи документов\n-№ личного дела\n-ФИО\n-Адрес проживания\n-Дата рождения\n-ИНН\n-Данные документа удостоверяющего личность\n-Данные документа о ранее полученном образовании\n-Факультет\n-Форма обучения\n-Специальность\n-Образовательная программа\n-План\n-Инностранный язык, который изучался\n-Телефон для связи\n-Статус"
+        "Должны быть заполнены поля:\n-Дата подачи документов\n-№ личного дела\n-ФИО\n-Адрес проживания\n-Дата рождения\n-ИНН\n-Данные документа удостоверяющего личность\n-Данные документа о ранее полученном образовании\n-Факультет\n-Форма обучения\n-Направление подготовки/специальность\n-Образовательная программа\n-План\n-Инностранный язык, который изучался\n-Телефон для связи\n-Статус"
       );
     }
   }
@@ -491,18 +492,26 @@ function Admin() {
           </div>
           <div className="separator"></div>
 
-          {groupSizeData.map((list) => {
-            return (
-              <GroupSize
-                key={list.get("groupName")}
-                title={list.get("groupName")}
-                currentSize={getStudentsInGroup(list.get("groupName"))}
-                size={list.get("size")}
-                setCurrentGroupSize={setCurrentGroupSize}
-                onClick={() => addGroupSize(list.id)}
-              />
-            );
-          })}
+          {groupSizeData !== null &&
+          groupSizeData !== undefined &&
+          groupSizeData.length > 0 ? (
+            groupSizeData.map((list) => {
+              return (
+                <GroupSize
+                  key={list.get("groupName")}
+                  title={list.get("groupName")}
+                  currentSize={getStudentsInGroup(list.get("groupName"))}
+                  size={list.get("size")}
+                  setCurrentGroupSize={setCurrentGroupSize}
+                  onClick={() => addGroupSize(list.id)}
+                />
+              );
+            })
+          ) : (
+            <div className="message-error">
+              Не удалось подключиться к серверу
+            </div>
+          )}
         </div>
         <h3 className="admin-groups-title">Добавить / редактировать данные</h3>
         <div className="admin-groups">
@@ -657,7 +666,7 @@ function Admin() {
             onChange={(e) => setValueForm(e.target.value)}
           />
           <Dropdown
-            title="Специальность"
+            title="Направление подготовки / специальность"
             size={"max"}
             list={groupList}
             isShowLabel={true}
@@ -759,15 +768,15 @@ function Admin() {
                   <AdminListButton
                     key={value}
                     status={data.get("status") === "Зачислен"}
-                    title={`${value + 1}) ${data.get("icode")}, №${data.get(
+                    title={`${value + 1}) №${data.get(
                       "personalID"
-                    )}`}
+                    )}, ${data.get("icode")}`}
                     onEditUser={() => onEditUser(data.id)}
                     onDeleteUser={() => onDeleteUser(data.id)}
                   />
                 );
               })
-            : ""}
+            :  <div className="message-error">Не удалось подключиться к серверу</div>}
         </div>
       </div>
     </div>

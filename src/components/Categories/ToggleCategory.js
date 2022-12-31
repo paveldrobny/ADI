@@ -6,6 +6,7 @@ function ToogleCategory({
   buttonOne,
   buttonTwo,
   setFilter,
+  size,
   defaultValue,
 }) {
   const [buttons, setButtons] = React.useState([
@@ -19,8 +20,8 @@ function ToogleCategory({
   };
 
   return (
-    <div className="tabs-nav">
-      <div className="tabs-nav-left">{title}:</div>
+    <div className={`tabs-nav ${size}`}>
+      <div className={`tabs-nav-left ${size}`}>{title}:</div>
       <div className="tabs-nav-right">
         {buttons.map((button) => {
           return (

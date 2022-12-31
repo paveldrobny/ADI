@@ -19,7 +19,7 @@ const Enrollment = () => {
     { name: "Преимущественное право зачисления" },
   ]);
   const [headersSearch, setHeadersSearch] = React.useState([
-    { name: "Специальность" },
+    { name: "Направление подготовки / специальность" },
     { name: "ФИО" },
     { name: "Факультет" },
     { name: "Образовательная программа" },
@@ -32,21 +32,29 @@ const Enrollment = () => {
   // Filters
   const [filterEnable, setFilterEnable] = React.useState("Категории");
   const [filterFaculty, setFilterFaculty] = React.useState("ТиИТ");
-  const [filterProgram, setFilterProgram] = React.useState("Бакалавриат");
+  const [filterProgram, setFilterProgram] = React.useState("");
   const [filterPlan, setFilterPlan] = React.useState("Контракт");
-  const [filterEducation, setFilterEducation] = React.useState("Заочная");
+  const [filterEducation, setFilterEducation] = React.useState("");
   const [filterGroup, setFilterGroup] = React.useState("");
 
   const onChange = (event) => setQuery(event.target.value);
 
   const [groupsList, setGroupsList] = React.useState([
-    "«Технология транспортных процессов ОПУТ»",
-    "«Эксплуатация транспортно-технологических машин и комплексов»",
-    "«Технология транспортных процессов ОБД",
-    "«Менеджмент»",
-    "«Бизнес-информатика»",
-    "«Техносферная безопасность»",
-    "«Наземные транспортно-технологические средства»",
+    "38.03.05 «Бизнес-информатика»",
+    "23.03.01 «Технология транспортных процессов ОПУТ / ОБД»",
+    "20.04.01 «Техносферная безопасность» (Маг)",
+    "23.03.03 «Эксплуатация транспортно-технологических машин и комплексов»",
+    "23.05.01 «Наземные транспортно-технологические средства» (Маг)",
+    "20.03.01 «Техносферная безопасность»",
+    "38.04.02 «Менеджмент» (Маг)",
+    "38.03.02 «Менеджмент»",
+  ]);
+
+  const [formList, setFormList] = React.useState([
+    "Очная",
+    "Заочная",
+    "Очная ССО",
+    "Заочная ССО",
   ]);
 
   const [programList, setProgramList] = React.useState([
@@ -108,8 +116,8 @@ const Enrollment = () => {
           <ListButton
             key={index}
             path={`/profile/${value.get("personalID")}`}
-            title={`${index + 1}) ${value.get("icode")}, №${value.get(
-              "personalID"
+            title={`${index + 1}) №${value.get("personalID")}, ${value.get(
+              "icode"
             )}`}
           />
         );
@@ -158,6 +166,7 @@ const Enrollment = () => {
           buttonOne="ДТ"
           buttonTwo="ТиИТ"
           setFilter={setFilterFaculty}
+          size={"category"}
           defaultValue={1}
         />
         <ComboBoxCategory
@@ -172,15 +181,13 @@ const Enrollment = () => {
           setFilter={setFilterPlan}
           defaultValue={1}
         /> */}
-        <ToggleCategory
+        <ComboBoxCategory
           title="Форма обучения"
-          buttonOne="Очная"
-          buttonTwo="Заочная"
+          groupList={formList}
           setFilter={setFilterEducation}
-          defaultValue={1}
         />
         <ComboBoxCategory
-          title="Специальность"
+          title="Направление подготовки / специальность"
           groupList={groupsList}
           setFilter={setFilterGroup}
         />
@@ -198,7 +205,15 @@ const Enrollment = () => {
           placeholder="Найти по № личного дела"
         />
       </div>
-      <div className="groups-search">{component}</div>
+      <div className="groups-search">
+        {component !== null &&
+        component !== undefined &&
+        component.length > 0 ? (
+          component
+        ) : (
+          <div className="message-error">Не удалось подключиться к серверу</div>
+        )}
+      </div>
     </div>
   );
 };

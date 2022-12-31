@@ -1,6 +1,6 @@
 .admin-group-size {
   display: block;
-  width: calc(25% - 34px);
+  width: calc(25% - 30px);
   padding: 8px;
   margin: 0 6px 12px;
   color: var(--text-color);

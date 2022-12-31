@@ -30,9 +30,9 @@ function DefaultGroups({ value, groups, index }) {
               <ListButton
                 key={index}
                 path={`/profile/${group.get("personalID")}`}
-                title={`${index + 1}) ${group.get("icode")}, №${group.get(
+                title={`${index + 1}) №${group.get(
                   "personalID"
-                )}`}
+                )}, ${group.get("icode")}`}
               />
             );
           })}

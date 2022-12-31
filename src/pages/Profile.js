@@ -20,7 +20,7 @@ function Profile() {
     { name: "ФИО", key: "name" },
     { name: "Факультет", key: "faculty" },
     { name: "Форма обучения", key: "formEducation" },
-    { name: "Специальность", key: "category" },
+    { name: "Направление подготовки / специальность", key: "category" },
     { name: "Образовательная программа", key: "program" },
     { name: "План", key: "plan" },
     { name: "Наличие льгот", key: "privileges" },
@@ -161,10 +161,10 @@ function Profile() {
   return (
     <div className="page profile">
       <div className="groups noPadding noBG">
-      {studentsData !== null &&
-      studentsData !== undefined &&
-      studentsData.length > 0
-        ? studentsData.map((data) => {
+        {studentsData !== null &&
+        studentsData !== undefined &&
+        studentsData.length > 0 ? (
+          studentsData.map((data) => {
             return data.get("personalID") === getStudentID().toString() ? (
               <div key={data.get("personalID")} className="profile-content">
                 <div className="groups space">
@@ -277,8 +277,10 @@ function Profile() {
               </div>
             ) : null;
           })
-        : "Данных нет..."}
-        </div>
+        ) : (
+          <div className="message-error">Не удалось подключиться к серверу</div>
+        )}
+      </div>
     </div>
   );
 }

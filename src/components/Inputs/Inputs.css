@@ -17,7 +17,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     color: var(--text-color);
-    background: var(--btn-bg);
+    background: var(--groups-bg);
 }
 
 .input-title.is-active {
@@ -37,7 +37,7 @@
     box-sizing: border-box;
     overflow: hidden;
     color: var(--text-color);
-    background: var(--btn-bg);
+    background: var(--groups-bg);
 }
 
 ::-webkit-calendar-picker-indicator {
@@ -63,7 +63,7 @@
     border: none;
     box-sizing: border-box;
     color: var(--text-color);
-    background: var(--btn-bg);
+    background: var(--groups-bg);
 }
 
 .dropdown-list {
@@ -123,7 +123,7 @@
     margin: 5px 0;
     border: 1px solid var(--border-color);
     border-radius: var(--global-border-radius);
-    background: var(--btn-bg)
+    background: var(--groups-bg);
 }
 
 .dropdown-list-item:hover {

@@ -20,9 +20,9 @@ function SearchGroups({ filter, query }) {
           <ListButton
             key={group.get("personalID")}
             path={`/profile/${group.get("personalID")}`}
-            title={`${value + 1}) ${group.get("icode")}, №${group.get(
+            title={`${value + 1}) №${group.get(
               "personalID"
-            )}`}
+            )}, ${group.get("icode")}`}
           />
         );
       })}

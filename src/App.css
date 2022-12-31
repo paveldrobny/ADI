@@ -62,7 +62,8 @@ input:focus {
   --bg: #FAFCFF;
   --text-color: black;
   --text-color-nav: #445b78;
-  --btn-bg: white;
+  --btn-bg: #fff;
+  --groups-bg: #fffff;
   --border-color: #e1e1e1;
   --border-color-light: #efefef;
   --select-table-bg: rgb(231, 231, 231);
@@ -75,15 +76,17 @@ input:focus {
 }
 
 [class="dark-theme"] {
-  --bg: #18191a;
+  --bg: #171717;
   --text-color: rgb(241, 241, 241);
   --text-color-nav: rgb(195, 195, 195);
   --btn-bg: #242526;
+  --groups-bg: rgb(30, 30, 30);
   --border-color: rgb(60, 60, 60);
+  --border-color-light: #272727;
   --select-table-bg: rgb(62, 62, 62);
   --select-table-hover: rgb(77, 77, 77);
   --enrollment-tabs-content-bg: rgb(69, 69, 69);
-  --enrollment-tabs-bg: rgb(45, 43, 43);
+  --enrollment-tabs-bg: rgb(58, 58, 58);
   --selected-event: var(--btn-bg);
   --settings-item-bg: rgb(68, 68, 68);
   --description: rgb(152, 152, 152);

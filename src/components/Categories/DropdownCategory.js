@@ -17,33 +17,30 @@ function DropdownCategory({ title, groupList, setFilter }) {
   };
 
   return (
-    <div className="tabs-nav">
-      <div className="tabs-nav-left">{title}:</div>
+    <div className="tabs-nav category">
+      <div className="tabs-nav-left category">{title}:</div>
       <div className="tabs-nav-right min">
-        <button
-          onClick={() => setShowList(!isShowList)}
-          className="enrollment-tabs max active"
-        >
+        <button className="enrollment-tabs max active">
           {label}
+          <div className="enrollment-list-content">
+            <ul className="enrollment-list">
+              <li className="enrollment-list-item reset" onClick={reset}>
+                СБРОС
+              </li>
+              {groupList.map((group) => {
+                return (
+                  <li
+                    key={group}
+                    className="enrollment-list-item"
+                    onClick={() => action(group)}
+                  >
+                    {group}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
         </button>
-        <div className={`enrollment-list-content ${isShowList ? "" : "hide"}`}>
-          <ul className="enrollment-list">
-            <li className="enrollment-list-item reset" onClick={reset}>
-              СБРОС
-            </li>
-            {groupList.map((group) => {
-              return (
-                <li
-                  key={group}
-                  className="enrollment-list-item"
-                  onClick={() => action(group)}
-                >
-                  {group}
-                </li>
-              );
-            })}
-          </ul>
-        </div>
       </div>
     </div>
   );

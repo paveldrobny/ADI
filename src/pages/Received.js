@@ -60,9 +60,7 @@ const Received = () => {
             return <DefaultGroups key={index} value={value} groups={groups} />;
           })
         ) : (
-          <div className="groups">
-            <h3>На данный момент зачисленных нет</h3>
-          </div>
+          <div className="message-error">Не удалось подключиться к серверу</div>
         )}
       </div>
     </div>
