@@ -51,6 +51,41 @@
   background: rgba(251, 2, 15, 0.2);
 }
 
+.message-loading {
+  width: calc(100% - 32px);
+  text-align: center;
+  padding: 15px 5px;
+  margin: 10px;
+  border-radius: var(--global-border-radius);
+  font-weight: 600;
+  color: var(--text-color);
+  opacity: 1;
+  animation: loadingAnim infinite ease-out 2s;
+  border: 1px solid var(--border-color);
+  background: var(--border-color-light);
+}
+
+.message-desc {
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--description);
+}
+
+@keyframes loadingAnim {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: .4;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
 #banner-content {
   text-align: center;
 }
@@ -382,7 +417,7 @@
   padding: 20px 10px;
   color: var(--text-color);
   border-radius: var(--global-border-radius);
-  background: var(--border-color-light);
+  background: var(--border-color);
 }
 
 .tiles.space {
@@ -679,7 +714,7 @@
   padding: 8px 15px;
   border: none;
   border-radius: var(--global-border-radius);
-  background: rgb(0, 153, 255);
+  background: rgb(01, 153, 255);
 }
 
 #admin-update-list:hover {

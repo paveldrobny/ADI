@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Parse from "parse/dist/parse.min.js";
+import { initializeParse, useParseQuery } from '@parse/react';
 import data from "../data/studentsData";
 import Input from "../components/Inputs/Input";
 import ToogleCategory from "../components/Categories/ToggleCategory";
@@ -9,6 +10,7 @@ import AdminListButton from "../components/Buttons/AdminListButton";
 import InputDefault from "../components/Inputs/InputDefault";
 import GroupSize from "../components/Blocks/GroupSize";
 import SelectedButton from "../components/Buttons/SelectedButton";
+import LoaderData from "../components/Loaders/LoaderData";
 
 function Admin() {
   const [studentsData, setStudentsData] = useState([]);
@@ -390,13 +392,12 @@ function Admin() {
 
   async function fetchStudents() {
     const query = new Parse.Query("Person");
-
     try {
       let data = await query.find();
       setStudentsData(data);
       return true;
     } catch (error) {
-      console.log(error.message);
+       console.log(error.message);
       return false;
     }
   }
@@ -462,6 +463,7 @@ function Admin() {
     return studentInGroupCount.length < groupSizeCount;
   }
 
+
   return (
     <div className="page max">
       {/* <div id="admin-secure">
@@ -508,9 +510,7 @@ function Admin() {
               );
             })
           ) : (
-            <div className="message-error">
-              Не удалось подключиться к серверу
-            </div>
+            <LoaderData/>
           )}
         </div>
         <h3 className="admin-groups-title">Добавить / редактировать данные</h3>
@@ -776,7 +776,7 @@ function Admin() {
                   />
                 );
               })
-            :  <div className="message-error">Не удалось подключиться к серверу</div>}
+            :  <LoaderData/>}
         </div>
       </div>
     </div>

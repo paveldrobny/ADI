@@ -7,6 +7,7 @@ import InfoBlock from "../components/Blocks/InfoBlock";
 import ProfileAvatar from "../components/Profile/ProfileAvatar";
 import Parse from "parse/dist/parse.min.js";
 import students from "../image/undraw_wall_post_re_y78d.svg";
+import LoaderData from "../components/Loaders/LoaderData";
 
 function Profile() {
   const location = useLocation();
@@ -278,7 +279,7 @@ function Profile() {
             ) : null;
           })
         ) : (
-          <div className="message-error">Не удалось подключиться к серверу</div>
+          <LoaderData/>
         )}
       </div>
     </div>

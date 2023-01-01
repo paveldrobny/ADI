@@ -2,6 +2,7 @@ import React from "react";
 import DefaultGroups from "../components/Groups/DefaultGroups";
 import Parse from "parse/dist/parse.min.js";
 import list from "../image/undraw_happy_news_re_tsbd.svg";
+import LoaderData from "../components/Loaders/LoaderData";
 
 const Received = () => {
   const [groups, setGroups] = React.useState([]);
@@ -60,7 +61,7 @@ const Received = () => {
             return <DefaultGroups key={index} value={value} groups={groups} />;
           })
         ) : (
-          <div className="message-error">Не удалось подключиться к серверу</div>
+          <LoaderData/>
         )}
       </div>
     </div>

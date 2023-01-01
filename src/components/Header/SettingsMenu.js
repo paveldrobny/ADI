@@ -13,7 +13,7 @@ const SettingsMenu = ({
   const [favoritesTitle, setFavoritesTitle] =
     React.useState("Избранные профили");
   const [favoritesDesc, setFavoritesDesc] = React.useState(
-    "Профили будут сохранятся локально в браузере"
+    "Профили будут сохранятся в браузере"
   );
   const [favoritesLinkTitle, setFavoritesLinkTitle] =
     React.useState("Показать избранное");

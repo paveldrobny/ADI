@@ -63,7 +63,7 @@ input:focus {
   --text-color: black;
   --text-color-nav: #445b78;
   --btn-bg: #fff;
-  --groups-bg: #fffff;
+  --groups-bg: #fff;
   --border-color: #e1e1e1;
   --border-color-light: #efefef;
   --select-table-bg: rgb(231, 231, 231);
@@ -72,7 +72,7 @@ input:focus {
   --enrollment-tabs-bg: #fff;
   --selected-event: rgb(223, 223, 223);
   --settings-item-bg: rgb(235, 235, 235);
-  --description: rgb(78, 78, 78);
+  --description: rgb(145, 145, 145);
 }
 
 [class="dark-theme"] {

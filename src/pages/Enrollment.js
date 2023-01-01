@@ -7,6 +7,7 @@ import SearchGroups from "../components/Groups/SearchGroups";
 import Parse from "parse/dist/parse.min.js";
 import students from "../image/undraw_newsletter_re_wrob.svg";
 import "./page.css";
+import LoaderData from "../components/Loaders/LoaderData";
 
 const Enrollment = () => {
   const [headers, setHeaders] = React.useState([
@@ -132,6 +133,9 @@ const Enrollment = () => {
     );
   }
 
+  console.log(component === null);
+  console.log(component === undefined);
+
   return (
     <div className="page">
       <div className="groups pHorizontal space">
@@ -206,10 +210,10 @@ const Enrollment = () => {
         />
       </div>
       <div className="groups-search">
-        {component !== null && component !== undefined ? (
+        {component !== null && component !== undefined && groups.length > 0 ? (
           component
         ) : (
-          <div className="message-error">Не удалось подключиться к серверу</div>
+          <LoaderData />
         )}
       </div>
     </div>

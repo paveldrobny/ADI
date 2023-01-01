@@ -7,8 +7,8 @@
   text-align: center;
 }
 
-.tabs-nav.category{
- /* display: block; */
+.tabs-nav.category {
+  /* display: block; */
 }
 
 .tabs-nav-left {
@@ -17,7 +17,7 @@
   color: var(--text-color);
 }
 
-.tabs-nav-left.category{
+.tabs-nav-left.category {
   /* font-size: 15px;
   padding-bottom: 5px; */
 }
@@ -26,7 +26,7 @@
   position: relative;
   width: 256px;
   border-radius: var(--global-border-radius);
-  background: var(--border-color-light);
+  background: var(--border-color);
 }
 
 .tabs-nav-right.min {
@@ -63,7 +63,7 @@
   font-weight: 600;
   box-shadow: 0 2px 3px rgb(0 16 46 / 15%);
   color: var(--text-color);
-  background-color: var(--enrollment-tabs-bg);
+  background-color: var(--groups-bg);
 }
 
 .category-title {
@@ -94,7 +94,7 @@
   background: var(--btn-bg);
 }
 
-.enrollment-tabs:focus >.enrollment-list-content {
+.enrollment-tabs:focus>.enrollment-list-content {
   display: block;
 }
 
