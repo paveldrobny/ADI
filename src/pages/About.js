@@ -32,7 +32,7 @@ function About() {
     },
     {
       title: "Эл. почта для подачи документов",
-      content: ["priyomADI2022@yandex.ru"],
+      content: ["priyomADI2023@yandex.ru"],
     },
   ]);
   const defaultState = {

@@ -138,6 +138,9 @@
     font-size: 12px;
     word-wrap: break-all;
   }
+  .tabs-nav.category{
+    display: none;
+  }
 
   .tabs-nav-right {
     width: 100px;

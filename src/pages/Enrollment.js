@@ -170,7 +170,6 @@ const Enrollment = () => {
           buttonOne="ДТ"
           buttonTwo="ТиИТ"
           setFilter={setFilterFaculty}
-          size={"category"}
           defaultValue={1}
         />
         <ComboBoxCategory
