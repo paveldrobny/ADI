@@ -13,11 +13,17 @@
     transition: .35s;
     box-shadow: 0px 4px 12px rgba(18, 25, 43, 0.12);
     background: var(--btn-bg);
+    outline: 2px solid transparent;
 }
 
 .list-button:hover {
     color: white;
     background: rgba(1, 102, 102, 0.9);
+}
+
+.list-button:focus{
+    transition: .3s;
+    outline: 2px solid rgba(1, 102, 102,1);
 }
 
 .list-button-redirect {

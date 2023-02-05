@@ -950,3 +950,21 @@
     justify-content: center;
   }
 }
+
+.chart-content {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.chart.full{
+  width: 1100px;
+  text-align: center;
+}
+
+.chart.half {
+  width: 600px;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--border-color);
+}

@@ -53,7 +53,7 @@ function About() {
           <img className="undraw-img max" style={{obje}} height={400} src={students} alt="..." />
         </div> */}
         <div>
-          {aboutData.map((data) => {
+          {aboutData.map((data, index) => {
             return (
               <InfoBlock
                 key={data.title}

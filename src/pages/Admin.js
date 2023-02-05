@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Parse from "parse/dist/parse.min.js";
-import { initializeParse, useParseQuery } from '@parse/react';
+import { initializeParse, useParseQuery } from "@parse/react";
 import data from "../data/studentsData";
 import Input from "../components/Inputs/Input";
 import ToogleCategory from "../components/Categories/ToggleCategory";
@@ -11,6 +11,27 @@ import InputDefault from "../components/Inputs/InputDefault";
 import GroupSize from "../components/Blocks/GroupSize";
 import SelectedButton from "../components/Buttons/SelectedButton";
 import LoaderData from "../components/Loaders/LoaderData";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Pie, Doughnut, Bar } from "react-chartjs-2";
+
+ChartJS.register(
+  ArcElement,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 function Admin() {
   const [studentsData, setStudentsData] = useState([]);
@@ -397,7 +418,7 @@ function Admin() {
       setStudentsData(data);
       return true;
     } catch (error) {
-       console.log(error.message);
+      console.log(error.message);
       return false;
     }
   }
@@ -463,6 +484,110 @@ function Admin() {
     return studentInGroupCount.length < groupSizeCount;
   }
 
+  const unique = (array) => {
+    return array.filter((item, index) => {
+      return array.indexOf(item) === index;
+    });
+  };
+
+  const getFacultyCount = (facultyName) => {
+    const count = unique(
+      studentsData.filter((list) => list.get("faculty") === facultyName)
+    );
+    return count.length;
+  };
+
+  const getFormEducationCount = (formName) => {
+    const count = unique(
+      studentsData.filter((list) => list.get("formEducation") === formName)
+    );
+    return count.length;
+  };
+
+  const groupNameChart = groupSizeData.map((size) => size.get("groupName"));
+  const groupSizeChart = groupSizeData.map((list) =>
+    getStudentsInGroup(list.get("groupName"))
+  );
+
+  console.log(getFacultyCount("ДТ"));
+
+  const data = {
+    labels: groupNameChart,
+    datasets: [
+      {
+        label: "Кол-во студентов",
+        data: groupSizeChart,
+        backgroundColor: [
+          "rgba(255, 102, 102, 1)",
+          "rgba(102, 102, 255, 1)",
+          "rgba(102, 178, 255, 1)",
+          "rgba(102, 255, 178, 1)",
+          "rgba(255, 102, 255, 1)",
+          "rgba(178, 255, 102, 1)",
+          "rgba(255, 102, 178, 1)",
+          "rgba(102, 255, 255, 1)",
+        ],
+        borderColor: [
+          "rgba(0,0,0, .2)",
+          "rgba(0,0,0, .2)",
+          "rgba(0,0,0, .2)",
+          "rgba(0,0,0, .2)",
+          "rgba(0,0,0, .2)",
+          "rgba(0,0,0, .2)",
+          "rgba(0,0,0, .2)",
+          "rgba(0,0,0, .2)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const dataFaculty = {
+    labels: ["ТиИТ", "ДТ"],
+    datasets: [
+      {
+        label: "Кол-во студентов",
+        data: [getFacultyCount("ТиИТ"), getFacultyCount("ДТ")],
+        backgroundColor: ["rgba(102, 102, 255, 1)", "rgba(255, 102, 102, 1)"],
+        borderColor: ["rgba(0,0,0, .2)", "rgba(0,0,0, .2)"],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const dataTest = {
+    labels: ["Заочная", "Очная", "Заочная ССО", "Очная ССО"],
+    datasets: [
+      {
+        label: "Кол-во студентов",
+        data: [
+          getFormEducationCount("Заочная"),
+          getFormEducationCount("Очная"),
+          getFormEducationCount("Заочная ССО"),
+          getFormEducationCount("Очная ССО"),
+        ],
+        backgroundColor: [
+          "rgba(255, 102, 102, 1)",
+          "rgba(102, 102, 255, 1)",
+          "rgba(102, 178, 255, 1)",
+          "rgba(102, 255, 178, 1)",
+        ],
+        borderColor: [
+          "rgba(0,0,0, .2)",
+          "rgba(0,0,0, .2)",
+          "rgba(0,0,0, .2)",
+          "rgba(0,0,0, .2)",
+        ],
+        borderWidth: 1,
+      },
+    ],
+  };
+
+  const option = {
+    legend: {
+      display: false,
+    },
+  };
 
   return (
     <div className="page max">
@@ -510,9 +635,10 @@ function Admin() {
               );
             })
           ) : (
-            <LoaderData/>
+            <LoaderData />
           )}
         </div>
+
         <h3 className="admin-groups-title">Добавить / редактировать данные</h3>
         <div className="admin-groups">
           <Input
@@ -751,6 +877,7 @@ function Admin() {
             </button>
           </div>
         </div>
+
         <div className="admin-groups">
           <div className="admin-update-btn-cont">
             <button id="admin-update-list" onClick={fetchStudents}>
@@ -762,21 +889,34 @@ function Admin() {
           </div>
           {studentsData !== null &&
           studentsData !== undefined &&
-          studentsData.length > 0
-            ? studentsData.map((data, value) => {
-                return (
-                  <AdminListButton
-                    key={value}
-                    status={data.get("status") === "Зачислен"}
-                    title={`${value + 1}) №${data.get(
-                      "personalID"
-                    )}, ${data.get("icode")}`}
-                    onEditUser={() => onEditUser(data.id)}
-                    onDeleteUser={() => onDeleteUser(data.id)}
-                  />
-                );
-              })
-            :  <LoaderData/>}
+          studentsData.length > 0 ? (
+            studentsData.map((data, value) => {
+              return (
+                <AdminListButton
+                  key={value}
+                  status={data.get("status") === "Зачислен"}
+                  title={`${value + 1}) №${data.get("personalID")}, ${data.get(
+                    "icode"
+                  )}`}
+                  onEditUser={() => onEditUser(data.id)}
+                  onDeleteUser={() => onDeleteUser(data.id)}
+                />
+              );
+            })
+          ) : (
+            <LoaderData />
+          )}
+        </div>
+
+        <div className="admin-groups">
+          <div className="chart-content">
+            <div className="chart half">
+              <Doughnut options={{ maintainAspectRatio: true }} data={data} />
+            </div>
+            <div className="chart half">
+              <Pie options={{ maintainAspectRatio: true }} data={dataFaculty} />
+            </div>
+          </div>
         </div>
       </div>
     </div>

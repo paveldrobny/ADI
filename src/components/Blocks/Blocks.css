@@ -12,6 +12,10 @@
     background: var(--btn-bg);
 }
 
+.info-block.is-active{
+    outline: 2px solid red;
+}
+
 .info-block-title {
     font-weight: 500;
     width: 50%;
