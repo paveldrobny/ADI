@@ -768,7 +768,8 @@
 
 .admin-update-btn-cont {
   display: flex;
-  justify-content: right;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
 }
 

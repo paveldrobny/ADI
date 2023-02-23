@@ -878,14 +878,15 @@ function Admin() {
           </div>
         </div>
 
+        <h3 className="admin-groups-title">Карточки</h3>
         <div className="admin-groups">
           <div className="admin-update-btn-cont">
+          <div id="admin-list-count">
+              Кол-во студентов: {studentsData.length}
+            </div>
             <button id="admin-update-list" onClick={fetchStudents}>
               Обновить
             </button>
-          </div>
-          <div id="admin-list-count">
-            Кол-во студентов: {studentsData.length}
           </div>
           {studentsData !== null &&
           studentsData !== undefined &&
@@ -908,6 +909,7 @@ function Admin() {
           )}
         </div>
 
+        <h3 className="admin-groups-title">Статистика</h3>
         <div className="admin-groups">
           <div className="chart-content">
             <div className="chart half">
