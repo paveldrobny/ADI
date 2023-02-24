@@ -642,18 +642,18 @@ function Admin() {
         <h3 className="admin-groups-title">Добавить / редактировать данные</h3>
         <div className="admin-groups">
           <Input
-            title="Дата подачи документов"
-            type="date"
-            maxLength={15}
-            value={valueDateDocument}
-            onChange={(e) => setValueDateDocument(e.target.value)}
-          />
-          <Input
             title="№ личного дела"
             type="text"
             maxLength={9}
             value={valueDataID}
             onChange={(e) => setValueDataID(e.target.value)}
+          />
+          <Input
+            title="Дата подачи документов"
+            type="date"
+            maxLength={15}
+            value={valueDateDocument}
+            onChange={(e) => setValueDateDocument(e.target.value)}
           />
           <Input
             title="ФИО"
@@ -870,10 +870,10 @@ function Admin() {
           />
           <div style={{ width: "100%", textAlign: "center" }}>
             <button className="admin-add-new" onClick={addPerson}>
-              Добавить студента
+              Добавить личное дело
             </button>
             <button className="admin-add-new" onClick={onEditConfirm}>
-              Редактировать данные
+              Редактировать
             </button>
           </div>
         </div>
@@ -881,7 +881,7 @@ function Admin() {
         <h3 className="admin-groups-title">Карточки</h3>
         <div className="admin-groups">
           <div className="admin-update-btn-cont">
-          <div id="admin-list-count">
+            <div id="admin-list-count">
               Кол-во студентов: {studentsData.length}
             </div>
             <button id="admin-update-list" onClick={fetchStudents}>

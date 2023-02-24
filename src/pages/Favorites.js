@@ -6,7 +6,7 @@ import "./page.css";
 function Favorites() {
   const [favoritesData, setFavoritesData] = React.useState([]);
   const [title, setTitle] = React.useState("Ваши избранные профили");
-  const [btnText, setBtnText] = React.useState("Удалить все профили");
+  const [btnText, setBtnText] = React.useState("Очистить список");
   const [emptyDataText, setEmptyDataText] = React.useState(
     "Подсказка: В понравившемся профиле нажмите 'В избранное'."
   );

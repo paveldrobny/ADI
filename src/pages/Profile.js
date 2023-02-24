@@ -213,21 +213,20 @@ function Profile() {
                           arr.length - 1 !== 0 ? (
                           <div id="warning" key={index}>
                             <div id="warning-title">
-                              <i className="fas fa-exclamation-triangle"></i>У
-                              студента есть еще личных дел:
-                              <b>{arr.length - 1} шт.</b>
+                              <i className="fas fa-exclamation-triangle"></i>
+                              Количество личных дел:
+                              <b> {arr.length} шт.</b>
                             </div>
                           </div>
                         ) : (
                           ""
                         );
                       })}
-
-                    <InfoBlock
+                    {/* <InfoBlock
                       title={"Последнее обновление данных профиля"}
                       isDate={true}
                       textData={`${data.get("updatedAt")}`}
-                    />
+                    /> */}
                     <InfoBlock
                       title={"Конкурсный балл"}
                       isDate={false}
