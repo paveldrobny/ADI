@@ -84,6 +84,7 @@ function ChatMain() {
 
     try {
       await message.save();
+      setQueryChanngel1("")
       return true;
     } catch (error) {
       alert(`Ошибка! ${error}`);
@@ -100,6 +101,7 @@ function ChatMain() {
 
     try {
       await message.save();
+      setQueryChanngel2("")
       return true;
     } catch (error) {
       alert(`Ошибка! ${error}`);

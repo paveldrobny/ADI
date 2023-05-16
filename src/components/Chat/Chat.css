@@ -115,7 +115,7 @@
 
 .chat-message-list {
     overflow: auto;
-    height: 382px;
+    height: 377px;
 }
 
 .chat-message {
@@ -177,13 +177,13 @@
     border-radius: 5px;
     border: none;
     padding: 5px 10px;
-    margin: 0 5px;
+    margin: 0 5px 5px;
     background: #1b6dff;
 }
 
 .chat-account {
-    margin-top: -18px;
-    padding-left: 10px;
+    margin-top: -20px;
+    padding-left: 15px;
     font-size: 12px;
     color: var(--text-color);
 }
