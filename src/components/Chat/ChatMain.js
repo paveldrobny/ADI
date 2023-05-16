@@ -2,8 +2,15 @@ import React from "react";
 import "./Chat.css";
 import SelectedButton from "../Buttons/SelectedButton";
 import Input from "../Inputs/Input";
-import Parse from "parse/dist/parse.min.js";
+import Parse from "parse";
+import { initializeParse, useParseQuery } from "@parse/react";
 import Message from "./Message";
+
+initializeParse(
+  "https://entrantadi.b4a.io/",
+  "yxPnWbQX9w1aSveJmbTIEJyWJUO7Lg4emp6rEmSX",
+  "7JUESLrz0P2ALkZBtUIPLi1XJ7IN1ItWySclh5lU"
+);
 
 function ChatMain() {
   const [isVisible, setVisible] = React.useState(false);
@@ -17,9 +24,6 @@ function ChatMain() {
   const [channelID, setChannelID] = React.useState(0);
   const [accounts, setAccounts] = React.useState([]);
 
-  const [messagesChannel1, setMessagesChannel1] = React.useState([]);
-  const [messagesChannel2, setMessagesChannel2] = React.useState([]);
-
   const [queryChannel1, setQueryChanngel1] = React.useState("");
   const [queryChannel2, setQueryChanngel2] = React.useState("");
 
@@ -30,6 +34,9 @@ function ChatMain() {
   const [name, setName] = React.useState("");
   const [password, setPassword] = React.useState("");
 
+  const parseChannel1 = new Parse.Query("Channel_1");
+  const parseChannel2 = new Parse.Query("Channel_2");
+
   const [pageState, setPageState] = React.useState(1);
   /* 
     0 - Регистрация 
@@ -38,6 +45,14 @@ function ChatMain() {
     3 - Канал "Поступления"
     4 - Канал "Другое" 
   */
+
+  const { isLoading, results } = useParseQuery(
+    pageState === 3 ? parseChannel1 : parseChannel2,
+    {
+      enableLocalDatastore: false,
+      enableLiveQuery: true,
+    }
+  );
 
   const createAccount = async function () {
     if (regPassword === regRePassword) {
@@ -69,7 +84,6 @@ function ChatMain() {
 
     try {
       await message.save();
-      readChannel1();
       return true;
     } catch (error) {
       alert(`Ошибка! ${error}`);
@@ -86,7 +100,6 @@ function ChatMain() {
 
     try {
       await message.save();
-      readChannel2();
       return true;
     } catch (error) {
       alert(`Ошибка! ${error}`);
@@ -99,30 +112,6 @@ function ChatMain() {
     try {
       let account = await parseQuery.find();
       setAccounts(account);
-      return true;
-    } catch (error) {
-      alert(`Ошибка! ${error}`);
-      return false;
-    }
-  };
-
-  const readChannel1 = async function () {
-    const parseQuery = new Parse.Query("Channel_1");
-    try {
-      let messages = await parseQuery.find();
-      setMessagesChannel1(messages);
-      return true;
-    } catch (error) {
-      alert(`Ошибка! ${error}`);
-      return false;
-    }
-  };
-
-  const readChannel2 = async function () {
-    const parseQuery = new Parse.Query("Channel_2");
-    try {
-      let messages = await parseQuery.find();
-      setMessagesChannel2(messages);
       return true;
     } catch (error) {
       alert(`Ошибка! ${error}`);
@@ -165,8 +154,6 @@ function ChatMain() {
 
   React.useEffect(() => {
     readProfile();
-    readChannel1();
-    readChannel2();
   }, []);
 
   return (
@@ -281,21 +268,30 @@ function ChatMain() {
           <div className="chat-group">
             <h3 className="chat-title">Канал "Поступление"</h3>
             <button className="chat-btn-back" onClick={() => setPageState(2)}>
-              Назад
+            <i className="fa-solid fa-arrow-left"></i> Назад
             </button>
-            <div className="chat-message-list">
-              {messagesChannel1.map((message, index) => {
-                return (
-                  <Message
-                    key={index}
-                    self={message.get("name") === name}
-                    name={message.get("name")}
-                    text={message.get("text")}
-                    date={message.get("date")}
-                  />
-                );
-              })}
-            </div>
+            {isLoading && <h3>Загрузка...</h3>}
+            {results && (
+              <div className="chat-message-list">
+                {results.length > 0 ? (
+                  results
+                    .sort((a, b) => a.get("createdAt") - b.get("createdAt"))
+                    .map((result, index) => (
+                      <Message
+                        key={index}
+                        self={result.get("name") === name}
+                        name={result.get("name")}
+                        text={result.get("text")}
+                        date={result.get("date")}
+                      />
+                    ))
+                ) : (
+                  <div className="empty-message">
+                    Пусто. Напишите первое сообщение
+                  </div>
+                )}
+              </div>
+            )}
             <div className="send-message-content">
               <Input
                 title="Введите сообщение"
@@ -309,7 +305,7 @@ function ChatMain() {
                 className="chat-account-btn main"
                 onClick={createMessageFromChannel1}
               >
-                Отправить
+               <i className="fa-sharp fa-solid fa-circle-arrow-right"></i>
               </button>
             </div>
             <div className="chat-account">Аккаунт: {name}</div>
@@ -318,21 +314,31 @@ function ChatMain() {
           <div className="chat-group">
             <h3 className="chat-title">Канал "Другое"</h3>
             <button className="chat-btn-back" onClick={() => setPageState(2)}>
-              Назад
+            <i className="fa-solid fa-arrow-left"></i> Назад
             </button>
-            <div className="chat-message-list">
-              {messagesChannel2.map((message, index) => {
-                return (
-                  <Message
-                    key={index}
-                    self={message.get("name") === name}
-                    name={message.get("name")}
-                    text={message.get("text")}
-                    date={message.get("date")}
-                  />
-                );
-              })}
-            </div>
+
+            {isLoading && <h3>Загрузка...</h3>}
+            {results && (
+              <div className="chat-message-list">
+                {results.length > 0 ? (
+                  results
+                    .sort((a, b) => a.get("createdAt") - b.get("createdAt"))
+                    .map((result, index) => (
+                      <Message
+                        key={index}
+                        self={result.get("name") === name}
+                        name={result.get("name")}
+                        text={result.get("text")}
+                        date={result.get("date")}
+                      />
+                    ))
+                ) : (
+                  <div className="empty-message">
+                    Пусто. Напишите первое сообщение
+                  </div>
+                )}
+              </div>
+            )}
             <div className="send-message-content">
               <Input
                 title="Введите сообщение"
@@ -346,7 +352,7 @@ function ChatMain() {
                 className="chat-account-btn send"
                 onClick={createMessageFromChannel2}
               >
-                Отправить
+                 <i className="fa-sharp fa-solid fa-circle-arrow-right"></i>
               </button>
             </div>
             <div className="chat-account">Аккаунт: {name}</div>
