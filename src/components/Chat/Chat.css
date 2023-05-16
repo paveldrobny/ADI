@@ -198,3 +198,8 @@
 .fa-arrow-left {
     margin-right: 5px;
 }
+
+.chat-message-account{
+    padding: 8px 0;
+    text-align: center;
+}

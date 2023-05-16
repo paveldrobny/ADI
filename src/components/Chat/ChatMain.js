@@ -91,20 +91,19 @@ function ChatMain() {
         alert(`Ошибка! ${error}`);
         return false;
       }
-    }
-    else{
-      alert("Введите сообщение.")
+    } else {
+      alert("Введите сообщение.");
     }
   };
 
   const createMessageFromChannel2 = async function () {
-    if(queryChannel2.trim()){
+    if (queryChannel2.trim()) {
       let message = new Parse.Object("Channel_2");
       const date = new Date().toLocaleString();
       message.set("name", name);
       message.set("text", queryChannel2);
       message.set("date", date);
-  
+
       try {
         await message.save();
         setQueryChanngel2("");
@@ -113,8 +112,8 @@ function ChatMain() {
         alert(`Ошибка! ${error}`);
         return false;
       }
-    }else{
-      alert("Введите сообщение")
+    } else {
+      alert("Введите сообщение");
     }
   };
 
@@ -274,6 +273,7 @@ function ChatMain() {
             <button className="chat-signOut" onClick={signOut}>
               Выйти с аккаунта
             </button>
+            <div className="chat-message-account">({name})</div>
           </div>
         ) : pageState === 3 ? (
           <div className="chat-group">
