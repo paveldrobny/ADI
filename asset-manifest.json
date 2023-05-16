@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/ADI/static/css/main.77db6676.css",
+    "main.css": "/ADI/static/css/main.a21c406c.css",
     "main.js": "/ADI/static/js/main.9e39950e.js",
     "static/js/787.76849462.chunk.js": "/ADI/static/js/787.76849462.chunk.js",
     "static/media/ProfileBG.png": "/ADI/static/media/ProfileBG.2a52bbc7677abe784943.png",
@@ -16,12 +16,12 @@
     "static/media/undraw_mobile_app_re_catg.svg": "/ADI/static/media/undraw_mobile_app_re_catg.04affafe179ab5be3bdc985174a69981.svg",
     "static/media/undraw_cloud_files_wmo8.svg": "/ADI/static/media/undraw_cloud_files_wmo8.9b5f9dbb636b7174daf2f9a47ab36afa.svg",
     "index.html": "/ADI/index.html",
-    "main.77db6676.css.map": "/ADI/static/css/main.77db6676.css.map",
+    "main.a21c406c.css.map": "/ADI/static/css/main.a21c406c.css.map",
     "main.9e39950e.js.map": "/ADI/static/js/main.9e39950e.js.map",
     "787.76849462.chunk.js.map": "/ADI/static/js/787.76849462.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.77db6676.css",
+    "static/css/main.a21c406c.css",
     "static/js/main.9e39950e.js"
   ]
 }
