@@ -1,9 +1,16 @@
 .input-container {
     position: relative;
-    width: calc(33.33% - 24px);
+    width: calc(33.33% - 16px);
     transition: .35s;
     margin: 8px;
 }
+
+.input-max {
+    position: relative;
+    margin: 20px 8px;
+    width: calc(100% - 16px) !important;
+}
+
 
 .input-title {
     pointer-events: none;

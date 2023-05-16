@@ -1,7 +1,7 @@
 import React from "react";
 import "./Inputs.css";
 
-const Input = ({ title, type, maxLength, value, onChange }) => {
+const Input = ({ title, type, maxLength, value, onChange, max = 0 }) => {
   const onFocus = () => {
     // setActiveAnim(true);
   };
@@ -15,7 +15,7 @@ const Input = ({ title, type, maxLength, value, onChange }) => {
   };
 
   return (
-    <div className="input-container">
+    <div className={`${max === 0 ? "input-container " : "input-max"}`}>
       <label className="input-title is-active">{title}:</label>
       <input
         className="input"

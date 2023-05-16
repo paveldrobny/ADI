@@ -13,6 +13,7 @@ import NotFound from "./pages/NotFound";
 import { Context } from "./context";
 import Favorites from "./pages/Favorites";
 import Received from "./pages/Received";
+import ChatMain from "./components/Chat/ChatMain";
 
 const PARSE_APPLICATION_ID = "yxPnWbQX9w1aSveJmbTIEJyWJUO7Lg4emp6rEmSX";
 const PARSE_HOST_URL = "https://parseapi.back4app.com/";
@@ -100,6 +101,7 @@ function App() {
               <Route path="/download" element={<MobileApp />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
+            <ChatMain/>
           </div>
         ) : (
           <div className="message-warning">Маленькая ширина экрана</div>
