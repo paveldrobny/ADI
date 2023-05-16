@@ -76,36 +76,45 @@ function ChatMain() {
   };
 
   const createMessageFromChannel1 = async function () {
-    let message = new Parse.Object("Channel_1");
-    const date = new Date().toLocaleString();
-    message.set("name", name);
-    message.set("text", queryChannel1);
-    message.set("date", date);
+    if (queryChannel1.trim()) {
+      let message = new Parse.Object("Channel_1");
+      const date = new Date().toLocaleString();
+      message.set("name", name);
+      message.set("text", queryChannel1);
+      message.set("date", date);
 
-    try {
-      await message.save();
-      setQueryChanngel1("")
-      return true;
-    } catch (error) {
-      alert(`Ошибка! ${error}`);
-      return false;
+      try {
+        await message.save();
+        setQueryChanngel1("");
+        return true;
+      } catch (error) {
+        alert(`Ошибка! ${error}`);
+        return false;
+      }
+    }
+    else{
+      alert("Введите сообщение.")
     }
   };
 
   const createMessageFromChannel2 = async function () {
-    let message = new Parse.Object("Channel_2");
-    const date = new Date().toLocaleString();
-    message.set("name", name);
-    message.set("text", queryChannel2);
-    message.set("date", date);
-
-    try {
-      await message.save();
-      setQueryChanngel2("")
-      return true;
-    } catch (error) {
-      alert(`Ошибка! ${error}`);
-      return false;
+    if(queryChannel2.trim()){
+      let message = new Parse.Object("Channel_2");
+      const date = new Date().toLocaleString();
+      message.set("name", name);
+      message.set("text", queryChannel2);
+      message.set("date", date);
+  
+      try {
+        await message.save();
+        setQueryChanngel2("");
+        return true;
+      } catch (error) {
+        alert(`Ошибка! ${error}`);
+        return false;
+      }
+    }else{
+      alert("Введите сообщение")
     }
   };
 
@@ -270,7 +279,7 @@ function ChatMain() {
           <div className="chat-group">
             <h3 className="chat-title">Канал "Поступление"</h3>
             <button className="chat-btn-back" onClick={() => setPageState(2)}>
-            <i className="fa-solid fa-arrow-left"></i> Назад
+              <i className="fa-solid fa-arrow-left"></i> Назад
             </button>
             {isLoading && <h3>Загрузка...</h3>}
             {results && (
@@ -307,7 +316,7 @@ function ChatMain() {
                 className="chat-account-btn main"
                 onClick={createMessageFromChannel1}
               >
-               <i className="fa-sharp fa-solid fa-circle-arrow-right"></i>
+                <i className="fa-sharp fa-solid fa-circle-arrow-right"></i>
               </button>
             </div>
             <div className="chat-account">Аккаунт: {name}</div>
@@ -316,7 +325,7 @@ function ChatMain() {
           <div className="chat-group">
             <h3 className="chat-title">Канал "Другое"</h3>
             <button className="chat-btn-back" onClick={() => setPageState(2)}>
-            <i className="fa-solid fa-arrow-left"></i> Назад
+              <i className="fa-solid fa-arrow-left"></i> Назад
             </button>
 
             {isLoading && <h3>Загрузка...</h3>}
@@ -354,7 +363,7 @@ function ChatMain() {
                 className="chat-account-btn send"
                 onClick={createMessageFromChannel2}
               >
-                 <i className="fa-sharp fa-solid fa-circle-arrow-right"></i>
+                <i className="fa-sharp fa-solid fa-circle-arrow-right"></i>
               </button>
             </div>
             <div className="chat-account">Аккаунт: {name}</div>
